@@ -20,7 +20,7 @@ Connection conn = null;
 Statement stmt = null;
 ResultSet rs = null;
 %>
-<h2 align="center"><font><strong>Soul Style Records</strong></font></h2>
+<h2 align="center"><font><strong>Soul Style Records!!</strong></font></h2>
 <table align="center" cellpadding="5" cellspacing="5" border="1">
 <body/>
 <tr>
