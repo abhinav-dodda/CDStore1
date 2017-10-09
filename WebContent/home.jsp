@@ -6,9 +6,9 @@
 <%
 String jdbcDriver = "com.mysql.jdbc.Driver";
 String connectionUrl = "jdbc:mysql://localhost:3306/";
-String databaseName = "cdstore";
+String databaseName = "assignment1_schema";
 String user = "root";
-String pswd = "";
+String pswd = "Ottawa@2017";
 
 try {
 Class.forName(jdbcDriver);
