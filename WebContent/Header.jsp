@@ -9,11 +9,11 @@
 
 <!-- Including the style sheets  -->
 <link rel="stylesheet" href="styles/bootstrap-grid.min.css"
-	type="text/css" />
+	type="text/css">
 <link rel="stylesheet" href="styles/bootstrap-reboot.min.css"
-	type="text/css" />
-<link rel="stylesheet" href="styles/bootstrap.min.css" type="text/css" />
-<link rel="stylesheet" href="styles/styles.css" type="text/css" />
+	type="text/css">
+<link rel="stylesheet" href="styles/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="styles/styles.css" type="text/css">
 
 <script type="text/javascript" src="validations/bootstrap.js"></script>
 <script type="text/javascript" src="validations/bootstrap.min.js"></script>
