@@ -77,18 +77,9 @@ table {
   .pull-right{
   float:right;
   }
- footer {
-            color: #666;
-            background: #222;
-            padding: 17px 0 18px 0;
-            border-top: 1px solid #000;
+ .site-footer {
+ text-align:center;
+ background-color: #F0F0F0;
+ border-top: 1px solid #000;
+ padding-bottom:1%;
         }
-        footer a {
-            color: #999;
-        }
-        footer a:hover {
-            color: #efefef;
-        }
-.hyper{
-	padding-top:1%;
-}
