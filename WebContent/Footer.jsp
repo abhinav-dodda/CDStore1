@@ -12,8 +12,9 @@
 				href="Aboutus.jsp" class="form-title">About US</a> | <a
 				href="Aboutus.jsp" class="form-title">Contact</a>
 			<p class="hyper">
-				<a href="Home.jsp" class="form-title">Trial Blazers</a>@2017
-				AllRights Deserved Design by Code Pirates
+				<a href="Home.jsp" class="form-title">Trial Blazers</a>
+				@2017
+				AllRights Reserved Design by Code Pirates
 			</p>
   </footer>
 </div>
