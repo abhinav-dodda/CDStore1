@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ include file="Header.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport"
@@ -29,17 +28,12 @@
 <title>Home</title>
 </head>
 <body background="">
-<div class="container">
+<div class="container-fluid">
+<%@ include file="Header.jsp"%>
 
-
-		<h2 align="center">
-			<font face="Matura MT Script Capitals" color="orange" size="200"><strong>
-					Music Bonanza </strong></font>
-		</h2>
-
-		<div id="carouselExampleControls" class="carousel slide"
+		<!-- <div id="carouselExampleControls" class="carousel slide"
 			data-ride="carousel">
-			<!-- Indicators -->
+			Indicators
 			<ol class="carousel-indicators">
 				<li data-target="#carouselExampleControls" data-slide-to="0"
 					class="active"></li>
@@ -76,10 +70,9 @@
 				class="sr-only">Next</span>
 			</a>
 
-		</div>
-
+		</div> -->
+<%@ include file="Footer.jsp"%>
 	</div>
-	<%@ include file="Footer.jsp"%>
 </body>
 
 </html>
