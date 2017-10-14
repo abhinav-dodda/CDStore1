@@ -78,9 +78,32 @@ table {
   float:right;
   }
  .site-footer {
- margin-top:30%;
- text-align:center;
- background-color: #F0F0F0;
- border-top: 1px solid #000;
- padding-bottom:1%;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0px;
+    color: white;
+    width: 100%;
+    background-color: black;
         }
+        
+.site-header{
+	background-color:black;
+	    height: 56px;
+}
+        
+.site-title{
+	float: left;
+	padding-top:15px;
+	font-family : "Matura MT Script Capitals";
+	font-size: 30px;
+    color: orange;
+}
+
+.nav-item a {
+	color:#d89602;
+}
+
+body{
+	background-image: url('../images/CD.jpg');
+}

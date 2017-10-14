@@ -6,15 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<div>
+<div class="row">
 	<footer class="site-footer">
-  <a href="Home.jsp" class="form-title">Home</a> | <a
+  <!-- <a href="Home.jsp" class="form-title">Home</a> | <a
 				href="Aboutus.jsp" class="form-title">About US</a> | <a
-				href="Aboutus.jsp" class="form-title">Contact</a>
+				href="Aboutus.jsp" class="form-title">Contact</a> -->
 			<p class="hyper">
-				<a href="Home.jsp" class="form-title">Trial Blazers</a>
+				<a href="Home.jsp" class="form-title">Music Bonanza</a>
 				@2017
-				AllRights Reserved Design by Code Pirates
+				AllRights Reserved Design by ***
 			</p>
   </footer>
 </div>
