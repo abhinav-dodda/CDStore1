@@ -27,7 +27,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <title>Home</title>
 </head>
-<body background="">
+<body id="home-body">
 <div class="container-fluid">
 <%@ include file="Header.jsp"%>
 
