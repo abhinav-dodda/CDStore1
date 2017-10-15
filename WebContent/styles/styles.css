@@ -113,18 +113,20 @@ table {
 	
 }
 #order-checkout-body{
-	background:none;
+	/* background:none;
 	background-color:rgba(9, 8, 8, 0.92);
-	color: #1997c6;
+	color: #1997c6; */
+	background-image: url('../images/colorful_note.jpg');
 }
 
 .section-title{
 	padding-bottom:10px;
 	border-bottom: 1px solid rgba(73, 65, 65, 0.66);
+	color:#ea1c26;
 }
 
 .order-checkout-content{
-	color:grey;
+	color:#0275D5;
 	padding-top: 10px;
 }
 
