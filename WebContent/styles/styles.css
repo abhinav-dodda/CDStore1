@@ -79,7 +79,7 @@ table {
   }
  .site-footer {
     text-align: center;
-    padding: 15px;
+    padding: 10px;
     position: fixed;
     bottom: 0px;
     color: white;
@@ -107,3 +107,24 @@ table {
 body{
 	background-image: url('../images/CD.jpg');
 }
+.order-checkout-div{
+	margin: 30px 15px;
+	/* background: linear-gradient(to left, black, orange); */
+	
+}
+#order-checkout-body{
+	background:none;
+	background-color:rgba(9, 8, 8, 0.92);
+	color: #1997c6;
+}
+
+.section-title{
+	padding-bottom:10px;
+	border-bottom: 1px solid rgba(73, 65, 65, 0.66);
+}
+
+.order-checkout-content{
+	color:grey;
+	padding-top: 10px;
+}
+

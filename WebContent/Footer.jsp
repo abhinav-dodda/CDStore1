@@ -6,8 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<div class="row">
-	<footer class="site-footer">
+<div class="row row-site-footer">
+	<footer class="col-sm-12 site-footer">
   <!-- <a href="Home.jsp" class="form-title">Home</a> | <a
 				href="Aboutus.jsp" class="form-title">About US</a> | <a
 				href="Aboutus.jsp" class="form-title">Contact</a> -->

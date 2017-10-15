@@ -22,41 +22,68 @@
 
 <title>Order Check Out</title>
 </head>
-<body>
+<body id="order-checkout-body">
 	<div class="container-fluid">
 		<%@ include file="Header.jsp"%>
-		<!-- <div class="row">
-			<div class="col-sm-8 jumbotron">
-			Select Delivery Address
-			<address>
-				<div><strong>Gurpreet Saran</strong></div>
-				<div>Apt #314</div>
-				<div>2201 Riverside Drive</div>
-				<div>Ottawa, ON</div>
-				<div>Canada</div>
+		<div class="row order-checkout-div">
+			<div class="col-sm-4">
+				<div class="section-title">
+					<strong>Delivery Address</strong>
+				</div>
+				<address class="order-checkout-content">
+					<div>
+						<strong>Gurpreet Saran</strong>
+					</div>
+					<div>Apt #314</div>
+					<div>2201 Riverside Drive</div>
+					<div>Ottawa, ON</div>
+					<div>Canada</div>
 				</address>
 				<div>
-					<button type="button" class="btn btn-success float-right">
-						Edit Address <svg-icon><src href="sprite.svg#si-glyph-edit" /></svg-icon>
-					</button>
+					<button type="button" class="btn btn-primary">Edit</button>
 				</div>
 			</div>
-			<div class="col-sm-4">
-				<div><span class"label">Order ID</span> 1234</div>
-				<div><span class"label">Items</span></div>
-				<div><span class"label">Order Total</span></div>
-				<div><span class"label">Delivery</span></div>
-				<div><span class"label">Total</span></div>
-				<div>
-					<button type="button" class="btn btn-success float-right">
-						Continue <span class="glyphicon glyphicon-success"></span>
-					</button>
+			<div class="col-sm-8">
+				<div class="section-title">
+					<strong>Order Details</strong>
+				</div>
+				<div class="row order-checkout-content">
+					<div class="col-sm-6">
+						<div>
+							<label>Expected Delivery Detail: 25 Oct, 2017</label>
+						</div>
+						<div>
+							<label>Items Ordered: 2</label>
+						</div>
+						<div>
+							<label>Order ID: 1342</label>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div>
+							<label>Order Total: $300</label>
+						</div>
+						<div>
+							<label>Delivery Charges: $30</label>
+						</div>
+						<div>
+							<label>Discount: $10</label>
+						</div>
+						<div>
+							<label>Tax: $5</label>
+						</div>
+						<div>
+							<label>Total: $325</label>
+						</div>
+						<div>
+							<button type="button" class="btn btn-primary">Continue
+								to Payment</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div> -->
 		<%@ include file="Footer.jsp"%>
 	</div>
 </body>
-
 </html>
