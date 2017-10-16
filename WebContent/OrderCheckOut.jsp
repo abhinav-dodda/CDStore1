@@ -10,7 +10,9 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Including the style sheets  -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"> -->
+<link rel="stylesheet" href="styles/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="styles/font-awesome.min.css" type="text/css">
 <link rel="stylesheet" href="styles/styles.css" type="text/css">
 
 <!-- Including the java script files -->
@@ -40,7 +42,7 @@
 					<div>Canada</div>
 				</address>
 				<div>
-					<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
+					<button type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
 				</div>
 			</div>
 			<div class="col-sm-8">
@@ -78,7 +80,7 @@
 						</div>
 						</section>
 						<div>
-							<button type="button" class="btn btn-primary">Pay<span class="glyphicon glyphicon-usd"></span></button>
+							<button type="button" class="btn btn-primary">Pay <i class="fa fa-usd" aria-hidden="true"></i></button>
 						</div>
 						
 					</div>
