@@ -52,17 +52,27 @@ table {
 .container {
       padding: 80px 120px;
   }
-  .carousel-inner img {
+ /*  .carousel-inner img {
     -webkit-filter: grayscale(90%);
-    filter: grayscale(90%); /* make all photos black and white */ 
-    width: 100%; /* Set width to 100% */
+    filter: grayscale(90%); make all photos black and white 
+    width: 100%; Set width to 100%
     margin: auto;
 }
 
 .carousel-caption h3 {
     color: #fff !important;
+} */
+/* .autoslide {display:none;} */
+.carouselExampleControls{
+	float:left;
 }
-
+#carouselExampleControls{
+	width:75%;
+}
+.carousel-inner img{
+	width:28%;
+	margin-top:20%;
+}
 /* On hover, the color of .btn will transition to white with black text */
 .btn:hover, .btn:focus {
     border: 1px solid #333;
