@@ -68,16 +68,16 @@ function validatelogin(){
 	<!-- Main Form -->
 	<br>
 	<div class="login-form-1">
-		<form id="login-form" class="text-left" method="post">
+		<form id="login-form" class="text-left" method="post" onsubmit="validateLogin()">
 			<div class="login-form-main-message"></div>
 					<div class="form-group">
 						<label for="username">Username</label>
-						<input type="text" class="form-control" id="username" name="username" placeholder="username" required>
+						<input type="text" class="form-control" id="user" name="username" placeholder="username" required>
 					</div>
 					<br>
 					<div class="form-group">
 						<label for="password">Password</label>
-						<input type="password" class="form-control" id="pass" name="pass" placeholder="password" required>
+						<input type="password" class="form-control" id="pass" name="password" placeholder="password" required>
 					     <span id="message"></span>
 					</div>
 					<div class="form-group login-group-checkbox">
@@ -85,7 +85,7 @@ function validatelogin(){
 						<label for="lg_remember">remember</label>
 					</div>
 			<div class= login-button>
-				<input type="submit" class="login-button" value="Login"><i class="fa fa-chevron-right" onsubmit="return validateLogin();"></i>
+				<input type="submit" class="login-button" value="Login"><i class="fa fa-chevron-right"	></i>
 				</div>
 				<br>
 			<div class="etc-login-form">

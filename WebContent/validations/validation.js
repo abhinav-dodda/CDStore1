@@ -1,10 +1,8 @@
-
-validateLogin();
 function validateLogin(){
 	//var user = $('#username').val();
 	//var pwd = $('#pass').val();
-	var username=document.getElementsByName("username").value;
-	var password=document.getElementsByName("password").value;
+	var username=$('#user').val();
+	var password=$('#pass').val();
 	
 	if ( username == "raman" && password == "raman123"){
 		alert ("Login successfully");
