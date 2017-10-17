@@ -26,7 +26,7 @@
 <script type="text/javascript" src="validations/bootstrap.js"></script>
 <script type="text/javascript" src="validations/bootstrap.min.js"></script>
 <script type="text/javascript" src="validations/validation.js"></script>
-<title>Home</title>
+<title>Login</title>
 </head>
 <body background="">
 
@@ -85,7 +85,7 @@ function validatelogin(){
 						<label for="lg_remember">remember</label>
 					</div>
 			<div class= login-button>
-				<input type="submit" class="login-button" value="Login"><i class="fa fa-chevron-right" onsubmit="return validatelogin();"></i>
+				<input type="submit" class="login-button" value="Login"><i class="fa fa-chevron-right" onsubmit="return validateLogin();"></i>
 				</div>
 				<br>
 			<div class="etc-login-form">
