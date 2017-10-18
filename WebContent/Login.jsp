@@ -57,9 +57,7 @@ function validatelogin(){
 
 <div class="container-fluid">
 <%@ include file="Header.jsp"%>
-		<h2 align="center">
-			<font face="Matura MT Script Capitals" color="orange" size="200"><strong>
-					Music Bonanza </strong></font>	</h2>
+
 <div class="row">
 <div class="col-sm-3"></div>
 <div class="col-sm-6">
