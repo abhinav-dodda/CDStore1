@@ -29,7 +29,7 @@
       <li class="nav-item"><a class="nav-link"
 							href="ProductCategories.jsp">Product Catalog</a></li>
 							<li class="nav-item">
-        <a class="nav-link" href="#">Sign In</a>
+        <a class="nav-link" href="Login.jsp">Sign In</a>
       </li>
     </ul>
   </div>
