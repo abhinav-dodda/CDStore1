@@ -28,60 +28,32 @@
 <script type="text/javascript" src="validations/validation.js"></script>
 <title>Login</title>
 </head>
-<body background="">
-
-<script type="text/javascript">
-function validatelogin(){
-	
-	//var user = $('#username').val();
-	//var pwd = $('#pass').val();
-	var user=document.getElementsByName("username").value;
-	var pass1=document.getElementsByName("pass").value;
-	
-	if ( user == "raman" && pass1 == "raman123"){
-		alert ("Login successfully");
-		window.location = "home.jsp";
-		}
-			
-	//if(username.value == 'abc' && password.value == '123'){
-		//alert("login sucessfull");
-		//windows.location="index.jsp";
-		//return false;
-	//}
-	else {
-		alert("Invalid username or password");
-		}	
-}
-
-</script>
+<body>
 
 <div class="container-fluid">
 <%@ include file="Header.jsp"%>
 
 <div class="row">
-<div class="col-sm-3"></div>
-<div class="col-sm-6">
+<div class="col-sm-4"></div>
+<div class="col-sm-3">
 <div class="text-center" style="padding:50px 0" align="center">
-	<div class="logo">Login</div>
+	<div class="logo"></div>
 	<!-- Main Form -->
 	<br>
 	<div class="login-form-1">
-		<form id="login-form" class="text-left" method="post" onsubmit="validateLogin()">
+		<form id="login-form" action="Login" class="text-left" method="post" onsubmit="validateLogin()">
 			<div class="login-form-main-message"></div>
 					<div class="form-group">
 						<label for="username">Username</label>
-						<input type="text" class="form-control" id="user" name="username" placeholder="username" required>
+						<input type="text" class="form-control" id="user" name="username" placeholder="" required>
 					</div>
 					<br>
 					<div class="form-group">
 						<label for="password">Password</label>
-						<input type="password" class="form-control" id="pass" name="password" placeholder="password" required>
+						<input type="password" class="form-control" id="pass" name="password" placeholder="" required>
 					     <span id="message"></span>
 					</div>
-					<div class="form-group login-group-checkbox">
-						<input type="checkbox" id="lg_remember" name="lg_remember">
-						<label for="lg_remember">remember</label>
-					</div>
+					
 			<div class= login-button>
 				<input type="submit" class="login-button" value="Login"><i class="fa fa-chevron-right"	></i>
 				</div>
@@ -97,7 +69,7 @@ function validatelogin(){
 </div>
 
 </div>
-<div class="col-sm-3"></div>
+<div class="col-sm-5"></div>
 <%@ include file="Footer.jsp"%>
 </div>
 </body>

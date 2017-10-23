@@ -5,7 +5,6 @@ function validateLogin(){
 	var password=$('#pass').val();
 	
 	if ( username == "raman" && password == "raman123"){
-		alert ("Login successfully");
 		window.location = "home.jsp";
 		}
 			
@@ -18,3 +17,14 @@ function validateLogin(){
 		alert("Invalid username or password");
 		}	
 }
+
+var check = function() {
+	  if (document.getElementById('signupPassword').value ==
+	    document.getElementById('ConfirmsignupPassword').value) {
+	   // document.getElementById('message').style.color = 'green';
+	    document.getElementById('message').innerHTML = 'matching';
+	  } else {
+	   // document.getElementById('message').style.color = 'red';
+	    document.getElementById('message').innerHTML = 'not matching';
+	  }
+	}
