@@ -9,7 +9,7 @@
 	<div class="row site-header">
 		<div class="col-sm-7 site-title">
 			<span>
-				<strong>Music Bonanza</strong>
+				<strong><a href="Home.jsp">Music Bonanza</a></strong>
 			</span>
 		</div>
 		<div class="col-sm-5">
