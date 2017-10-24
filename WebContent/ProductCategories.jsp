@@ -12,36 +12,349 @@
 	type="text/css">
 <link rel="stylesheet" href="styles/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="styles/styles.css" type="text/css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.min.css">
+<!-- Naveen -->
+<!-- Google Fonts -->
+<link
+	href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600'
+	rel='stylesheet' type='text/css'>
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300'
+	rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Raleway:400,100'
+	rel='stylesheet' type='text/css'>
 
+<!-- Bootstrap -->
+<link rel="stylesheet" href="styles/bootstrap.min.css">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="styles/font-awesome.min.css">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="styles/owl.carousel.css">
+<link rel="stylesheet" href="styles/responsive.css">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Naveen-End -->
 
 <!-- Including the java script files -->
-<script type="text/javascript" src="validations/jquery.min.js"></script>
+<script type="text/javascript" src="validations/jquery.min.js">
+	
+</script>
 <script type="text/javascript" src="validations/bootstrap.js"></script>
 <script type="text/javascript" src="validations/bootstrap.min.js"></script>
 <script type="text/javascript" src="validations/validation.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-<link rel="stylesheet" type="text/css" href="styles/styles.css">
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<script type="text/javascript"
+	src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js'></script>
+
 <title>Product Catalog</title>
 </head>
-<%@include file="Header.jsp" %>
-<body background="images/music1.png">
-	<div class="container" align="center">
-	<h2 align="center"><font face="Matura MT Script Capitals" color="orange" size="200"><strong> Music Bonanza </strong></font></h2>
-		<table class="table">
-			<tr>
-				<td>Select Genre :</td>
-				<td><select name="Genre" class="form-fi">
+<%@include file="Header.jsp"%>
+<body background="images/colorful_note.jpg">
+	<div class="container-fluid">
+		<div class="row" id="productCatalogue">
+			<!-- 	<div class="col-sm-4" id="countryClass"> -->
 
-						<option value="Rock" class="form-fi" id="Rock"> Rock </option>
-						<option value="Pop" class="form-fi" id="Pop"> Pop </option>
-						<option value="Country" class="form-fi" id="Country"> Country </option>
-				</select></td>
-			</tr>
-		</table>
+			<div class="single-product-area">
+				<div class="zigzag-bottom"></div>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3 col-sm-6">
+							<div class="single-shop-product">
+								<div class="product-upper">
+									<img src="images/product-1.jpg" alt="">
+								</div>
+								<h2>
+									<a href="#openModal">Product1</a>
+								</h2>
+
+
+								<!-- Modal Box -->
+								<div id="openModal" class="modalDialog">
+									<div class="adjustModal">
+										<a href="#close" title="Close" class="close">X</a>
+
+										<h2>Crash My Party</h2>
+
+										<div class="w3-cell-row">
+											<div class="w3-container w3-gray w3-cell w3-mobile">
+												<img src="images/product-1.jpg" alt="">
+											</div>
+											<div class="w3-container w3-cell w3-mobile">
+												<p>Artist: Luke Bryan</p>
+												<p>Release date: 13 August 2013</p>
+												<p>Producer: Jeff Stevens</p>
+												<p>Awards: Billboard Music Award for Top</p>
+												<p>Country Album Genre: Country music</p>
+											</div>
+										</div>
+
+										<div class="product-option-shop">
+											<a class="add_to_cart_button" data-quantity="1"
+												data-product_sku="" data-product_id="70" rel="nofollow"
+												href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+											<div class="product-carousel-price">
+												<ins>$89.00</ins>
+												<del>$99.00</del>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- Modal Box -->
+
+								<div class="product-carousel-price">
+									<ins>$899.00</ins>
+									<del>$999.00</del>
+								</div>
+
+								<div class="product-option-shop">
+									<a class="add_to_cart_button" data-quantity="1"
+										data-product_sku="" data-product_id="70" rel="nofollow"
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="single-shop-product">
+								<div class="product-upper">
+									<img src="images/product-2.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">Apple new mac book 2015 March :P</a>
+								</h2>
+								<div class="product-carousel-price">
+									<ins>$899.00</ins>
+									<del>$999.00</del>
+								</div>
+
+								<div class="product-option-shop">
+									<a class="add_to_cart_button" data-quantity="1"
+										data-product_sku="" data-product_id="70" rel="nofollow"
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="single-shop-product">
+								<div class="product-upper">
+									<img src="images/product-3.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">Apple new mac book 2015 March :P</a>
+								</h2>
+								<div class="product-carousel-price">
+									<ins>$899.00</ins>
+									<del>$999.00</del>
+								</div>
+
+								<div class="product-option-shop">
+									<a class="add_to_cart_button" data-quantity="1"
+										data-product_sku="" data-product_id="70" rel="nofollow"
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="single-shop-product">
+								<div class="product-upper">
+									<img src="images/product-4.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">Apple new mac book 2015 March :P</a>
+								</h2>
+								<div class="product-carousel-price">
+									<ins>$899.00</ins>
+									<del>$999.00</del>
+								</div>
+
+								<div class="product-option-shop">
+									<a class="add_to_cart_button" data-quantity="1"
+										data-product_sku="" data-product_id="70" rel="nofollow"
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="single-shop-product">
+								<div class="product-upper">
+									<img src="images/product-5.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">Apple new mac book 2015 March :P</a>
+								</h2>
+								<div class="product-carousel-price">
+									<ins>$899.00</ins>
+									<del>$999.00</del>
+								</div>
+
+								<div class="product-option-shop">
+									<a class="add_to_cart_button" data-quantity="1"
+										data-product_sku="" data-product_id="70" rel="nofollow"
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="single-shop-product">
+								<div class="product-upper">
+									<img src="images/product-2.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">Apple new mac book 2015 March :P</a>
+								</h2>
+								<div class="product-carousel-price">
+									<ins>$899.00</ins>
+									<del>$999.00</del>
+								</div>
+
+								<div class="product-option-shop">
+									<a class="add_to_cart_button" data-quantity="1"
+										data-product_sku="" data-product_id="70" rel="nofollow"
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="single-shop-product">
+								<div class="product-upper">
+									<img src="images/product-3.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">Apple new mac book 2015 March :P</a>
+								</h2>
+								<div class="product-carousel-price">
+									<ins>$899.00</ins>
+									<del>$999.00</del>
+								</div>
+
+								<div class="product-option-shop">
+									<a class="add_to_cart_button" data-quantity="1"
+										data-product_sku="" data-product_id="70" rel="nofollow"
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="single-shop-product">
+								<div class="product-upper">
+									<img src="images/product-4.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">Apple new mac book 2015 March :P</a>
+								</h2>
+								<div class="product-carousel-price">
+									<ins>$899.00</ins>
+									<del>$999.00</del>
+								</div>
+
+								<div class="product-option-shop">
+									<a class="add_to_cart_button" data-quantity="1"
+										data-product_sku="" data-product_id="70" rel="nofollow"
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="single-shop-product">
+								<div class="product-upper">
+									<img src="images/product-2.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">Apple new mac book 2015 March :P</a>
+								</h2>
+								<div class="product-carousel-price">
+									<ins>$899.00</ins>
+									<del>$999.00</del>
+								</div>
+
+								<div class="product-option-shop">
+									<a class="add_to_cart_button" data-quantity="1"
+										data-product_sku="" data-product_id="70" rel="nofollow"
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="single-shop-product">
+								<div class="product-upper">
+									<img src="images/product-1.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">Apple new mac book 2015 March :P</a>
+								</h2>
+								<div class="product-carousel-price">
+									<ins>$899.00</ins>
+									<del>$999.00</del>
+								</div>
+
+								<div class="product-option-shop">
+									<a class="add_to_cart_button" data-quantity="1"
+										data-product_sku="" data-product_id="70" rel="nofollow"
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="single-shop-product">
+								<div class="product-upper">
+									<img src="images/product-3.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">Apple new mac book 2015 March :P</a>
+								</h2>
+								<div class="product-carousel-price">
+									<ins>$899.00</ins>
+									<del>$999.00</del>
+								</div>
+
+								<div class="product-option-shop">
+									<a class="add_to_cart_button" data-quantity="1"
+										data-product_sku="" data-product_id="70" rel="nofollow"
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="single-shop-product">
+								<div class="product-upper">
+									<img src="images/product-4.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">Apple new mac book 2015 March :P</a>
+								</h2>
+								<div class="product-carousel-price">
+									<ins>$899.00</ins>
+									<del>$999.00</del>
+								</div>
+
+								<div class="product-option-shop">
+									<a class="add_to_cart_button" data-quantity="1"
+										data-product_sku="" data-product_id="70" rel="nofollow"
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+			<!-- <input type="image" src="images/CountryMusic.jpg" name="saveForm" class="btTxt submit" id="country"onClick="loadmyDiv('country')" />
+				<a href="#" onclick="hidemyDiv('country')" id="countryClose">Close</a> -->
+		</div>
+
+		<!-- <div class="col-sm-4" id="pop"><input type="image" src="images/PopMusic.jpg" name="saveForm" class="btTxt submit" id="pop"/></div>
+			<div class="col-sm-4" id="rock"><input type="image" src="images/RockMusic.jpg" name="saveForm" class="btTxt submit" id="rock"/></div> -->
 	</div>
-	
+	</div>
 	<%@ include file="Footer.jsp"%>
 </body>
 
