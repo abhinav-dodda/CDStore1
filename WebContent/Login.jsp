@@ -41,7 +41,7 @@
 	<!-- Main Form -->
 	<br>
 	<div class="login-form-1">
-		<form id="login-form"  class="text-left" method="post" >
+		<form id="login-form" action="Login" class="text-left" method="post" onsubmit="validateLogin()">
 			<div class="login-form-main-message"></div>
 					<div class="form-group">
 						<label for="username">Username</label>
@@ -55,7 +55,7 @@
 					</div>
 					
 			<div class= login-button>
-				<input type="button" class="login-button" id="loginButton" value="Login"><i class="fa fa-chevron-right"	></i>
+				<input type="submit" class="login-button" id="loginButton" value="Login"><i class="fa fa-chevron-right"	></i>
 				</div>
 				<br>
 			<div class="etc-login-form">
@@ -73,9 +73,9 @@
 <%@ include file="Footer.jsp"%>
 </div>
 <script type="text/javascript">
-$('#loginButton').click(function(){
+/* $('#loginButton').click(function(){
 	validateLogin();
-});
+}); */
 </script>
 </body>
 </html>

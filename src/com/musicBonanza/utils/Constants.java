@@ -1,4 +1,4 @@
-package com.musicBonanza.Util;
+package com.musicBonanza.utils;
 
 public final class Constants {
 	// Database Configurations and sql pool names
