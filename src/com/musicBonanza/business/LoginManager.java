@@ -1,10 +1,9 @@
 package com.musicBonanza.business;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.musicBonanza.dao.LoginDao;
+import com.musicBonanza.dao.*;
 
 public class LoginManager {
 	public String login(String username, String password) throws IOException{

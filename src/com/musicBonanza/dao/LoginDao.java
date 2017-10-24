@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
-import com.musicBonanza.DBAgent.LoginDBManager;
-
 public class LoginDao {
 	LoginDBManager loginDBManager;
 	Properties prop = new Properties();
@@ -25,7 +23,7 @@ public class LoginDao {
 		prop.load(input);
 
 		// get the property value and print it out
-		String query = prop.getProperty("selectFromAddress");
+		String query = prop.getProperty("selectFromUserLogin");
 		ResultSet resultSet = loginDBManager.login(query, parameters);
 		try {
 			if(resultSet.next()){

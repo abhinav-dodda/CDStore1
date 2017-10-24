@@ -58,7 +58,7 @@ public class Login extends HttpServlet {
 
 	}
 	private static void sendGET() throws IOException {
-		URL obj = new URL("http://localhost:7002/MusicBonanza/rest/userLogin/getLogin");
+		URL obj = new URL("http://localhost:8080/MusicBonanza/rest/userLogin/getLogin");
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
 		//con.setRequestProperty("User-Agent", USER_AGENT);

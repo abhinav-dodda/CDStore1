@@ -1,4 +1,4 @@
-package com.musicBonanza.DBAgent;
+package com.musicBonanza.dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
