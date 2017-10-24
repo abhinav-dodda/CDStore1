@@ -26,6 +26,9 @@
       <li class="nav-item">
         <a class="nav-link" href="#">About Us</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="Cart.jsp">My Cart</a>
+      </li>
       <li class="nav-item"><a class="nav-link"
 							href="ProductCategories.jsp">Product Catalog</a></li>
 							<li class="nav-item">
