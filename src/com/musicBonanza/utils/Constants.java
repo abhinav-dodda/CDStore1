@@ -33,7 +33,7 @@ public final class Constants {
 	public static final int successCode = 1;
 
 	// FileNames
-	public static final String sqlQueryProperty = "com/musephoria/util/SqlQuery.properties";
+	public static final String sqlQueryProperty = "com/musicBonanza/utils/sqlQuery.properties";
 	public static final String hibernatePropertyFile = "hibernate.cfg.xml";
 
 	// Property Keys

@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import com.musicBonanza.dao.*;
 /**
  * Servlet implementation class Login
  */
@@ -65,18 +65,19 @@ public class Login extends HttpServlet {
 		int responseCode = con.getResponseCode();
 		System.out.println("GET Response Code :: " + responseCode);
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
-			BufferedReader in = new BufferedReader(new InputStreamReader(
+			/*BufferedReader in = new BufferedReader(new InputStreamReader(
 					con.getInputStream()));
 			String inputLine;
 			StringBuffer response = new StringBuffer();
-
-			while ((inputLine = in.readLine()) != null) {
+*/
+			DBManager.executeSQL("Abhinav");
+			/*while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
-			}
-			in.close();
+			}*/
+			//in.close();
 
 			// print result
-			System.out.println(response.toString());
+			//System.out.println(response.toString());
 		} else {
 			System.out.println("GET request not worked");
 		}

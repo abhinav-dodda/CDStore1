@@ -1,5 +1,5 @@
 package com.musicBonanza.dao;
-
+import com.musicBonanza.Helper.*;
 import java.io.IOException;
 //import java.io.IOException;
 import java.sql.Connection;
@@ -37,7 +37,7 @@ import com.musicBonanza.utils.Constants;
 @WebServlet("/DBManager")
 public class DBManager extends HttpServlet {
 	private Configuration hConfig;
-	private Session hSession;
+	private static Session hSession;
 	private Transaction hTransaction;
 	SessionFactory hSessionFactory;
 	private static final long serialVersionUID = 1L;
@@ -139,33 +139,34 @@ public class DBManager extends HttpServlet {
 	 * @param queryID
 	 * @param parameterList
 	 * @return resObj
-	 
-	public ResultSet executeSQL(String queryID, List<?> parameterList) {
+	 */
+	public static ResultSet executeSQL(String string) {
 		ResultSet resObj = null;
 		Query hQuery = null;
 
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
-		String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
+		//String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, string);
 
+		Log log;
 		try {
-			if (!sqlQuery.isEmpty()) {
+			/*if (!sqlQuery.isEmpty()) {
 				hQuery = hSession.createQuery(sqlQuery);
 				log.info(Constants.executeSQLQueryExecuted);
-			}
+			}*/
+			System.out.println(string);
 
 			// Setting the result object with no of rows affected & success
 			// code/message.
-			resObj = setResultObject(null, null, hQuery.list().size(), Constants.successCode, Constants.successMessage);
+			//resObj = setResultObject(null, null, hQuery.list().size(), Constants.successCode, Constants.successMessage);
 
 		} catch (Exception e) {
 			// Setting the result object with failure code/message.
-			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
-			log.error(e.getLocalizedMessage(), e);
+		/*	resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
+			log.error(e.getLocalizedMessage(), e);*/
 		}
 		return resObj;
 	}
-	
-	 * Executes query and returns result set.
+	 /* Executes query and returns result set.
 	 *
 	 * @param queryID
 	 * @param parameterList

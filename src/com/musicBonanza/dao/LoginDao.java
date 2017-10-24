@@ -27,7 +27,7 @@ public class LoginDao {
 		ResultSet resultSet = loginDBManager.login(query, parameters);
 		try {
 			if(resultSet.next()){
-				return "success";
+				return "Abhi";
 			}
 			else{
 				return "failure";
