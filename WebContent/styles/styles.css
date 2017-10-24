@@ -102,12 +102,16 @@ table {
 	    height: 56px;
 }
         
-.site-title{
+.site-title a{
 	float: left;
 	padding-top:15px;
 	font-family : "Matura MT Script Capitals";
 	font-size: 30px;
     color: orange;
+}
+
+.site-title a:hover{
+	text-decoration: none;
 }
 
 .nav-item a {

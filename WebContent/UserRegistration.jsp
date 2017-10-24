@@ -31,19 +31,6 @@
 </head>
 <body>
 
-<script>
-var check = function() {
-	  if (document.getElementById('signupPassword').value ==
-	    document.getElementById('ConfirmsignupPassword').value) {
-	   // document.getElementById('message').style.color = 'green';
-	    document.getElementById('message').innerHTML = 'matching';
-	  } else {
-	   // document.getElementById('message').style.color = 'red';
-	    document.getElementById('message').innerHTML = 'not matching';
-	  }
-	}
-</script>
-
 <div class="container-fluid">
  <%@ include file="Header.jsp" %>
 
@@ -52,13 +39,13 @@ var check = function() {
 <div class="col-sm-4">
 			<div class="panel panel-primary">
 				<div class="panel-body">
-					<form method="POST" action="" role="form">
+					<form method="POST" action="UserRegistration" role="form">
 						<div class="form-group">
-							<h2>Create account</h2>
+							<h2>Create an account</h2>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="signupName">Your name</label>
-							<input id="signupName" type="text" maxlength="50" class="form-control" required>
+							<input id="signupName" type="text" maxlength="50" name="signupname" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="signupEmail">Email</label>

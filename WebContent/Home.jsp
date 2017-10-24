@@ -21,10 +21,10 @@
 
 <!-- Including the java script files -->
 <script type="text/javascript" src="validations/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script type="text/javascript" src="validations/bootstrap.js"></script>
 <script type="text/javascript" src="validations/bootstrap.min.js"></script>
 <script type="text/javascript" src="validations/validation.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <title>Home</title>
 </head>
 <body id="home-body">
