@@ -28,7 +28,7 @@
 <script type="text/javascript" src="validations/bootstrap.js"></script>
 <script type="text/javascript" src="validations/bootstrap.min.js"></script>
 <script type="text/javascript" src="validations/validation.js"></script>
-<title>CD Shopping Cart</title>
+<title>CDShopping Cart</title>
 
 </head>
 <body>
