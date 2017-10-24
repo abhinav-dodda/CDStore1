@@ -5,6 +5,7 @@ public class ShoppingCart {
 	private int ProductId;
 	private String ProductName;
 	private float ProdPrice;
+	
 	public int getProductId() {
 		return ProductId;
 	}
