@@ -24,15 +24,18 @@
         <a class="nav-link" href="Home.jsp"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About Us</a>
+        <a class="nav-link" href="#">AboutUs</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="Cart.jsp">My Cart</a>
+        <a class="nav-link" href="Cart.jsp">MyCart</a>
       </li>
       <li class="nav-item"><a class="nav-link"
 							href="ProductCategories.jsp">Product Catalog</a></li>
 							<li class="nav-item">
-        <a class="nav-link" href="Login.jsp">Sign In</a>
+        <a class="nav-link" href="Login.jsp">SignIn</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="Logout.jsp?action=logout">SignOut</a>
       </li>
     </ul>
   </div>
