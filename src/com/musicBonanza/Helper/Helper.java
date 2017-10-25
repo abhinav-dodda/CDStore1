@@ -21,7 +21,7 @@ public class Helper {
 			
 					property.load(inputStream);
 				System.out.println("Prop File loaded");
-				System.out.println(property.getProperty("selectFromUserLogin"));
+				
 		}
 		 catch (IOException e) {
 			// log.error(e.getLocalizedMessage(), e);
@@ -38,6 +38,7 @@ public class Helper {
 	 */
 	public static String FetchPropertyAndProcessQuery(Properties propertyObj, String propertyKey,
 			List<?> parameterList) {
+		
 		String rawQuery = StringUtils.EMPTY;
 		String processedQuery = StringUtils.EMPTY;
 
@@ -47,28 +48,15 @@ public class Helper {
 
 		if (parameterList != null) {
 			processedQuery = ProcessQuery(parameterList, rawQuery);
+			System.out.println("Reached FetchAndProcessQuery");
 		} else {
 			processedQuery = rawQuery;
 		}
 
 		return processedQuery;
 	}
-
-	
 	/**
-	 * Loads the property file using the below parameters.
-	 *
-	 * @param propertyKey
-	 * @param className
-	 * @return 
-	 * @return
-	 */
-	public static void main(String[] args) {
-
-	 Helper.LoadProperty("com/musicBonanza/Util/sqlQuery.properties");
-	
-}
-/* Processes the query string by replacing @param parameters with actual
+	 * Processes the query string by replacing @param parameters with actual
 	 * parameters.
 	 *
 	 * @param parameterList
@@ -81,10 +69,25 @@ public class Helper {
 
 		Iterator<?> iterator = parameterList.iterator();
 		while (iterator.hasNext()) {
-			processedString = processedString.replace("@param" + i, iterator.next().toString());
+			String result = (String) iterator.next();
+			System.out.println(result);
+			processedString = processedString.replace("@param" + i, result);
+			System.out.println("Reached ProcessQuery");
 			i++;
 		}
 
 		return processedString;
 	}
+	 /* Loads the property file using the below parameters.
+	 *
+	 * @param propertyKey
+	 * @param className
+	 * @return 
+	 * @return
+	 */
+	public static void main(String[] args) {
+
+	 Helper.LoadProperty("com/musicBonanza/Util/sqlQuery.properties");
+	
+}
 }
