@@ -147,8 +147,10 @@ public  class DBManager extends HttpServlet {
 		ResultSet rs=null;
 		try {
 			Context context = new InitialContext();
+			System.out.println(Constants.envNameContext);
 			DataSource ds = (DataSource) context.lookup(Constants.envNameContext);
 			Connection connection = ds.getConnection();
+			
 			//System.out.println(connection);
 			
 			Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);

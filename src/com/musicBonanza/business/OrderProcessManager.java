@@ -18,7 +18,7 @@ public class OrderProcessManager {
 	
 	public String getAccount(String userName, String password) throws IOException{
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
-		String response = "failure";
+		String response = null;
 		ResultSet resultSet = orderProcessDao.getAccount(userName,password);
 		if(resultSet==null) {
 			response = "success";

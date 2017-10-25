@@ -25,21 +25,20 @@ public class OrderProcessService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAccount(String params) throws IOException {
-		
+		String response = null;
 		JSONParser parser = new JSONParser();
 		try {
-			JSONObject json = (JSONObject) parser.parse(params);
-			System.out.println(json.get("userName"));
+			JSONObject json = (JSONObject)parser.parse(params);
+			String userName = json.get("userName").toString();
+			String password = json.get("password").toString();
+			OrderProcessManager orderProcessManager = new OrderProcessManager();
+			response = orderProcessManager.getAccount(userName,password);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		OrderProcessManager orderProcessManager = new OrderProcessManager();
-		String response = orderProcessManager.getAccount("raman","raman123");
-
-		// LoginManager loginManager = new LoginManager();
-		return "success"; // loginManager.login(username,password);
+		return response;
 	}
 	
 	@POST
