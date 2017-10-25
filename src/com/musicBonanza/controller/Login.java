@@ -62,7 +62,7 @@ public class Login extends HttpServlet {
 		user.setPassword(password);*/
 		
 		Client client = Client.create();
-		WebResource webResource = client.resource(Constants.localhostUrl+"rest/orderProcess/getAccount");
+		WebResource webResource = client.resource(Constants.localhostUrl+"orderProcess/getAccount");
         String input = "{\"userName\":\"userName\",\"password\":\"password\"}";
         ClientResponse webServiceResponse = webResource.type("application/json")
            .post(ClientResponse.class, input);

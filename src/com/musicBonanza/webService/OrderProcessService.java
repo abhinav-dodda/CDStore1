@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.musicBonanza.business.OrderProcessManager;
 import com.musicBonanza.dao.OrderProcessDao;
 
 @Path("/orderProcess")
@@ -21,8 +22,8 @@ public class OrderProcessService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAccount() throws IOException {
 		
-		OrderProcessDao orderProcessDao = new OrderProcessDao();
-		String response = orderProcessDao.getAccount(userName,password);
+		OrderProcessManager orderProcessManager = new OrderProcessManager();
+		String response = orderProcessManager.getAccount("raman","raman123");
 
 		// LoginManager loginManager = new LoginManager();
 		return "success"; // loginManager.login(username,password);
