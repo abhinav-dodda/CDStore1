@@ -3,6 +3,7 @@ package com.musicBonanza.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.musicBonanza.dao.*;
+import com.musicBonanza.entity.User;
+import com.musicBonanza.utils.Constants;
 /**
  * Servlet implementation class Login
  */
@@ -45,33 +48,33 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String uname = request.getParameter("username");
+		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
-
-	
-		sendGET();
-		if (uname.equals("raman") && password.equals("raman123")) {
-			response.sendRedirect("Home.jsp");
-		} else {
-			response.sendRedirect("Login.jsp");
-		}
-
-	}
-	private static void sendGET() throws IOException {
-		URL obj = new URL("http://localhost:8080/MusicBonanza/rest/userLogin/getLogin");
+		User user = new User();
+		user.setUserName(userName);
+		user.setPassword(password);
+		
+		URL obj = new URL(Constants.localhostUrl+"rest/orderProcess/getAccount");
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		con.setRequestMethod("GET");
+		con.setRequestMethod("POST");
+		
+		con.setDoOutput(true);
+		OutputStream os = con.getOutputStream();
+		System.out.println(user.toString());
+		os.write(user.toString().getBytes());
+		os.flush();
+		os.close();
+		
 		//con.setRequestProperty("User-Agent", USER_AGENT);
 		int responseCode = con.getResponseCode();
-		System.out.println("GET Response Code :: " + responseCode);
+		System.out.println("POST Response Code :: " + responseCode);
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
+			response.sendRedirect("Home.jsp");
 			/*BufferedReader in = new BufferedReader(new InputStreamReader(
 					con.getInputStream()));
 			String inputLine;
 			StringBuffer response = new StringBuffer();
-*/
-			DBManager.executeSQL("Abhinav");
-			/*while ((inputLine = in.readLine()) != null) {
+			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
 			}*/
 			//in.close();
