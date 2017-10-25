@@ -62,9 +62,7 @@ public class ShoppingCartServlet extends HttpServlet {
     	 cart.add(new CD(productId, productName, prodPrice, prodDesc, imgUrl));//declare variables 
     	 session.setAttribute("cart", cart);
     	 //naveen session set attribute
-    	 PurchaseOrder purchaseOrder = new PurchaseOrder();
-     	 session.setAttribute("cart",purchaseOrder);
-     	 User cart =  (User) session.getAttribute("cart");
+    	 
       }
       else
       {
@@ -78,7 +76,7 @@ public class ShoppingCartServlet extends HttpServlet {
 	    int id = Integer.parseInt(request.getParameter("index"));
 	    HttpSession session = request.getSession();	
 	    List<CD> cart = (List<CD>) session.getAttribute("cart");
-	    cart.remove(index);
+	    cart.remove(id);
 	    session.setAttribute("cart",cart);
 	    response.sendRedirect("Cart.jsp");
         
