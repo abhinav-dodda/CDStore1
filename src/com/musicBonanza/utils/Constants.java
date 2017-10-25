@@ -1,6 +1,9 @@
 package com.musicBonanza.utils;
 
 public final class Constants {
+	//Localhost access 
+	public static final String localhostUrl = "http://localhost:8080/MusicBonanza/";
+	
 	// Database Configurations and sql pool names
 	public static final String sqlConfigName = "mySqlConfig.properties";
 	public static final String dbName = "dbName";

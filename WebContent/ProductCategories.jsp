@@ -60,6 +60,40 @@
 		<div class="row" id="productCatalogue">
 			<!-- 	<div class="col-sm-4" id="countryClass"> -->
 
+			<div class="w3-cell-row">
+				<div id="search-bar" class="w3-container w3-cell w3-mobile">
+					<input type="text" name="search" placeholder="Search.."
+						style="width: 80%;" />
+				</div>
+				<div id="category-select-box" class="w3-container w3-cell w3-mobile">
+					<div>
+						<p>Select Category:</p>
+					</div>
+					<div>
+						<select class="field" style="width: 40%;">
+							<option value="">All</option>
+							<option value="">Country</option>
+							<option value="">Pop</option>
+							<option value="">Rock</option>
+						</select>
+					</div>
+				</div>
+				<div class="cart_right" class="w3-container w3-cell w3-mobile">
+					<div class="cart_box" style="width: 100%; font-size: smaller;">
+						<a href="Cart.jsp">
+							<h3>
+								<span class="simpleCart_total">$0.00</span> (<span
+									id="simpleCart_quantity" class="simpleCart_quantity">0</span>
+								items)<img src="images/bag.png" alt="">
+							</h3>
+						</a>
+						<p>
+							<a href="javascript:;" class="simpleCart_empty">Empty cart</a>
+						</p>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
 			<div class="single-product-area">
 				<div class="zigzag-bottom"></div>
 				<div class="container">
@@ -67,12 +101,13 @@
 						<div class="col-md-3 col-sm-6">
 							<div class="single-shop-product">
 								<div class="product-upper">
-									<img src="images/product-1.jpg" alt="">
+									<a href="#openModal"> <img src="images/product-1.jpg"
+										alt="">
+									</a>
 								</div>
 								<h2>
 									<a href="#openModal">Product1</a>
 								</h2>
-
 
 								<!-- Modal Box -->
 								<div id="openModal" class="modalDialog">
@@ -83,7 +118,7 @@
 
 										<div class="w3-cell-row">
 											<div class="w3-container w3-gray w3-cell w3-mobile">
-												<img src="images/product-1.jpg" alt="">
+												<img class="modalImg" src="images/product-1.jpg" alt="">
 											</div>
 											<div class="w3-container w3-cell w3-mobile">
 												<p>Artist: Luke Bryan</p>
@@ -95,9 +130,11 @@
 										</div>
 
 										<div class="product-option-shop">
-											<a class="add_to_cart_button" data-quantity="1"
-												data-product_sku="" data-product_id="70" rel="nofollow"
-												href="Cart.jsp?action=buy">Add to cart</a>
+											<div>
+												<a class="add_to_cart_button" data-quantity="1"
+													data-product_sku="" data-product_id="70" rel="nofollow"
+													href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+											</div>
 											<div class="product-carousel-price">
 												<ins>$89.00</ins>
 												<del>$99.00</del>
@@ -115,7 +152,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="Cart.jsp?action=buy">Add to cart</a>
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 								</div>
 							</div>
 						</div>
@@ -135,7 +172,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="Cart.jsp?action=buy">Add to cart</a>
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 								</div>
 							</div>
 						</div>
@@ -155,7 +192,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="Cart.jsp?action=buy">Add to cart</a>
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 								</div>
 							</div>
 						</div>
@@ -175,7 +212,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="Cart.jsp?action=buy">Add to cart</a>
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 								</div>
 							</div>
 						</div>
@@ -195,7 +232,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="Cart.jsp?action=buy">Add to cart</a>
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 								</div>
 							</div>
 						</div>
@@ -215,7 +252,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="Cart.jsp?action=buy">Add to cart</a>
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 								</div>
 							</div>
 						</div>
@@ -235,7 +272,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="Cart.jsp?action=buy">Add to cart</a>
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 								</div>
 							</div>
 						</div>
@@ -255,7 +292,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="Cart.jsp?action=buy">Add to cart</a>
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 								</div>
 							</div>
 						</div>
@@ -275,7 +312,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="Cart.jsp?action=buy">Add to cart</a>
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 								</div>
 							</div>
 						</div>
@@ -295,7 +332,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="Cart.jsp?action=buy">Add to cart</a>
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 								</div>
 							</div>
 						</div>
@@ -315,7 +352,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="Cart.jsp?action=buy">Add to cart</a>
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 								</div>
 							</div>
 						</div>
@@ -335,7 +372,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="Cart.jsp?action=buy">Add to cart</a>
+										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 								</div>
 							</div>
 						</div>

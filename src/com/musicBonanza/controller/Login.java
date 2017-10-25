@@ -3,16 +3,26 @@ package com.musicBonanza.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.jws.WebService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
+
 import com.musicBonanza.dao.*;
+import com.musicBonanza.entity.User;
+import com.musicBonanza.utils.Constants;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 /**
  * Servlet implementation class Login
  */
@@ -45,33 +55,32 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String uname = request.getParameter("username");
+		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
-
-	
-		sendGET();
-		if (uname.equals("raman") && password.equals("raman123")) {
-			response.sendRedirect("Home.jsp");
-		} else {
-			response.sendRedirect("Login.jsp");
-		}
-
-	}
-	private static void sendGET() throws IOException {
-		URL obj = new URL("http://localhost:8080/MusicBonanza/rest/userLogin/getLogin");
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		con.setRequestMethod("GET");
+		/*User user = new User();
+		user.setUserName(userName);
+		user.setPassword(password);*/
+		
+		Client client = Client.create();
+		WebResource webResource = client.resource(Constants.localhostUrl+"rest/orderProcess/getAccount");
+        String input = "{\"userName\":\"userName\",\"password\":\"password\"}";
+        ClientResponse webServiceResponse = webResource.type("application/json")
+           .post(ClientResponse.class, input);
+        		
+        //create account
+        
+        
+        
 		//con.setRequestProperty("User-Agent", USER_AGENT);
-		int responseCode = con.getResponseCode();
-		System.out.println("GET Response Code :: " + responseCode);
+		int responseCode = webServiceResponse.getStatus();
+		System.out.println("POST Response Code :: " + responseCode);
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
+			response.sendRedirect("Home.jsp");
 			/*BufferedReader in = new BufferedReader(new InputStreamReader(
 					con.getInputStream()));
 			String inputLine;
 			StringBuffer response = new StringBuffer();
-*/
-			DBManager.executeSQL("Abhinav");
-			/*while ((inputLine = in.readLine()) != null) {
+			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
 			}*/
 			//in.close();
@@ -79,7 +88,7 @@ public class Login extends HttpServlet {
 			// print result
 			//System.out.println(response.toString());
 		} else {
-			System.out.println("GET request not worked");
+			System.out.println("POST request not worked");
 		}
 
 	}
