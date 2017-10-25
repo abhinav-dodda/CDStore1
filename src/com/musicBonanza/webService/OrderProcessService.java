@@ -9,6 +9,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.musicBonanza.dao.OrderProcessDao;
+
 @Path("/orderProcess")
 public class OrderProcessService {
 	
@@ -18,7 +20,20 @@ public class OrderProcessService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAccount() throws IOException {
+		
+		OrderProcessDao orderProcessDao = new OrderProcessDao();
+		String response = orderProcessDao.getAccount(userName,password);
+
 		// LoginManager loginManager = new LoginManager();
 		return "success"; // loginManager.login(username,password);
+	}
+	
+	@POST
+	@Path("/createAccount")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String createAccount() throws IOException {
+		
+		return "success";
 	}
 }

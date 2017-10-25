@@ -15,6 +15,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
+
 import com.musicBonanza.dao.*;
 import com.musicBonanza.entity.User;
 import com.musicBonanza.utils.Constants;
@@ -64,7 +66,11 @@ public class Login extends HttpServlet {
         String input = "{\"userName\":\"userName\",\"password\":\"password\"}";
         ClientResponse webServiceResponse = webResource.type("application/json")
            .post(ClientResponse.class, input);
-		
+        		
+        //create account
+        
+        
+        
 		//con.setRequestProperty("User-Agent", USER_AGENT);
 		int responseCode = webServiceResponse.getStatus();
 		System.out.println("POST Response Code :: " + responseCode);
