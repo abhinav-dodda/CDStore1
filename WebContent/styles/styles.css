@@ -1342,4 +1342,8 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .close:hover {
     background: #00d9ff;
 }
+
+.modalImg{
+	width: 50%!important;
+}
 //Naveen
