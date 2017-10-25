@@ -20,16 +20,11 @@ public class OrderProcessManager {
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		String response = "failure";
 		ResultSet resultSet = orderProcessDao.getAccount(userName,password);
-		try {
-			if(resultSet.next()) {
-				response = "success";
-			}
-			else {
-				response = "failure";
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(resultSet==null) {
+			response = "success";
+		}
+		else {
+			response = "failure";
 		}
 		return response;
 		}
