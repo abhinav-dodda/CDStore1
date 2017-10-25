@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.jws.WebService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.musicBonanza.dao.*;
 import com.musicBonanza.entity.User;
 import com.musicBonanza.utils.Constants;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 /**
  * Servlet implementation class Login
  */
@@ -50,23 +55,18 @@ public class Login extends HttpServlet {
 
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
-		User user = new User();
+		/*User user = new User();
 		user.setUserName(userName);
-		user.setPassword(password);
+		user.setPassword(password);*/
 		
-		URL obj = new URL(Constants.localhostUrl+"rest/orderProcess/getAccount");
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		con.setRequestMethod("POST");
-		
-		con.setDoOutput(true);
-		OutputStream os = con.getOutputStream();
-		System.out.println(user.toString());
-		os.write(user.toString().getBytes());
-		os.flush();
-		os.close();
+		Client client = Client.create();
+		WebResource webResource = client.resource("http://localhost:8080/your-app/rest/data/post");
+        String input = "{\"userName\":\"userName\",\"password\":\"password\"}";
+        ClientResponse webServiceResponse = webResource.type("application/json")
+           .post(ClientResponse.class, input);
 		
 		//con.setRequestProperty("User-Agent", USER_AGENT);
-		int responseCode = con.getResponseCode();
+		int responseCode = webServiceResponse.getStatus();
 		System.out.println("POST Response Code :: " + responseCode);
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
 			response.sendRedirect("Home.jsp");
@@ -82,7 +82,7 @@ public class Login extends HttpServlet {
 			// print result
 			//System.out.println(response.toString());
 		} else {
-			System.out.println("GET request not worked");
+			System.out.println("POST request not worked");
 		}
 
 	}
