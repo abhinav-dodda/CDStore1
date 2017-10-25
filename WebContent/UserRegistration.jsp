@@ -48,6 +48,10 @@
 							<input id="signupName" type="text" maxlength="50" name="signupname" class="form-control" required>
 						</div>
 						<div class="form-group">
+							<label class="control-label" for="userName">Your name</label>
+							<input id="userName" type="text" maxlength="50" name="userName" class="form-control" required>
+						</div>
+						<div class="form-group">
 							<label class="control-label" for="signupEmail">Email</label>
 							<input id="signupEmail" type="email" name="email" maxlength="50" class="form-control" required>
 						</div>
