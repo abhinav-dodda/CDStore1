@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.musicBonanza.*;
 import com.musicBonanza.Helper.Helper;
+import com.musicBonanza.entity.Result;
+import com.musicBonanza.entity.User;
 import com.musicBonanza.utils.Constants;
 
 public class OrderProcessDao {
@@ -20,9 +22,16 @@ public class OrderProcessDao {
 		return resultSet;
 		}
 	
-	public static int createOrder(OrderProcessDao purchaseorder) {
-		
-		return 0;
+	public Result createAccount(User user) throws IOException{
+		List<String> parameters = new ArrayList<String>();
+		parameters.add(user.getSignupname());
+		parameters.add(user.getUserName());
+		parameters.add(user.getsignupEmail());
+		parameters.add(user.getsignupPassword());
+		parameters.add(user.getConfirmsignupPassword());
+		DBManager dbManager= new DBManager();
+		Result result = dbManager.executeSQL("InsertIntoUsers", parameters);
+		return result;
 	}
 
 }

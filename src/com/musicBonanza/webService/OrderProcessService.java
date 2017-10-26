@@ -16,6 +16,7 @@ import org.json.simple.parser.ParseException;
 
 import com.musicBonanza.business.OrderProcessManager;
 import com.musicBonanza.dao.OrderProcessDao;
+import com.musicBonanza.entity.User;
 
 @Path("/orderProcess")
 public class OrderProcessService {
@@ -46,8 +47,42 @@ public class OrderProcessService {
 	@Path("/createAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String createAccount() throws IOException {
+	public String createAccount(String params) throws IOException {
+	
+		String response = null;
+		JSONParser parser = new JSONParser();
+		try {
+			JSONObject json = (JSONObject)parser.parse(params);
+			String name = json.get("signupName").toString();
+			String userName = json.get("userName").toString();
+			String email = json.get("signupEmail").toString();
+			String password = json.get("signupPassword").toString();
+			String confirmPassword = json.get("ConfirmsignupPassword").toString();
+			
+			User user= new User();
+			user.setSignupname(name);
+			user.setUserName(userName);
+            user.setsignupEmail(email);
+            user.setsignupPassword(password);
+            user.setCofirmsignupPassword(confirmPassword);
+            
+            if(!(name!=null) && (userName!=null) && (email!=null) && (password!=null) && (confirmPassword!=null))
+            {
+            	return "Please add User Info";
+            }
+            else if (!(password==confirmPassword)) 
+            {
+             return "Paasword donot match";	
+            }
+            
+			OrderProcessManager orderProcessManager = new OrderProcessManager();
+			response = orderProcessManager.createAccount(user);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		return "success";
+		return response;
 	}
+
 }

@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.musicBonanza.dao.OrderProcessDao;
 import com.musicBonanza.entity.PurchaseOrder;
+import com.musicBonanza.entity.Result;
 import com.musicBonanza.entity.Shipping;
 import com.musicBonanza.entity.User;
 
@@ -33,19 +34,21 @@ public class OrderProcessManager {
 		}
 		return response;
 		}
-	/*public int createOrder(int[] shoppingCartInfo, PurchaseOrder purchaseOrder, Shipping shippingInfo)
-	{
-	OrderProcessDao orderProcessDao = new OrderProcessDao();
-	
-	PurchaseOrder purchaseorder = new PurchaseOrder();
-	purchaseorder.setShippings(shippings);
-	purchaseorder.setpurchaseOrder(purchaseOrder);
-	purchaseorder.setshippingInfo(shippingInfo);
-	
-	return orderProcessDao.createOrder(purchaseorder);
-	}*/
 	
 	
+	    public String createAccount(User user) throws IOException{
+		OrderProcessDao orderProcessDao = new OrderProcessDao();
+		String response = null;
+		Result resultSet = orderProcessDao.createAccount(user);
+		if(resultSet==null) {
+			response = "success";
+		}
+		else {
+			response = "failure";
+		}
+		return response;
+		}
+
 	
 	
 	

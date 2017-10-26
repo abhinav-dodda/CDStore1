@@ -4,9 +4,10 @@ public class User {
 
 	private int userId;
 	private String userName;
-	private String email;
-	private String password;
-	private String cofirmPassword;
+	private String signupname;
+	private String signupEmail;
+	private String signupPassword;
+	private String confirmsignupPassword;
 	
 	public int getUserId() {
 		return userId;
@@ -14,29 +15,35 @@ public class User {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	public String getSignupname() {
+		return signupname;
+	}
+	public void setSignupname(String signupname) {
+		this.signupname = signupname;
+	}
 	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getEmail() {
-		return email;
+	public String getsignupEmail() {
+		return signupEmail;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setsignupEmail(String email) {
+		this.signupEmail = email;
 	}
-	public String getPassword() {
-		return password;
+	public String getsignupPassword() {
+		return signupPassword;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setsignupPassword(String password) {
+		this.signupPassword = password;
 	}
-	public String getCofirmPassword() {
-		return cofirmPassword;
+	public String getConfirmsignupPassword() {
+		return confirmsignupPassword;
 	}
-	public void setCofirmPassword(String cofirmPassword) {
-		this.cofirmPassword = cofirmPassword;
+	public void setCofirmsignupPassword(String confirmPassword) {
+		this.confirmsignupPassword = confirmPassword;
 	} 
 	
 }

@@ -44,11 +44,11 @@
 							<h2>Create an account</h2>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="signupName">Your name</label>
+							<label class="control-label" for="signupName">Full name</label>
 							<input id="signupName" type="text" maxlength="50" name="signupname" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="userName">Your name</label>
+							<label class="control-label" for="userName">Username</label>
 							<input id="userName" type="text" maxlength="50" name="userName" class="form-control" required>
 						</div>
 						<div class="form-group">
