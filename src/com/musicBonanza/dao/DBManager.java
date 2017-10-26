@@ -69,6 +69,20 @@ public  class DBManager extends HttpServlet {
 		beginTransaction();*/	
 		// TODO Auto-generated constructor stub
 	}
+	public static void startTransaction() {
+		try {
+			connection.setAutoCommit(false);
+			connection.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void endTransaction() throws SQLException {
+		connection.rollback();
+	}
+	
+	
 	/**
 	 * Executes query and returns the number of rows affected in the result
 	 * object.
@@ -76,10 +90,12 @@ public  class DBManager extends HttpServlet {
 	 * @param queryID
 	 * @param parameterList
 	 * @return resObj
+	 * @throws SQLException 
 	 */
-	public Result executeSQL(String queryID, List<?> parameterList) {
+	public static Result executeSQL(String queryID, List<?> parameterList) throws SQLException {
+		startTransaction();
 		Result resObj = null;
-
+		
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
 		String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
 
@@ -89,16 +105,19 @@ public  class DBManager extends HttpServlet {
 				//log.info(Constants.executeSQLQueryExecuted);
 				stmt = connection.createStatement();
 				stmt.executeUpdate(sqlQuery);
+			
 			}
 
 			// Setting the result object with no of rows affected & success
 			// code/message.
 			//resObj = setResultObject(null, null, hQuery.list().size(), Constants.successCode, Constants.successMessage);
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// Setting the result object with failure code/message.
 			//resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
 			//log.error(e.getLocalizedMessage(), e);
+			e.printStackTrace();
+			endTransaction();
 		}
 		return resObj;
 	}
@@ -109,7 +128,8 @@ public  class DBManager extends HttpServlet {
 	 * @param parameterList
 	 * @return resObj
 	 */
-	public static ResultSet getQueryResult(String queryID, List<String> parameters) {
+	public static ResultSet getQueryResult(String queryID, List<String> parameters) throws SQLException {
+		startTransaction();
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {		
@@ -128,6 +148,7 @@ public  class DBManager extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			endTransaction();
 		}
 		return rs;
 
