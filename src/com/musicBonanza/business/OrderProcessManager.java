@@ -3,6 +3,7 @@ package com.musicBonanza.business;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -16,15 +17,19 @@ import com.musicBonanza.entity.User;
 
 public class OrderProcessManager {
 	
-	public String getAccount(String userName, String password) throws IOException{
+	public String getAccount(String userName, String password) throws IOException, SQLException{
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		String response = null;
 		ResultSet resultSet = orderProcessDao.getAccount(userName,password);
-		if(resultSet==null) {
-			response = "success";
+		if(resultSet != null) {
+		while(resultSet.next()) {
+			if(resultSet.getString("Username").equals(userName)) {
+				response = "success";
+			}
+			else {
+				response = "failure";
+			}
 		}
-		else {
-			response = "failure";
 		}
 		return response;
 		}

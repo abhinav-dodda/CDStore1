@@ -1,6 +1,7 @@
 package com.musicBonanza.webService;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -24,7 +25,7 @@ public class OrderProcessService {
 	@Path("/getAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getAccount(String params) throws IOException {
+	public String getAccount(String params) throws IOException, SQLException {
 		String response = null;
 		JSONParser parser = new JSONParser();
 		try {

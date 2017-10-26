@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Properties;
 import com.musicBonanza.*;
@@ -31,7 +32,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.context.internal.ManagedSessionContext;*/
 
 import com.musicBonanza.utils.Constants;
-import com.mysql.jdbc.Statement;
+
 /**
  * Servlet implementation class DBManager
  */
@@ -142,7 +143,7 @@ public  class DBManager extends HttpServlet {
 	 * @param parameterList
 	 * @return resObj
 	 */
-	public static ResultSet runSQLQueries(String queryID, List<?> parameterList) {
+	public static ResultSet executeSQL(String queryID, List<String> parameters) {
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {
@@ -156,13 +157,12 @@ public  class DBManager extends HttpServlet {
 			Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
 			System.out.println(propertyObj);
 			
-			String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID,parameterList);
+			String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID,parameters);
 			System.out.println("Reached till here");
 			//Log log = null;
 			if (!sqlQuery.isEmpty()) {
-				//hQuery = hSession.createQuery(sqlQuery);
-				//stmt = (Statement) connection.createStatement();
-				// rs = stmt.executeQuery(sqlQuery);
+				stmt = connection.createStatement();
+				 rs = stmt.executeQuery(sqlQuery);
 				//log.info(Constants.executeSQLQueryExecuted);
 			}
 			System.out.println(queryID);
