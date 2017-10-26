@@ -43,6 +43,7 @@ public class ProductCategoryDBManager {
 		{
 			// PreparedStatement preparedStatement = (PreparedStatement)
 			// connection.prepareStatement(query);
+			this.initConnectionPool();
 			Statement statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
 		} 

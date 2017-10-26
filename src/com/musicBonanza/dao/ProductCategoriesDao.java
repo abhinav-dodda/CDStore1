@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -21,12 +22,19 @@ public class ProductCategoriesDao
 		
 	}
 	
-	public String getProducts(String category) throws IOException
+	public ResultSet getProducts(String category) throws IOException
 	{
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
-		
-		// get the property value and print it out
+/*		List<String> parameters = new ArrayList<String>();
+		parameters.add(category);*/
+	
 		String query = propertyObj.getProperty("selectFromProductCategories");
+		ResultSet resultSet = productCategoryDBManager.productCategories(query, category);
+		
+		//ResultSet resultSet = DBManager.runSQLQueries("selectFromProductCategories", parameters);
+		return resultSet;
+		// get the property value and print it out
+		/*String query = propertyObj.getProperty("selectFromProductCategories");
 		ResultSet resultSet = productCategoryDBManager.productCategories(query, category);
 		
 		try {
@@ -40,6 +48,6 @@ public class ProductCategoriesDao
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "failure";
+		return "failure";*/
 	}
 }

@@ -2,6 +2,10 @@ package com.musicBonanza.webService;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+
 import java.io.IOException;
 import java.sql.ResultSet;
 
@@ -24,14 +28,21 @@ public class ProductCategoryService {
 	@Path("/categories")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String categories() throws IOException
+	public String categories(String params) throws IOException
 	{
+		String response = null;
 		/*ProductCategoryDBManager productCategoryManager = new ProductCategoryDBManager();
 		String output = productCategoryManager.productCategories();*/
-		ProductCategoriesDao productCategoryDao = new ProductCategoriesDao();
-		String x = productCategoryDao.getProducts("POP");
-		System.out.println(x);
+		try {
+			
+			ProductCategoryManager productCategoryManager = new ProductCategoryManager();
+			response = productCategoryManager.getProductCategories(params);
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		return x;
+		return response;
 	}
 }

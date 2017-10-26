@@ -70,7 +70,7 @@
 						<p>Select Category:</p>
 					</div>
 					<div>
-						<select class="field" style="width: 40%;">
+						<select id="selectCategory" class="field" style="width: 40%;">
 							<option value="">All</option>
 							<option value="">Country</option>
 							<option value="">Pop</option>
