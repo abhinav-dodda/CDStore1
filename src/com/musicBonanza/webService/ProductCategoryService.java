@@ -28,7 +28,7 @@ public class ProductCategoryService {
 	@Path("/categories")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String categories(String params) throws IOException
+	public String getCategoryList(String params) throws IOException
 	{
 		String response = null;
 		/*ProductCategoryDBManager productCategoryManager = new ProductCategoryDBManager();
@@ -36,7 +36,7 @@ public class ProductCategoryService {
 		try {
 			
 			ProductCategoryManager productCategoryManager = new ProductCategoryManager();
-			response = productCategoryManager.getProductCategories(params);
+			response = productCategoryManager.getCategoryList(params);
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block

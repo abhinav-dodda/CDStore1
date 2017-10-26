@@ -15,18 +15,18 @@ import com.musicBonanza.entity.User;
 
 public class ProductCategoryManager {
 	
-	public String getProductCategories(String category) throws IOException{
+	public String getCategoryList(String category) throws IOException{
 		ProductCategoriesDao productCategoriesDao = new ProductCategoriesDao();
 		String response = null;
 
-		ResultSet resultSet = productCategoriesDao.getProducts(category);
+		ResultSet resultSet = productCategoriesDao.getCategoryList(category);
 try {
 		if(resultSet!=null) 
 		{
 			while(resultSet.next()) 
 			{
 
-					String title = resultSet.getString("title");
+					String title = resultSet.getString("category");
 					System.out.println(title);
 			}
 			

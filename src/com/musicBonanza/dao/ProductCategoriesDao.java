@@ -14,7 +14,7 @@ import com.musicBonanza.utils.Constants;
 
 public class ProductCategoriesDao 
 {
-	ProductCategoryDBManager productCategoryDBManager = new ProductCategoryDBManager();;
+/*	ProductCategoryDBManager productCategoryDBManager = new ProductCategoryDBManager();;*/
 	Properties prop = new Properties();
 	
 	public ProductCategoriesDao()
@@ -22,17 +22,22 @@ public class ProductCategoriesDao
 		
 	}
 	
-	public ResultSet getProducts(String category) throws IOException
+	public ResultSet getCategoryList(String category) throws IOException
 	{
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
 /*		List<String> parameters = new ArrayList<String>();
 		parameters.add(category);*/
-	
-		String query = propertyObj.getProperty("selectFromProductCategories");
+		List<String> parameters = new ArrayList<String>();
+		parameters.add(null);
+		
+		ResultSet resultSet = DBManager.executeSQL("selectCategoryFromProductCategories", parameters);
+		return resultSet;
+		}
+		/*String query = propertyObj.getProperty("selectCategoryFromProductCategories");
 		ResultSet resultSet = productCategoryDBManager.productCategories(query, category);
 		
 		//ResultSet resultSet = DBManager.runSQLQueries("selectFromProductCategories", parameters);
-		return resultSet;
+		return resultSet;*/
 		// get the property value and print it out
 		/*String query = propertyObj.getProperty("selectFromProductCategories");
 		ResultSet resultSet = productCategoryDBManager.productCategories(query, category);
@@ -50,4 +55,4 @@ public class ProductCategoriesDao
 		}
 		return "failure";*/
 	}
-}
+
