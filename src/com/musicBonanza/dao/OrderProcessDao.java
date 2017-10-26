@@ -16,7 +16,7 @@ public class OrderProcessDao {
 		parameters.add(userName);
 		parameters.add(password);
 		
-		ResultSet resultSet = DBManager.executeSQL("selectFromUserLogin", parameters);
+		ResultSet resultSet = DBManager.getQueryResult("selectFromUserLogin", parameters);
 		return resultSet;
 		}
 	

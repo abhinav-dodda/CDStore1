@@ -1,5 +1,7 @@
 package com.musicBonanza.dao;
 import com.musicBonanza.Helper.*;
+import com.musicBonanza.entity.Result;
+
 import java.io.IOException;
 //import java.io.IOException;
 import java.sql.Connection;
@@ -38,10 +40,22 @@ import com.musicBonanza.utils.Constants;
  */
 @WebServlet("/DBManager")
 public  class DBManager extends HttpServlet {
-	/*private Configuration hConfig;
-	private static Session hSession;
-	private Transaction hTransaction;
-	SessionFactory hSessionFactory;*/
+	static Connection connection;
+	static ResultSet rs;
+	static Statement stmt;
+	static {
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource) context.lookup("java:comp/env/myDataSource");
+			connection = ds.getConnection();
+			System.out.println(connection);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -49,93 +63,13 @@ public  class DBManager extends HttpServlet {
 	 */
 	public DBManager() {
 		super();
+		
 		/*loadConfiguration();
 		loadSession();
-		beginTransaction();*/
-		
+		beginTransaction();*/	
 		// TODO Auto-generated constructor stub
 	}
-	/*
-	 * Loads SQL configuration information from the hibernate configuration
-	 * file.
-	 *
-	 * @return Hibernate configuration object.
-	 */
-	/*public Configuration loadConfiguration() {
-		hConfig = new Configuration();
-		hConfig.configure(Constants.hibernatePropertyFile);
-		Log log = null;
-		log.info(Constants.hibernateConfigLoaded);
-		return hConfig;
-	}*/
-	/*
-	 * Opens a Hibernate Session.
-	 *
-	 * @param config
-	 * @return Hibernate Session Object.
-	 */
-/*	@SuppressWarnings("deprecation")
-	public Session loadSession() {
-		Log log = null;
-		// Reference :
-		// http://www.17od.com/2006/11/06/using-managed-sessions-in-hibernate-to-ease-unit-testing/
-		try {
-			if (!hConfig.equals(null)) {
-				hSessionFactory = hConfig.buildSessionFactory();
-				hSession = hSessionFactory.openSession();
-				hSession.setFlushMode(FlushMode.MANUAL);
-				ManagedSessionContext.bind(hSession);
-				log.info(Constants.hibernateSessionCreated);
-			}
-		} catch (HibernateException e) {
-			log.error(e.getLocalizedMessage(), e);
-		}
-		return hSession;
-	}*/
-	/*
-	 * Begins a Hibernate Transaction.
-	 *
-	 * @param hSession
-	 * @return Hibernate Transaction Object.
-	 */
-/*	public Transaction beginTransaction() {
-		Log log = null;
-		try {
-			if (!hSession.equals(null)) {
-				hTransaction = hSession.beginTransaction();
-				log.info(Constants.hibernateTransactionStarted);
-			}
-		} catch (HibernateException e) {
-			log.error(e.getLocalizedMessage(), e);
-
-		}
-		return hTransaction;
-	}
-	
-	 * Terminates the Transaction & Closes the Session.
-	 *
-	 * @param hTransaction
-	 * @param hSession
-	 
-	public void cleanUpSession() {
-		if (!hTransaction.equals(null) && !hSession.equals(null)) {
-			Log log = null;
-			try {
-				ManagedSessionContext.unbind(hSessionFactory);
-				hSession.flush();
-				hTransaction.commit();
-				hSession.close();
-				log.info(Constants.hibernateSessionCleanedUp);
-			} catch (TransactionException e) {
-				log.error(e.getLocalizedMessage(), e);
-			}
-
-			catch (SessionException e) {
-				log.error(e.getLocalizedMessage(), e);
-			}
-		}
-	}
-	
+	/**
 	 * Executes query and returns the number of rows affected in the result
 	 * object.
 	 *
@@ -143,17 +77,42 @@ public  class DBManager extends HttpServlet {
 	 * @param parameterList
 	 * @return resObj
 	 */
-	public static ResultSet executeSQL(String queryID, List<String> parameters) {
+	public Result executeSQL(String queryID, List<?> parameterList) {
+		Result resObj = null;
+
+		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
+		String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
+
+		try {
+			if (!sqlQuery.isEmpty()) {
+				//hQuery = hSession.createQuery(sqlQuery);
+				//log.info(Constants.executeSQLQueryExecuted);
+				stmt = connection.createStatement();
+				stmt.executeUpdate(sqlQuery);
+			}
+
+			// Setting the result object with no of rows affected & success
+			// code/message.
+			//resObj = setResultObject(null, null, hQuery.list().size(), Constants.successCode, Constants.successMessage);
+
+		} catch (Exception e) {
+			// Setting the result object with failure code/message.
+			//resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
+			//log.error(e.getLocalizedMessage(), e);
+		}
+		return resObj;
+	}
+	/* Executes query and returns the number of rows affected in the result
+	 * object.
+	 *
+	 * @param queryID
+	 * @param parameterList
+	 * @return resObj
+	 */
+	public static ResultSet getQueryResult(String queryID, List<String> parameters) {
 		Statement stmt = null;
 		ResultSet rs=null;
-		try {
-			Context context = new InitialContext();
-			System.out.println(Constants.envNameContext);
-			DataSource ds = (DataSource) context.lookup(Constants.envNameContext);
-			Connection connection = ds.getConnection();
-			
-			//System.out.println(connection);
-			
+		try {		
 			Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
 			System.out.println(propertyObj);
 			
@@ -166,8 +125,6 @@ public  class DBManager extends HttpServlet {
 				//log.info(Constants.executeSQLQueryExecuted);
 			}
 			System.out.println(queryID);
-		} catch (NamingException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

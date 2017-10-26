@@ -37,7 +37,7 @@ public class Helper {
 	 * @return
 	 */
 	public static String FetchPropertyAndProcessQuery(Properties propertyObj, String propertyKey,
-			List<String> parameters) {
+			List<?> parameterList) {
 		
 		String rawQuery = StringUtils.EMPTY;
 		String processedQuery = StringUtils.EMPTY;
@@ -46,8 +46,8 @@ public class Helper {
 			rawQuery = propertyObj.getProperty(propertyKey);
 		}
 
-		if (parameters != null) {
-			processedQuery = ProcessQuery(parameters, rawQuery);
+		if (parameterList != null) {
+			processedQuery = ProcessQuery(parameterList, rawQuery);
 			System.out.println("Reached FetchAndProcessQuery");
 		} else {
 			processedQuery = rawQuery;
