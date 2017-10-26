@@ -44,16 +44,20 @@
 							<h2>Create an account</h2>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="signupName">Full name</label>
-							<input id="signupName" type="text" maxlength="50" name="signupname" class="form-control" required>
+							<label class="control-label" for="firstName">First name</label>
+							<input id="firstName" type="text" maxlength="50" name="firstName" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="lastName">Last name</label>
+							<input id="lastName" type="text" maxlength="50" name="lastName" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="userName">Username</label>
 							<input id="userName" type="text" maxlength="50" name="userName" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="signupEmail">Email</label>
-							<input id="signupEmail" type="email" name="email" maxlength="50" class="form-control" required>
+							<label class="control-label" for="email">Email</label>
+							<input id="email" type="email" name="email" maxlength="50" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="signupPassword">Password</label>

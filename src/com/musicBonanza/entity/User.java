@@ -2,48 +2,50 @@ package com.musicBonanza.entity;
 
 public class User {
 
+
 	private int userId;
-	private String userName;
-	private String signupname;
-	private String signupEmail;
-	private String signupPassword;
-	private String confirmsignupPassword;
-	
+	private String firstName;
+	private String lastName;
+	private String username;
+	private String email;
+	private String password;
 	public int getUserId() {
 		return userId;
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public String getSignupname() {
-		return signupname;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setSignupname(String signupname) {
-		this.signupname = signupname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getUserName() {
-		return userName;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-	public String getsignupEmail() {
-		return signupEmail;
+	public String getUsername() {
+		return username;
 	}
-	public void setsignupEmail(String email) {
-		this.signupEmail = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getsignupPassword() {
-		return signupPassword;
+	public String getEmail() {
+		return email;
 	}
-	public void setsignupPassword(String password) {
-		this.signupPassword = password;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getConfirmsignupPassword() {
-		return confirmsignupPassword;
+	public String getPassword() {
+		return password;
 	}
-	public void setCofirmsignupPassword(String confirmPassword) {
-		this.confirmsignupPassword = confirmPassword;
-	} 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
 	
 }
