@@ -14,33 +14,30 @@ import com.musicBonanza.entity.Shipping;
 import com.musicBonanza.entity.User;
 
 public class ProductCategoryManager {
-	
-	public String getCategoryList(String category) throws IOException{
+
+	public String getCategoryList(String category) throws IOException, SQLException {
 		ProductCategoriesDao productCategoriesDao = new ProductCategoriesDao();
+
 		String response = null;
-
 		ResultSet resultSet = productCategoriesDao.getCategoryList(category);
-try {
-		if(resultSet!=null) 
-		{
-			while(resultSet.next()) 
-			{
+		try {
+			if (resultSet != null) {
+				
+				  while(resultSet.next()) {
+				  
+				  String resultCategory = resultSet.getString("category");
+				  System.out.println(resultCategory); }
+				 
+				response = "Success";
 
-					String title = resultSet.getString("category");
-					System.out.println(title);
 			}
-			
-			response = "success";
+			else
+			{
+				response = "Failure";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		else {
-			response = "failure";
-		}
-}
-catch(Exception e)
-{
-	e.printStackTrace();
-	}
-		
 		return response;
-		}
+	}
 }
