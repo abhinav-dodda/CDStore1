@@ -57,9 +57,6 @@ public class Login extends HttpServlet {
 
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
-		/*User user = new User();
-		user.setUserName(userName);
-		user.setPassword(password);*/
 		
 		Client client = Client.create();
 		WebResource webResource = client.resource(Constants.localhostUrl+"orderProcess/getAccount");
@@ -67,11 +64,6 @@ public class Login extends HttpServlet {
         ClientResponse webServiceResponse = webResource.type("application/json")
            .post(ClientResponse.class, input);
         		
-        //create account
-        
-        
-        
-		//con.setRequestProperty("User-Agent", USER_AGENT);
 		int responseCode = webServiceResponse.getStatus();
 		System.out.println("POST Response Code :: " + responseCode);
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success

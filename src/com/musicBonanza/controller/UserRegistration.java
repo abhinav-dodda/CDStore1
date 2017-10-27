@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.musicBonanza.entity.User;
+import com.musicBonanza.utils.Constants;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 /**
  * Servlet implementation class UserRegistration
@@ -43,57 +47,37 @@ public class UserRegistration extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String name = request.getParameter("signupname");
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
 		String userName= request.getParameter("userName");
-		String useremail = request.getParameter("email");
+		String email = request.getParameter("email");
 		String password = request.getParameter("signupPassword");
-		String confirmpassword = request.getParameter("ConfirmsignupPassword");
 		
-		if (!password.equals(confirmpassword )){
-			request.setAttribute("message", "Passwords do not match, please enter a valid password");
-			response.sendRedirect("UserRegistration.jsp");
-		}
-		else {
-			sendPOST();
-			response.sendRedirect("Home.jsp");
-		}
-	}
-	
-	private static void sendPOST() throws IOException {
-		URL obj = new URL("http://localhost:8080/MusicBonanza/rest/orderProcess/createAccount");
-		/*HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		con.setRequestMethod("POST");
-		//con.setRequestProperty("User-Agent", USER_AGENT);
-		User user = new User();
-		user.setUserName("Raman");
-
-		// For POST only - START
-		con.setDoOutput(true);
-		OutputStream os = con.getOutputStream();
-		os.write(user.toString().getBytes());
-		os.flush();
-		os.close();
-		// For POST only - END
-
-		int responseCode = con.getResponseCode();
+		Client client = Client.create();
+		WebResource webResource = client.resource(Constants.localhostUrl+"orderProcess/createAccount");
+        String input = "{\"userName\":\""+userName+"\",\"password\":\""+password+"\","+
+        		"\"firstName\":\""+firstName+"\",\"lastName\":\""+lastName+"\",\"email\":\""+email+"\"}";
+        ClientResponse webServiceResponse = webResource.type("application/json")
+           .post(ClientResponse.class, input);
+        		
+		int responseCode = webServiceResponse.getStatus();
 		System.out.println("POST Response Code :: " + responseCode);
-
-		if (responseCode == HttpURLConnection.HTTP_OK) { //success
-			BufferedReader in = new BufferedReader(new InputStreamReader(
+		if (responseCode == HttpURLConnection.HTTP_OK) { // success
+			response.sendRedirect("Home.jsp");
+			/*BufferedReader in = new BufferedReader(new InputStreamReader(
 					con.getInputStream()));
 			String inputLine;
 			StringBuffer response = new StringBuffer();
-
 			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
-			}
-			in.close();
+			}*/
+			//in.close();
 
 			// print result
-			System.out.println(response.toString());
+			//System.out.println(response.toString());
 		} else {
 			System.out.println("POST request not worked");
-		}*/
+		}
 	}
 
 }

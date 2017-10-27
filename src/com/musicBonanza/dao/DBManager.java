@@ -59,16 +59,39 @@ public  class DBManager extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * @throws SQLException 
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DBManager() {
+	public DBManager() throws SQLException {
 		super();
-		
-		/*loadConfiguration();
-		loadSession();
-		beginTransaction();*/	
-		// TODO Auto-generated constructor stub
+	//TODO Auto-generated constructor stub
 	}
+	public static void startTransaction() throws SQLException {
+		try {
+			connection.setAutoCommit(false);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//connection.setAutoCommit(true);
+			e.printStackTrace();
+		}
+	}
+	public static void endTransaction(boolean exceptionFlag) throws SQLException {
+		
+		try {
+			if(exceptionFlag) {
+				connection.rollback();
+			}else {
+				connection.commit();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+	}
+	
+	
 	/**
 	 * Executes query and returns the number of rows affected in the result
 	 * object.
@@ -76,29 +99,39 @@ public  class DBManager extends HttpServlet {
 	 * @param queryID
 	 * @param parameterList
 	 * @return resObj
+	 * @throws SQLException 
 	 */
-	public Result executeSQL(String queryID, List<?> parameterList) {
+	public static Result executeSQL(String queryID, List<?> parameterList) throws SQLException {
+		boolean expectionFlag=false;
 		Result resObj = null;
-
+		
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
+		stmt = connection.createStatement();
 		String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
 
 		try {
 			if (!sqlQuery.isEmpty()) {
 				//hQuery = hSession.createQuery(sqlQuery);
 				//log.info(Constants.executeSQLQueryExecuted);
-				stmt = connection.createStatement();
+				startTransaction();
 				stmt.executeUpdate(sqlQuery);
+			
 			}
 
 			// Setting the result object with no of rows affected & success
 			// code/message.
 			//resObj = setResultObject(null, null, hQuery.list().size(), Constants.successCode, Constants.successMessage);
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// Setting the result object with failure code/message.
 			//resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
 			//log.error(e.getLocalizedMessage(), e);
+			e.printStackTrace();
+			expectionFlag=true;
+			
+		}
+		finally {
+			endTransaction(expectionFlag);
 		}
 		return resObj;
 	}
@@ -109,7 +142,8 @@ public  class DBManager extends HttpServlet {
 	 * @param parameterList
 	 * @return resObj
 	 */
-	public static ResultSet getQueryResult(String queryID, List<String> parameters) {
+	public static ResultSet getQueryResult(String queryID, List<String> parameters) throws SQLException {
+		boolean expectionFlag=false;
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {		
@@ -120,6 +154,7 @@ public  class DBManager extends HttpServlet {
 			System.out.println("Reached till here");
 			//Log log = null;
 			if (!sqlQuery.isEmpty()) {
+				startTransaction();
 				stmt = connection.createStatement();
 				 rs = stmt.executeQuery(sqlQuery);
 				//log.info(Constants.executeSQLQueryExecuted);
@@ -128,6 +163,9 @@ public  class DBManager extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+		}finally {
+			endTransaction(expectionFlag);
 		}
 		return rs;
 
