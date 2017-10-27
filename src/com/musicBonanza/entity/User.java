@@ -1,14 +1,17 @@
 package com.musicBonanza.entity;
 
+// UserDetails generated
+
 public class User {
-
-
-	private int userId;
+    private int userId;
 	private String firstName;
 	private String lastName;
 	private String username;
 	private String email;
 	private String password;
+	
+	// Generating getters and setters   
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -45,7 +48,5 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
 	
 }

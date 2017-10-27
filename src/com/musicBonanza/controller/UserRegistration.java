@@ -22,6 +22,9 @@ import com.sun.jersey.api.client.WebResource;
 /**
  * Servlet implementation class UserRegistration
  */
+
+  // Servlet implementing Registration of new User 
+
 @WebServlet("/UserRegistration")
 public class UserRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,13 +48,24 @@ public class UserRegistration extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
+	/*method that handles the registration of new user
+	@param request
+	@param response
+	@throw servletException
+	@throw IOException*/
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// Retrieving parameters from UserRegistration.jsp
 		
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String userName= request.getParameter("userName");
 		String email = request.getParameter("email");
 		String password = request.getParameter("signupPassword");
+		
+		// Calling Web Service to Create Account
 		
 		Client client = Client.create();
 		WebResource webResource = client.resource(Constants.localhostUrl+"orderProcess/createAccount");

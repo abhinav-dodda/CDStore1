@@ -24,8 +24,11 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 /**
- * Servlet implementation class Login
+ * Servlet Implementation class Login
  */
+
+   // Servlet implementing login functionality
+
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -52,11 +55,20 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	
+	/*doPost method for implementing Login functionality 
+	 * @param request
+	 * @param response
+	 * @throws ServletException 
+	 * @throws IOException*/
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
+		
+	   // Calling Web Service to get Account details
 		
 		Client client = Client.create();
 		WebResource webResource = client.resource(Constants.localhostUrl+"orderProcess/getAccount");
