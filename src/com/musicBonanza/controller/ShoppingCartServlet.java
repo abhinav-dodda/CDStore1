@@ -38,14 +38,24 @@ public class ShoppingCartServlet extends HttpServlet {
 	 */
   //GET method for shopping cart  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("action");
-		if(action.equalsIgnoreCase("delete"))
+		
+		HttpSession session = request.getSession();
+		if(session == null)
 		{
-			doGet_delete(request, response);
+			System.out.println("session isssssss null");
+			response.sendRedirect("Cart.jsp");	
 		}
-		else if(action.equalsIgnoreCase("checkout")) 
+    	String action = request.getParameter("action");
+		if(action != null)
 		{
-			doGet_checkout(request, response);
+			if(action.equalsIgnoreCase("delete"))
+			{
+				doGet_delete(request, response);
+			}
+			else if(action.equalsIgnoreCase("checkout")) 
+			{
+				doGet_checkout(request, response);
+			}
 		}
 
 	}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+<script type="text/javascript" src="validations/validation.js"></script>
 <html>
 <head>
 <title>Music Bonanza</title>
@@ -27,7 +28,7 @@
         <a class="nav-link" href="#">AboutUs</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="Cart.jsp">MyCart</a>
+        <a class="nav-link" href="ShoppingCartServlet">MyCart</a>
       </li>
       <li class="nav-item"><a class="nav-link"
 							href="ProductCategories.jsp">Product Catalog</a></li>
