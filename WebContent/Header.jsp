@@ -32,7 +32,7 @@
       </li>
       
       <li class="nav-item"><a class="nav-link"
-							href="ProductCategories.jsp">Product Catalog</a></li>
+							href="ProductCategoryServlet">Product Catalog</a></li>
 							<li class="nav-item">
         <a class="nav-link" href="Login.jsp">SignIn</a>
       </li>

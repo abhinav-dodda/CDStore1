@@ -2,13 +2,13 @@ package com.musicBonanza.controller;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 
 import com.musicBonanza.utils.Constants;
 import com.sun.jersey.api.client.Client;
@@ -90,8 +90,8 @@ public class ProductCategory extends HttpServlet {
 		String category = request.getParameter("selectCategory");
 
 		Client client = Client.create();
-		WebResource webResource = client.resource(Constants.localhostUrl + "ProductCategory/categories");
-		ClientResponse webServiceResponse = webResource.type("application/json").get(ClientResponse.class);
+		WebResource webResource = client.resource(Constants.localhostUrl + "ProductCategory");
+		ClientResponse webServiceResponse = webResource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
 		request.setAttribute("category", category);
 	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/ProductCategories.jsp");
@@ -99,10 +99,10 @@ public class ProductCategory extends HttpServlet {
 		
 		int responseCode = webServiceResponse.getStatus();
 		
-		System.out.println("POST Response Code :: " + responseCode);
+		System.out.println("GET Response Code :: " + responseCode);
 
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
-			System.out.print(response);
+			System.out.print(response.getContentType());
 			//response.sendRedirect("ProductCategory.jsp");
 
 		} else {

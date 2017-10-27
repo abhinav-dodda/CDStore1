@@ -22,14 +22,12 @@ public class ProductCategoriesDao
 		
 	}
 	
-	public ResultSet getCategoryList(String category) throws IOException, SQLException
+	public ResultSet getCategoryList() throws IOException, SQLException
 	{
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
 /*		List<String> parameters = new ArrayList<String>();
 		parameters.add(category);*/
 		List<String> parameters = new ArrayList<String>();
-		parameters.add(null);
-		
 		ResultSet resultSet = DBManager.getQueryResult("selectCategoryFromProductCategories", parameters);
 		return resultSet;
 		}

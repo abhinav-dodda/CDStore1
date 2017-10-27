@@ -9,26 +9,29 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import com.musicBonanza.dao.ProductCategoriesDao;
+import com.musicBonanza.entity.ProductCategories;
 import com.musicBonanza.entity.PurchaseOrder;
 import com.musicBonanza.entity.Shipping;
 import com.musicBonanza.entity.User;
-
+import com.musicBonanza.*;
 public class ProductCategoryManager {
 
-	public String getCategoryList(String category) throws IOException, SQLException {
+	public ResultSet getCategoryList() throws IOException, SQLException {
 		ProductCategoriesDao productCategoriesDao = new ProductCategoriesDao();
 
 		String response = null;
-		ResultSet resultSet = productCategoriesDao.getCategoryList(category);
+		ResultSet resultSet = productCategoriesDao.getCategoryList();
 		try {
 			if (resultSet != null) {
 				
 				  while(resultSet.next()) {
 				  
 				  String resultCategory = resultSet.getString("category");
-				  System.out.println(resultCategory); }
-				 
-				response = "Success";
+				  System.out.println(resultCategory);
+				  //ProductCategories productCategories = new ProductCategories();
+				  //productCategories.setCategoryName(resultSet.getString("category")); 
+				//response = productCategories.CategoryName;
+				  }
 
 			}
 			else
@@ -38,6 +41,6 @@ public class ProductCategoryManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return response;
+		return resultSet;
 	}
 }
