@@ -133,7 +133,7 @@
 											<div>
 												<a class="add_to_cart_button" data-quantity="1"
 													data-product_sku="" data-product_id="70" rel="nofollow"
-													href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+													href="ProductCategories">Add to cart</a>
 											</div>
 											<div class="product-carousel-price">
 												<ins>$89.00</ins>
@@ -152,7 +152,7 @@
 								<div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+										href="ProductCategories">Add to cart</a>
 								</div>
 							</div>
 						</div>

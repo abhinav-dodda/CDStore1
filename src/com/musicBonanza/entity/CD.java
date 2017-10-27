@@ -2,39 +2,22 @@ package com.musicBonanza.entity;
 
 public class CD {
 	
-	private int ProductId;
+	private String ProductId;
 	private String ProductName;
 	private float ProdPrice;
-	private String ProdDesc;
-	private String ImgUrl;
+	private String ProdCat;
+	private float totalPrice;
 	
-	public CD(int productId, String productName, float prodPrice, String prodDesc, String imgUrl)
-	{
-		ProductId = productId;
-		ProductName = productName;
-		ProdPrice = prodPrice;
-		ProdDesc = prodDesc;
-		ImgUrl = imgUrl;
+	public String getProdCat() {
+		return ProdCat;
 	}
-	
-	public String getProdDesc() {
-		return ProdDesc;
+	public void setProdCat(String prodCat) {
+		ProdCat = prodCat;
 	}
-	
-	public void setProdDesc(String prodDesc) {
-		ProdDesc = prodDesc;
-	}
-	public String getImgUrl() {
-		return ImgUrl;
-	}
-
-	public void setImgUrl(String imgUrl) {
-		ImgUrl = imgUrl;
-	}
-	public int getProductId() {
+	public String getProductId() {
 		return ProductId;
 	}
-	public void setProductId(int productId) {
+	public void setProductId(String productId) {
 		ProductId = productId;
 	}
 	public String getProductName() {
@@ -48,6 +31,15 @@ public class CD {
 	}
 	public void setProdPrice(float prodPrice) {
 		ProdPrice = prodPrice;
+	}
+	
+	public void calculatePrice(float prodPrice)
+	{
+		totalPrice += prodPrice;
+	}
+	
+	public float getcalculatePrice() {
+		return totalPrice;
 	}
 	
 	

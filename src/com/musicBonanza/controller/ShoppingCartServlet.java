@@ -1,7 +1,11 @@
 package com.musicBonanza.controller;
 
 import java.io.IOException;
+
+
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,9 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.musicBonanza.entity.CD;
-import com.musicBonanza.entity.CD.*;
-
-
 
 
 /**
@@ -38,11 +39,7 @@ public class ShoppingCartServlet extends HttpServlet {
   //GET method for shopping cart  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		if(action.equalsIgnoreCase("buy"))
-		{
-			doGet_Purchase(request, response);
-		}
-		else if(action.equalsIgnoreCase("delete"))
+		if(action.equalsIgnoreCase("delete"))
 		{
 			doGet_delete(request, response);
 		}
@@ -50,46 +47,34 @@ public class ShoppingCartServlet extends HttpServlet {
 		{
 			doGet_checkout(request, response);
 		}
+
 	}
- // Purchase Order action
-	protected void doGet_Purchase(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
-	  HttpSession session = request.getSession();	
-      CD cdCart = new CD();// add constructor arguments - naveen
-      if(session == null)
-      {
-    	 List<CD> cart = new ArrayList<CD>();
-    	 cart.add(new CD(productId, productName, prodPrice, prodDesc, imgUrl));//declare variables 
-    	 session.setAttribute("cart", cart);
-    	 //naveen session set attribute
-    	 
-      }
-      else
-      {
-    	  List<CD> cart = (List<CD>) session.getAttribute("cart");
-      }
-    	request.getRequestDispatcher("Cart.jsp").forward(request, response);  
-	}
+
 	//delete action for shopping cart
 	protected void doGet_delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-	    int id = Integer.parseInt(request.getParameter("index"));
-	    HttpSession session = request.getSession();	
-	    List<CD> cart = (List<CD>) session.getAttribute("cart");
-	    cart.remove(id);
-	    session.setAttribute("cart",cart);
-	    response.sendRedirect("Cart.jsp");
-        
+		HttpSession session = request.getSession();
+    	String prodId = request.getParameter("prodId");
+    	List<CD> cart = (List<CD>) session.getAttribute("cart");
+    	Iterator<CD> iter = cart.iterator();
+    	while (iter.hasNext()) 
+    	{
+    		CD usercart = iter.next();
+    		if(usercart.getProductId().equals(prodId))
+    		{
+    			iter.remove();
+    		}
+    	}
+    	response.sendRedirect("Cart.jsp");
+	
+         
 	}
 	
 	//check out order action
 	
 	protected void doGet_checkout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-	    int id = Integer.parseInt(request.getParameter("index"));
-	    HttpSession session = request.getSession();	
-	    List<CD> cart = (List<CD>) session.getAttribute("cart");
-        //gurpreet will continue
+
         
 	}
 	
