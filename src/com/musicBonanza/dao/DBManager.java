@@ -59,27 +59,36 @@ public  class DBManager extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * @throws SQLException 
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DBManager() {
+	public DBManager() throws SQLException {
 		super();
-		
-		/*loadConfiguration();
-		loadSession();
-		beginTransaction();*/	
-		// TODO Auto-generated constructor stub
+	//TODO Auto-generated constructor stub
 	}
-	public static void startTransaction() {
+	public static void startTransaction() throws SQLException {
 		try {
 			connection.setAutoCommit(false);
-			connection.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			//connection.setAutoCommit(true);
 			e.printStackTrace();
 		}
 	}
-	public static void endTransaction() throws SQLException {
-		connection.rollback();
+	public static void endTransaction(boolean exceptionFlag) throws SQLException {
+		
+		try {
+			if(exceptionFlag) {
+				connection.rollback();
+			}else {
+				connection.commit();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -93,17 +102,18 @@ public  class DBManager extends HttpServlet {
 	 * @throws SQLException 
 	 */
 	public static Result executeSQL(String queryID, List<?> parameterList) throws SQLException {
-		startTransaction();
+		boolean expectionFlag=false;
 		Result resObj = null;
 		
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
+		stmt = connection.createStatement();
 		String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
 
 		try {
 			if (!sqlQuery.isEmpty()) {
 				//hQuery = hSession.createQuery(sqlQuery);
 				//log.info(Constants.executeSQLQueryExecuted);
-				stmt = connection.createStatement();
+				startTransaction();
 				stmt.executeUpdate(sqlQuery);
 			
 			}
@@ -117,7 +127,11 @@ public  class DBManager extends HttpServlet {
 			//resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
 			//log.error(e.getLocalizedMessage(), e);
 			e.printStackTrace();
-			endTransaction();
+			expectionFlag=true;
+			
+		}
+		finally {
+			endTransaction(expectionFlag);
 		}
 		return resObj;
 	}
@@ -129,7 +143,7 @@ public  class DBManager extends HttpServlet {
 	 * @return resObj
 	 */
 	public static ResultSet getQueryResult(String queryID, List<String> parameters) throws SQLException {
-		startTransaction();
+		boolean expectionFlag=false;
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {		
@@ -140,6 +154,7 @@ public  class DBManager extends HttpServlet {
 			System.out.println("Reached till here");
 			//Log log = null;
 			if (!sqlQuery.isEmpty()) {
+				startTransaction();
 				stmt = connection.createStatement();
 				 rs = stmt.executeQuery(sqlQuery);
 				//log.info(Constants.executeSQLQueryExecuted);
@@ -148,7 +163,9 @@ public  class DBManager extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			endTransaction();
+			
+		}finally {
+			endTransaction(expectionFlag);
 		}
 		return rs;
 
