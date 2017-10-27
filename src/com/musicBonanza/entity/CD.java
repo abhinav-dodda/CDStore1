@@ -8,6 +8,7 @@ public class CD {
 	private String ProdCat;
 	private float totalPrice;
 	
+	
 	public String getProdCat() {
 		return ProdCat;
 	}

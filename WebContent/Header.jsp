@@ -30,6 +30,7 @@
       <li class="nav-item">
         <a class="nav-link" href="ShoppingCartServlet">MyCart</a>
       </li>
+      
       <li class="nav-item"><a class="nav-link"
 							href="ProductCategories.jsp">Product Catalog</a></li>
 							<li class="nav-item">

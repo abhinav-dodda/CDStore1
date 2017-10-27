@@ -40,6 +40,7 @@ public class ShoppingCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
+		
 		if(session == null)
 		{
 			System.out.println("session isssssss null");

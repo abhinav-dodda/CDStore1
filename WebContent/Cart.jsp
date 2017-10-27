@@ -32,6 +32,7 @@
 <script type="text/javascript" src="validations/bootstrap.min.js"></script>
 <script type="text/javascript" src="validations/validation.js"></script>
 <script type="text/javascript" src="validations/PriceCalculations.js"></script>
+
 <title>Shopping Cart</title>
 
 </head>

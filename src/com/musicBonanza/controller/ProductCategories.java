@@ -52,7 +52,7 @@ public class ProductCategories extends HttpServlet {
 		//store it in the Arraylist	
 		cart.add(usercart);
 		//cart.add(i, usercart);
-		//System.out.println(cart.get(i));
+		System.out.println(cart.get(i));
 		//cart.add(usercart);
 		}
 		session.setAttribute("cart",cart);
