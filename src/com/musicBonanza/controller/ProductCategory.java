@@ -92,18 +92,19 @@ public class ProductCategory extends HttpServlet {
 		Client client = Client.create();
 		WebResource webResource = client.resource(Constants.localhostUrl + "ProductCategory");
 		ClientResponse webServiceResponse = webResource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
-
-		request.setAttribute("category", category);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/ProductCategories.jsp");
-	    rd.forward(request, response);
-		
 		int responseCode = webServiceResponse.getStatus();
+		Client aa = webServiceResponse.getClient();
 		
 		System.out.println("GET Response Code :: " + responseCode);
 
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
-			System.out.print(response.getContentType());
-			//response.sendRedirect("ProductCategory.jsp");
+			System.out.println(category);
+			System.out.print(aa);
+			request.setAttribute("category", category);
+			String output = webServiceResponse.getEntity(String.class);
+		    RequestDispatcher rd = getServletContext().getRequestDispatcher("/ProductCategories.jsp");
+		    rd.forward(request, response);
+		    System.out.println(output);
 
 		} else {
 			System.out.println("POST request not worked");

@@ -1,3 +1,4 @@
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html">
@@ -70,11 +71,17 @@
 						<p>Select Category:</p>
 					</div>
 					<div>
-						<select id="selectCategory" class="field" style="width: 40%;">
-							<option value="">All</option>
-							<option value="">Country</option>
+						<select id="selectCategory" name="selectCategory" class="field"
+							style="width: 40%;">
+							<%-- <c:forEach var="category" items="${category}">
+								<option value="${category}"></option>
+							</c:forEach> --%>
+							<c:forEach items="${category}" var="category">
+       			 <option value="${category}"><c:out value="${category}" /></option>
+    							</c:forEach>
+							<!-- 							<option value="">Country</option>
 							<option value="">Pop</option>
-							<option value="">Rock</option>
+							<option value="">Rock</option> -->
 						</select>
 					</div>
 				</div>
