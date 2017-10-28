@@ -3,6 +3,7 @@ package com.musicBonanza.webService;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -25,12 +26,17 @@ import com.mysql.jdbc.PreparedStatement;
 public class ProductCategoryService {
 	
 	@GET
+	@Path("/categories")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String  getCategoryList() throws IOException
 	{
 		ResultSet result = null;
 		ProductCategories productCategories = new ProductCategories();
-		JSONObject jsonObject = new JSONObject();
+		
+		JSONArray jsonArray = new JSONArray();
+
+		String output;
+		
 		try 
 		{
 			ProductCategoryManager productCategoryManager = new ProductCategoryManager();
@@ -38,11 +44,15 @@ public class ProductCategoryService {
 			// productCategories.setCategoryName(result.getString("category"));
 			 
 			int key=0;
+			
+			
 			while(result.next())
 			{
-				String output;
+				JSONObject jsonObject = new JSONObject();
 				output = result.getString("category");
-				jsonObject.put(key++, output);
+				jsonObject.put("category", output);
+				
+				jsonArray.add(key++, jsonObject);
 			}
 		}
 		catch (Exception e) 
@@ -51,7 +61,7 @@ public class ProductCategoryService {
 			e.printStackTrace();
 		}
 		
-		return jsonObject.toJSONString();
+		return jsonArray.toJSONString();
 	}
 }
 

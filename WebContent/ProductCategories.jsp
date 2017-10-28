@@ -76,8 +76,8 @@
 							<%-- <c:forEach var="category" items="${category}">
 								<option value="${category}"></option>
 							</c:forEach> --%>
-							<c:forEach items="${category}" var="category">
-       			 <option value="${category}"><c:out value="${category}" /></option>
+							<c:forEach items="${category}" var="c">
+       			 <option value="${c.category}"><c:out value="${c.category}" /></option>
     							</c:forEach>
 							<!-- 							<option value="">Country</option>
 							<option value="">Pop</option>

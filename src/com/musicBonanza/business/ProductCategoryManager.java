@@ -24,14 +24,15 @@ public class ProductCategoryManager {
 		try {
 			if (resultSet != null) {
 				
-				  while(resultSet.next()) {
+				return resultSet;
+				 // while(resultSet.next()) {
 				  
-				  String resultCategory = resultSet.getString("category");
-				  System.out.println(resultCategory);
+				 // String resultCategory = resultSet.getString("category");
+				 // System.out.println(resultCategory);
 				  //ProductCategories productCategories = new ProductCategories();
 				  //productCategories.setCategoryName(resultSet.getString("category")); 
 				//response = productCategories.CategoryName;
-				  }
+				  //}
 
 			}
 			else

@@ -2,6 +2,8 @@ package com.musicBonanza.controller;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+
+import javax.json.JsonString;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import com.musicBonanza.utils.Constants;
 import com.sun.jersey.api.client.Client;
@@ -87,10 +94,10 @@ public class ProductCategory extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String category = request.getParameter("selectCategory");
+		//String category = request.getParameter("selectCategory");
 
 		Client client = Client.create();
-		WebResource webResource = client.resource(Constants.localhostUrl + "ProductCategory");
+		WebResource webResource = client.resource(Constants.localhostUrl + "ProductCategory/categories");
 		ClientResponse webServiceResponse = webResource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 		int responseCode = webServiceResponse.getStatus();
 		Client aa = webServiceResponse.getClient();
@@ -98,14 +105,23 @@ public class ProductCategory extends HttpServlet {
 		System.out.println("GET Response Code :: " + responseCode);
 
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
-			System.out.println(category);
-			System.out.print(aa);
-			request.setAttribute("category", category);
+			//System.out.println(category);
+			//System.out.print(aa);
+			
 			String output = webServiceResponse.getEntity(String.class);
-		    RequestDispatcher rd = getServletContext().getRequestDispatcher("/ProductCategories.jsp");
-		    rd.forward(request, response);
-		    System.out.println(output);
-
+			JSONParser parser = new JSONParser();
+			try {
+				JSONArray json = (JSONArray)parser.parse(output);
+				
+				request.setAttribute("category", json);
+			    RequestDispatcher rd = getServletContext().getRequestDispatcher("/ProductCategories.jsp");
+			    rd.forward(request, response);
+			    System.out.println(output.toString());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		} else {
 			System.out.println("POST request not worked");
 		}

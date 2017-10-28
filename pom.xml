@@ -79,6 +79,12 @@
 			<version>3.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.8</version>
+		</dependency>
+		
 		<!-- Hibernate Dependancy -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
