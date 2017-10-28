@@ -59,7 +59,7 @@
 				</div>
 				<br>
 			<div class="etc-login-form">
-				<p>Forgot your password? <a href="###">click here</a></p>
+				
 				<p>New user? <a href="UserRegistration.jsp">Create new account</a></p>
 			</div>
 		</form>
@@ -72,10 +72,6 @@
 <div class="col-sm-5"></div>
 <%@ include file="Footer.jsp"%>
 </div>
-<script type="text/javascript">
-/* $('#loginButton').click(function(){
-	validateLogin();
-}); */
-</script>
+
 </body>
 </html>

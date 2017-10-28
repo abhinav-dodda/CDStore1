@@ -9,7 +9,16 @@ function validateLogin(){
 	}	
 }
 
-var check = function() {
+function Validate() {
+   
+        var password = $('#signupPassword').val();
+        var confirmPassword = $('#ConfirmsignupPassword').val();
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+         }
+}
+
+/*var check = function() {
 	  if (document.getElementById('signupPassword').value ==
 	    document.getElementById('ConfirmsignupPassword').value) {
 	   // document.getElementById('message').style.color = 'green';
@@ -18,4 +27,4 @@ var check = function() {
 	   // document.getElementById('message').style.color = 'red';
 	    document.getElementById('message').innerHTML = 'not matching';
 	  }
-	}
+	}*/

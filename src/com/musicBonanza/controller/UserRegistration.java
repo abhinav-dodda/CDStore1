@@ -64,13 +64,14 @@ public class UserRegistration extends HttpServlet {
 		String userName= request.getParameter("userName");
 		String email = request.getParameter("email");
 		String password = request.getParameter("signupPassword");
+		String confirmPassword = request.getParameter("ConfirmsignupPassword");
 		
 		// Calling Web Service to Create Account
 		
 		Client client = Client.create();
 		WebResource webResource = client.resource(Constants.localhostUrl+"orderProcess/createAccount");
         String input = "{\"userName\":\""+userName+"\",\"password\":\""+password+"\","+
-        		"\"firstName\":\""+firstName+"\",\"lastName\":\""+lastName+"\",\"email\":\""+email+"\"}";
+        		"\"firstName\":\""+firstName+"\",\"lastName\":\""+lastName+"\",\"email\":\""+email+"\", \"confirmPassword\":\""+confirmPassword+"\"}";
         ClientResponse webServiceResponse = webResource.type("application/json")
            .post(ClientResponse.class, input);
         		
@@ -90,6 +91,7 @@ public class UserRegistration extends HttpServlet {
 			// print result
 			//System.out.println(response.toString());
 		} else {
+			
 			System.out.println("POST request not worked");
 		}
 	}

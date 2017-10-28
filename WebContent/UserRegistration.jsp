@@ -39,7 +39,7 @@
 <div class="col-sm-4">
 			<div class="panel panel-primary">
 				<div class="panel-body">
-					<form method="POST" action="UserRegistration" role="form">
+					<form method="POST" action="UserRegistration" role="form" onsubmit="Validate()">
 						<div class="form-group">
 							<h2>Create an account</h2>
 						</div>
@@ -65,11 +65,11 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="ConfirmsignupPassword">Confirm Password</label>
-							<input id="ConfirmsignupPassword" type="password" name="ConfirmsignupPassword" maxlength="25" class="form-control"  onkeyup="check();" required>
+							<input id="ConfirmsignupPassword" type="password" name="ConfirmsignupPassword" maxlength="25" class="form-control" required>
 						    <span id= 'message'></span>
 						</div>
 						<div class="form-group">
-							<button id="signupSubmit" type="submit" class="btn btn-info btn-block">Create your account</button>
+							<button id="signupSubmit" type="submit" class="btn btn-info btn-block" >Create your account</button>
 						</div>
 						<hr>
 						<p>Already have an account? <a href="Login.jsp">Sign in</a></p>
