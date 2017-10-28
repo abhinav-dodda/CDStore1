@@ -42,7 +42,7 @@
 	<br>
 	<div class="login-form-1">
 		<form id="login-form" action="Login" class="text-left" method="post" onsubmit="validateLogin()">
-			<div class="login-form-main-message"></div>
+			<div class="login-form-main-message">${message }</div>
 					<div class="form-group">
 						<label for="username">Username</label>
 						<input type="text" class="form-control" id="user" name="username" placeholder="" required>

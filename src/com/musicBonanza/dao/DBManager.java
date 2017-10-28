@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Properties;
 import com.musicBonanza.*;
@@ -41,8 +42,6 @@ import com.musicBonanza.utils.Constants;
 @WebServlet("/DBManager")
 public  class DBManager extends HttpServlet {
 	static Connection connection;
-	static ResultSet rs;
-	static Statement stmt;
 	static {
 		try {
 			Context context = new InitialContext();
@@ -104,7 +103,8 @@ public  class DBManager extends HttpServlet {
 	public static Result executeSQL(String queryID, List<?> parameterList) throws SQLException {
 		boolean expectionFlag=false;
 		Result resObj = null;
-		
+		Statement stmt = null;
+		ResultSet rs=null;
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
 		stmt = connection.createStatement();
 		String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
@@ -182,6 +182,42 @@ public  class DBManager extends HttpServlet {
 			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
 			log.error(e.getLocalizedMessage(), e);
 		}*/
+	}
+	/**
+	 * Executes query and returns the number of rows affected in the result
+	 * object.
+	 *
+	 * @param queryID
+	 * @param parameterList
+	 * @return resObj
+	 * @throws SQLException 
+	 */
+	public static int executePreparedSQL(String queryID, List<?> parameterList) throws SQLException {
+		boolean expectionFlag=false;
+		int insertRowId = 0;
+		PreparedStatement preparedStatement = null;
+		
+		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
+				String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
+
+		try {
+			if (!sqlQuery.isEmpty()) {
+				startTransaction();
+				preparedStatement = connection.prepareStatement(sqlQuery,
+		                Statement.RETURN_GENERATED_KEYS);;
+		                insertRowId = preparedStatement.executeUpdate();
+			
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			expectionFlag=true;
+			
+		}
+		finally {
+			endTransaction(expectionFlag);
+		}
+		return insertRowId;
 	}
 	 /* Executes query and returns result set.
 	 *

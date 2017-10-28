@@ -1,17 +1,30 @@
 package com.musicBonanza.entity;
 
+import java.io.Serializable;
+
 // UserDetails generated
 
-public class User {
-    private int userId;
+public class User implements  Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4591109170447797272L;
+	private int userId;
 	private String firstName;
 	private String lastName;
 	private String username;
 	private String email;
 	private String password;
+	private int shippingId;
 	
 	// Generating getters and setters   
 	
+	public int getShippingId() {
+		return shippingId;
+	}
+	public void setShippingId(int shippingId) {
+		this.shippingId = shippingId;
+	}
 	public int getUserId() {
 		return userId;
 	}

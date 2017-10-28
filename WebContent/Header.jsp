@@ -34,7 +34,7 @@
       <li class="nav-item"><a class="nav-link"
 							href="ProductCategoryServlet">Product Catalog</a></li>
 							<li class="nav-item">
-        <a class="nav-link" href="Login.jsp">SignIn</a>
+        <a class="nav-link" href="/MusicBonanza/Login">SignIn</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="Logout.jsp?action=logout">SignOut</a>

@@ -2,24 +2,32 @@ package com.musicBonanza.entity;
 
 public class Shipping {
 	
+	private int shippingId;
 	private String streetAddress;
-	private String city;
+	private String phone;
 	private String province;
 	private String country;
 	private String zipCode; 
 	
 	
+	public int getShippingId() {
+		return shippingId;
+	}
+	public void setShippingId(int shippingId) {
+		this.shippingId = shippingId;
+	}
 	public String getStreetAddress() {
 		return streetAddress;
 	}
 	public void setStreetAddress(String streetAddress) {
 		this.streetAddress = streetAddress;
 	}
-	public String getCity() {
-		return city;
+	
+	public String getPhone() {
+		return phone;
 	}
-	public void setCity(String city) {
-		this.city = city;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getProvince() {
 		return province;

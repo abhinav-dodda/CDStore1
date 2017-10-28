@@ -2,7 +2,7 @@ package com.musicBonanza.utils;
 
 public final class Constants {
 	//Localhost access 
-	public static final String localhostUrl = "http://localhost:8082/MusicBonanza/rest/";
+	public static final String localhostUrl = "http://localhost:7002/MusicBonanza/rest/";
 	
 	// Database Configurations and sql pool names
 	public static final String sqlConfigName = "mySqlConfig.properties";
@@ -32,6 +32,7 @@ public final class Constants {
 	public static final String accountCreatedMessage = "Account Created";
 	public static final String dataDeleted = "Data is Deleted";
 	public static final String userIsValidated = "User is Validated.";
+	public static final String orderConfirmed = "CONFIRMED";
 	// Success Codes
 	public static final int successCode = 1;
 

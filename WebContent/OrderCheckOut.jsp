@@ -35,12 +35,13 @@
 				</div>
 				<address class="order-checkout-content">
 					<div>
-						<strong>Gurpreet Saran</strong>
+						<strong>${username}</strong>
 					</div>
-					<div>Apt #314</div>
-					<div>2201 Riverside Drive</div>
-					<div>Ottawa, ON</div>
-					<div>Canada</div>
+					<div>${street}</div>
+					<div>${province}</div>
+					<div>${country}</div>
+					<div>${zip}</div>
+					<div>${phone}</div>
 				</address>
 				<div>
 					<button type="button" class="btn btn-primary"
@@ -56,35 +57,35 @@
 				<div class="row order-checkout-content">
 					<div class="col-sm-6">
 						<div>
-							<label>Expected Delivery Detail: 25 Oct, 2017</label>
+							<label>Expected Delivery Detail: ${expectedDeliveryDate }</label>
 						</div>
 						<div>
-							<label>Items Ordered: 2</label>
+							<label>Items Ordered: 2HARDCODED</label>
 						</div>
 						<div>
-							<label>Order ID: 1342</label>
+							<label>Order ID: 1342HARDCODED</label>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<section>
 							<div>
-								<label>Order Total: $300</label>
+								<label>Order Total: ${totalAmount }</label>
 							</div>
 							<div>
-								<label>Delivery Charges: $30</label>
+								<label>Delivery Charges: ${deliveryCharges }</label>
 							</div>
 							<div>
-								<label>Discount: $10</label>
+								<label>Discount: $0</label>
 							</div>
 							<div>
-								<label>Tax: $5</label>
+								<label>Tax: ${taxes }</label>
 							</div>
 							<div>
-								<label>Total: $325</label>
+								<label>Total: ${totalAamount+taxes}</label>
 							</div>
 						</section>
 						<div>
-							<button type="button" class="btn btn-primary">
+							<button type="button" class="btn btn-primary" href="Payment.jsp">
 								Pay <i class="fa fa-usd" aria-hidden="true"></i>
 							</button>
 						</div>
@@ -95,60 +96,5 @@
 		</div>
 		<%@ include file="Footer.jsp"%>
 	</div>
-
-	<div id="shippingModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Shipping Address</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form id="shipping-address-form" method="post" onsubmit="saveShippingAddress()">
-						<div class="form-group">
-							<label for="shipping-name">Name</label> <input type="text"
-								class="form-control" id="shipping-name"
-								placeholder="Enter name">
-						</div>
-						<div class="form-group">
-							<label for="street">Street Address</label> <input type="text"
-								class="form-control" id="street" placeholder="Apartment/Street">
-						</div>
-						<div class="form-group">
-							<label for="city">City</label> <input type="text"
-								class="form-control" id="city">
-						</div>
-						<div class="form-group">
-							<label for="province">Province</label> <input type="text"
-								class="form-control" id="province">
-						</div>
-						<div class="form-group">
-							<label for="postal-code">Postal Code</label> <input type="text"
-								class="form-control" id="postal-code" placeholder="Postal code without spaces">
-						</div>
-						<button type="submit" class="btn btn-primary" >Save
-							changes</button>
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
-					</form>
-				</div>
-				<div class="modal-footer"></div>
-			</div>
-		</div>
-	</div>
-
-	<script>
-		$(document).ready(function() {
-			$("#openShippingAddrModal").click(function() {
-				// Load the page into the div
-				//$("#shippingModal").load("ShippingAddressForm.html");
-				// Show the modal dialog
-				$("#shippingModal").modal('show');
-			});
-		});
-	</script>
 </body>
 </html>
