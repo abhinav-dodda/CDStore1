@@ -42,7 +42,7 @@ public class OrderCheckOut extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		else{*/
-			String username = "raman"//user.getUsername();
+			String username = "raman";//user.getUsername();
 			Client client = Client.create();
 			WebResource webResource = client.resource(Constants.localhostUrl+"orderProcess/getAccountByUsername");
 	        String input = "{\"username\":\""+username+"\"}";
