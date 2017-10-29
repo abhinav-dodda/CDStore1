@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 
 import com.musicBonanza.utils.Constants;
 import com.sun.jersey.api.client.Client;
@@ -55,35 +56,26 @@ public class Payment extends HttpServlet {
 		String cardNumber = request.getParameter("card_number");
 		String expiryDate= request.getParameter("expiry_date");
 		String cardCVV = request.getParameter("card_cvv");
+		String expiryMonth = request.getParameter("expiry_month");
+		String expiryYear = request.getParameter("expiry_year");
 		
 		// Calling Web Service to process payment
 		
-				Client client = Client.create();
-				WebResource webResource = client.resource(Constants.localhostUrl+"orderProcess/confirmOrder");
-		        String input = "{\"cardHolderName\":\""+cardHolderName+"\",\"cardNumber\":\""+cardNumber+"\","+
-		        		"\"expiryDate\":\""+expiryDate+"\",\"cardCVV\":\""+cardCVV+"\"}";
-		        ClientResponse webServiceResponse = webResource.type("application/json")
-		           .post(ClientResponse.class, input);
-		
-		        int responseCode = webServiceResponse.getStatus();
-				System.out.println("POST Response Code :: " + responseCode);
-				if (responseCode == HttpURLConnection.HTTP_OK) { // success
-					response.sendRedirect("home.jsp");
-					/*BufferedReader in = new BufferedReader(new InputStreamReader(
-							con.getInputStream()));
-					String inputLine;
-					StringBuffer response = new StringBuffer();
-					while ((inputLine = in.readLine()) != null) {
-						response.append(inputLine);
-					}*/
-					//in.close();
+		Client client = Client.create();
+		WebResource webResource = client.resource(Constants.localhostUrl+"orderProcess/confirmOrder");
+        String input = "{\"cardHolderName\":\""+cardHolderName+"\",\"cardNumber\":\""+cardNumber+"\","+
+        		"\"expiryMonth\":\""+expiryMonth+ "\"expiryYear\":\""+expiryYear+"\",\"cardCVV\":\""+cardCVV+"\"}";
+        ClientResponse webServiceResponse = webResource.type(MediaType.APPLICATION_JSON)
+           .post(ClientResponse.class, input);
 
-					// print result
-					//System.out.println(response.toString());
-				} else {
-					
-					System.out.println("POST request not worked");
-				}
+        int responseCode = webServiceResponse.getStatus();
+		System.out.println("POST Response Code :: " + responseCode);
+		if (responseCode == HttpURLConnection.HTTP_OK) { // success
+			response.sendRedirect("PaymentStatus.jsp");
+		} else {
+			
+			System.out.println("POST request not worked");
+		}
 	}
 
 }

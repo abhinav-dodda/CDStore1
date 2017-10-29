@@ -1,7 +1,13 @@
 package com.musicBonanza.entity;
 
-public class PurchaseOrderItem {
+import java.io.Serializable;
 
+public class PurchaseOrderItem implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3173902450105647939L;
 	private int purchaseOrderId;
 	private String cdId;
 	private double cdPrice;
@@ -23,6 +29,11 @@ public class PurchaseOrderItem {
 	}
 	public void setCdPrice(double d) {
 		this.cdPrice = d;
+	}
+	@Override
+	public String toString() {
+		return "PurchaseOrderItem [purchaseOrderId=" + purchaseOrderId + ", cdId=" + cdId + ", cdPrice=" + cdPrice
+				+ "]";
 	}
 	
 }

@@ -1,12 +1,18 @@
 package com.musicBonanza.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class PurchaseOrder {
+public class PurchaseOrder implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public int getPurchaseOrderId() {
 		return purchaseOrderId;
 	}
@@ -101,6 +107,14 @@ public class PurchaseOrder {
 		this.purchaseOrderItems = purchaseOrderItems;
 		this.shippingId = shippingId;
 	  }
+
+	@Override
+	public String toString() {
+		return "PurchaseOrder [purchaseOrderId=" + purchaseOrderId + ", user=" + user + ", totalAmount=" + totalAmount
+				+ ", totalQuantity=" + totalQuantity + ", taxes=" + taxes + ", purchaseOrderStatus="
+				+ purchaseOrderStatus + ", purchaseOrderItems=" + purchaseOrderItems + ", shippingId=" + shippingId
+				+ "]";
+	}
 
 	
 	

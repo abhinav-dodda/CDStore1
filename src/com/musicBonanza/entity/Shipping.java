@@ -1,8 +1,14 @@
 package com.musicBonanza.entity;
 
-public class Shipping {
+import java.io.Serializable;
+
+public class Shipping implements Serializable{
 	
-    private int shippingId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4768310005313444080L;
+	private int shippingId;
 	private String streetAddress;
 	private String province;
 	private String country;
@@ -44,6 +50,11 @@ public class Shipping {
 	}
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
+	}
+	@Override
+	public String toString() {
+		return "Shipping [shippingId=" + shippingId + ", streetAddress=" + streetAddress + ", province=" + province
+				+ ", country=" + country + ", zipCode=" + zipCode + ", phone=" + phone + "]";
 	}
 	
 

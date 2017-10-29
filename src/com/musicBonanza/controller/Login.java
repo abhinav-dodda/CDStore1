@@ -29,11 +29,12 @@ import com.musicBonanza.utils.Constants;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+
 /**
  * Servlet Implementation class Login
  */
 
-   // Servlet implementing login functionality
+// Servlet implementing login functionality
 
 @WebServlet("/Login")
 public class Login extends HttpServlet {
@@ -55,10 +56,9 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		if(request.getAttribute("navigation") == null){
+		if (request.getAttribute("navigation") == null) {
 			response.sendRedirect("Login.jsp");
-		}
-		else if(request.getAttribute("navigation") == "OrderCheckOut"){
+		} else if (request.getAttribute("navigation") == "OrderCheckOut") {
 			response.sendRedirect("OrderCheckOut.jsp");
 		}
 	}
@@ -67,59 +67,55 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	
-	/*doPost method for implementing Login functionality 
+
+	/*
+	 * doPost method for implementing Login functionality
+	 * 
 	 * @param request
+	 * 
 	 * @param response
-	 * @throws ServletException 
-	 * @throws IOException*/
-	
+	 * 
+	 * @throws ServletException
+	 * 
+	 * @throws IOException
+	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
-		   
-		//Nandhini: session attribute set for login details
+
+		// Nandhini: session attribute set for login details
 		HttpSession session = request.getSession();
-		session.setAttribute("username",userName);
-		
+		session.setAttribute("username", userName);
+
 		// Calling Web Service to get Account details
 		Client client = Client.create();
-		WebResource webResource = client.resource(Constants.localhostUrl+"orderProcess/getAccount");
-        String input = "{\"userName\":\""+userName+"\",\"password\":\""+password+"\"}";
-        ClientResponse webServiceResponse = webResource.type(MediaType.APPLICATION_JSON)
-           .post(ClientResponse.class, input);
-        		System.out.println("Web servcie response: "+webServiceResponse);
+		WebResource webResource = client.resource(Constants.localhostUrl + "orderProcess/getAccount");
+		String input = "{\"userName\":\"" + userName + "\",\"password\":\"" + password + "\"}";
+		ClientResponse webServiceResponse = webResource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class,
+				input);
+		System.out.println("Web servcie response: " + webServiceResponse);
 		int responseCode = webServiceResponse.getStatus();
 		System.out.println("POST Response Code :: " + responseCode);
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
-			String output = webServiceResponse.getEntity(String.class);
-			JSONParser parser = new JSONParser();
-			try {
-				System.out.println("got output");
-				JSONObject json = (JSONObject)parser.parse(output);
-				if(json.get("username") == userName){
-					if(request.getAttribute("navigation") == "OrderCheckOut"){
-						response.sendRedirect("/OrderCheckOut.jsp");
-					}
-					else{
-						response.sendRedirect("/Home.jsp");
-					}
+			User user = webServiceResponse.getEntity(User.class);
+			if (userName.equals(user.getUsername())) {
+				if (request.getAttribute("navigation") == "OrderCheckOut") {
+					response.sendRedirect("/OrderCheckOut.jsp");
+				} else {
+					response.sendRedirect("/Home.jsp");
 				}
-				else{
-					String message = "Username or password is incorrect";
-					request.setAttribute("message",message);
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login.jsp");
-					dispatcher.forward(request, response);
-				}
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} else {
+				String message = "Username or password is incorrect";
+				request.setAttribute("message", message);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login.jsp");
+				dispatcher.forward(request, response);
 			}
 		} else {
 			String message = "Username or password is incorrect";
-			request.setAttribute("message",message);
+			request.setAttribute("message", message);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login.jsp");
 			dispatcher.forward(request, response);
 			System.out.println("POST request not worked");

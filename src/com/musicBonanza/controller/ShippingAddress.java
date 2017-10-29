@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.MediaType;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -81,24 +82,20 @@ public class ShippingAddress extends HttpServlet {
 			WebResource webResource = client.resource(Constants.localhostUrl + "orderProcess/createShipping");
 			String input = "{\"username\":\"" + username + "\",\"street\":\"" + street + "\",\"province\":\"" + province + "\",\"country\":\"" + country
 					+ "\",\"zip\":\"" + zip + "\",\"phone\":\"" + phone + "\"}";
-			ClientResponse webServiceResponse = webResource.type("application/json").post(ClientResponse.class, input);
+			ClientResponse webServiceResponse = webResource.accept(MediaType.APPLICATION_JSON).
+					type("application/json").post(ClientResponse.class, input);
 
 			int responseCode = webServiceResponse.getStatus();
 			System.out.println("POST Response Code :: " + responseCode);
 			if (responseCode == HttpURLConnection.HTTP_OK) { // success
-				String output = webServiceResponse.getEntity(String.class);
-				JSONParser parser = new JSONParser();
-				JSONObject json;
-				try {
-					json = (JSONObject) parser.parse(output);
-					request.setAttribute("shippingid", json.get("shippingId"));
+				Integer output = webServiceResponse.getEntity(Integer.class);
+				if(output != null && output.intValue() != 0){
+					request.setAttribute("shippingid", output);
 					RequestDispatcher dispatcher = getServletContext()
 							.getRequestDispatcher("/OrderCheckOut.jsp");
 					dispatcher.forward(request, response);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("Unable to save shipping address");
+				} else{
+					System.out.println("POST request not worked");
 				}
 
 			} else {
