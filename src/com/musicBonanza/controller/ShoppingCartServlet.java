@@ -40,25 +40,19 @@ public class ShoppingCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		
-		if(session == null)
-		{
-			System.out.println("session isssssss null");
-			response.sendRedirect("Cart.jsp");	
-		}
     	String action = request.getParameter("action");
-		if(action != null)
+		if(action.equalsIgnoreCase("delete"))
 		{
-			if(action.equalsIgnoreCase("delete"))
-			{
-				doGet_delete(request, response);
-			}
-			else if(action.equalsIgnoreCase("checkout")) 
-			{
-				doGet_checkout(request, response);
-			}
+			doGet_delete(request, response);
 		}
-
+		else if(action.equalsIgnoreCase("update")) 
+		{
+			doGet_update(request, response);
+		}
+		else if(action.equalsIgnoreCase("checkout")) 
+		{
+			doGet_checkout(request, response);
+		}
 	}
 
 	//delete action for shopping cart
@@ -77,25 +71,41 @@ public class ShoppingCartServlet extends HttpServlet {
     		}
     	}
     	response.sendRedirect("Cart.jsp");
+	 }
 	
-         
-	}
+	//update quantity in the cart and price
+	protected void doGet_update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+    	String prodId = request.getParameter("prodId");
+    	String prodPrice = request.getParameter("price");
+    	String totalprice = request.getParameter("totalPrice");
+    	//int quantity = quantity.getText();
+    	System.out.println("ProductId:"+prodId);
+    	System.out.println("totalprice:"+totalprice);
+    	System.out.println("prodPrice:"+prodPrice);
+ 
+	 }
 	
 	//check out order action
-	
 	protected void doGet_checkout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 
         
 	}
-	
+ 	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		String quantity = request.getParameter("quantity");
+		String totalprice = request.getParameter("totalPrice");
+		String price = request.getParameter("Price");
+    	//int quantity = quantity.getText();
+    	System.out.println("quantity retrieved:"+quantity);
+    	System.out.println("totalPrice retrieved:"+totalprice);
+    	System.out.println("totalPrice retrieved:"+price);
 	}
 
 }

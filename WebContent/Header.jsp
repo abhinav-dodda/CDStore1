@@ -45,7 +45,7 @@
         <a class="nav-link" href="Cart.jsp">MyCart</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="Logout.jsp?action=logout">SignOut</a>
+        <a class="nav-link" href="LogoutServlet">SignOut</a>
       </li>
       <%
       }
