@@ -30,10 +30,15 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Nandhini: created to null the session attributes(cart, userid)
-		HttpSession session = request.getSession();
-		session.setAttribute("username", "");
-		session.setAttribute("cart", "");
-		request.getRequestDispatcher("Home.jsp").forward(request, response);
+		System.out.println("logout is clicked");
+		HttpSession session = request.getSession(false);
+		if (session != null) 
+		{
+		    session.invalidate();
+		}
+		//System.out.println("null ayuducha paaru:"+session.getAttribute("username"));
+		response.sendRedirect("Home.jsp");
+		//request.getRequestDispatcher("Home.jsp").forward(request, response);
 	}
 
 	/**
