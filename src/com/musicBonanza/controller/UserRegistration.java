@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -78,20 +79,23 @@ public class UserRegistration extends HttpServlet {
 		int responseCode = webServiceResponse.getStatus();
 		System.out.println("POST Response Code :: " + responseCode);
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
-			response.sendRedirect("Home.jsp");
-			/*BufferedReader in = new BufferedReader(new InputStreamReader(
-					con.getInputStream()));
-			String inputLine;
-			StringBuffer response = new StringBuffer();
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}*/
-			//in.close();
-
-			// print result
-			//System.out.println(response.toString());
+			String responseMsg = webServiceResponse.getEntity(String.class);
+			if(responseMsg.contains("required")){
+				String message = "Please fill all the required fields";
+				request.setAttribute("message", message);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserRegistration.jsp");
+				dispatcher.forward(request, response);
+			}
+			else if(responseMsg.contains("Password")){
+				String message = "Password Mismatch";
+				request.setAttribute("message", message);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserRegistration.jsp");
+				dispatcher.forward(request, response);
+			}
+			else{
+				response.sendRedirect("Home.jsp");
+			}
 		} else {
-			
 			System.out.println("POST request not worked");
 		}
 	}

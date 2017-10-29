@@ -40,6 +40,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-body">
 					<form method="POST" action="UserRegistration" role="form" onsubmit="Validate()">
+					<div style="color:red">${message }</div>
 						<div class="form-group">
 							<h2>Create an account</h2>
 						</div>
