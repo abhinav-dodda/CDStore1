@@ -22,7 +22,14 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+
+	  <%
+	  HttpSession usersession = request.getSession();
+	  if(usersession.getAttribute("username") == null)
+	  {
+		  
+	  %>
+	  <li class="nav-item active">
         <a class="nav-link" href="Home.jsp"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
@@ -33,33 +40,29 @@
 	  </li>
 	  <li class="nav-item">
         <a class="nav-link" href="Login.jsp">SignIn</a>
-        <a class="nav-link" href="ShoppingCartServlet">MyCart</a>
       </li>
       
-      <li class="nav-item"><a class="nav-link"
-							href="ProductCategoryServlet">Product Catalog</a></li>
-							<li class="nav-item">
-        <a class="nav-link" href="/MusicBonanza/Login">SignIn</a>
-      </li>
-	  
-	  <%
-	  HttpSession usersession = request.getSession();
-	  if(usersession.getAttribute("username") != null)
-	  {
-		  
-		  System.out.println("user logged in");
-	  %>
-      <li class="nav-item">
-        <a class="nav-link" href="Cart.jsp">MyCart</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="LogoutServlet">SignOut</a>
-      </li>
       <%
       }
 	  else
-	  {
-		  System.out.println("user not logged in");
+	  {%>
+	  <li class="nav-item active">
+        <a class="nav-link" href="Home.jsp"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">AboutUs</a>
+      </li>
+	  <li class="nav-item">
+         <a class="nav-link" href="ProductCategories.jsp">Product Catalog</a>
+	  </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="Cart.jsp">MyCart</a>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="LogoutServlet">SignOut</a>
+      </li>
+      
+	  <%	 
 	  }
       %>
     </ul>

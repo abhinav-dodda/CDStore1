@@ -93,7 +93,7 @@ public class OrderProcessService {
 			if (!(firstName != null) && (lastName != null) && (userName != null) && (email != null)
 					&& (password != null) && (confirmPassword != null)) {
 				return "Please fill all the required fields";
-			} else if (password != confirmPassword) {
+			} else if (password.equals(confirmPassword)) {
 				return "Password Mismatch";
 			} else {
 				User user = new User();
