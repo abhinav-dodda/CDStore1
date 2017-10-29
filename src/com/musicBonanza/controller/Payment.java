@@ -60,20 +60,26 @@ public class Payment extends HttpServlet {
 		String expiryYear = request.getParameter("expiry_year");
 		
 		// Calling Web Service to process payment
-		
+		int purchaseOrderId = 1; // request.getParameter("purchaseOrderId");
 		Client client = Client.create();
 		WebResource webResource = client.resource(Constants.localhostUrl+"orderProcess/confirmOrder");
         String input = "{\"cardHolderName\":\""+cardHolderName+"\",\"cardNumber\":\""+cardNumber+"\","+
-        		"\"expiryMonth\":\""+expiryMonth+ "\"expiryYear\":\""+expiryYear+"\",\"cardCVV\":\""+cardCVV+"\"}";
+        		"\"expiryMonth\":\""+expiryMonth+ "\",\"expiryYear\":\""+expiryYear+"\",\"cardCVV\":\""+cardCVV+
+        		"\",\"purchaseOrderId\":\""+purchaseOrderId+"\"}";
         ClientResponse webServiceResponse = webResource.type(MediaType.APPLICATION_JSON)
            .post(ClientResponse.class, input);
 
         int responseCode = webServiceResponse.getStatus();
 		System.out.println("POST Response Code :: " + responseCode);
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
-			response.sendRedirect("PaymentStatus.jsp");
+			String responseMsg = webServiceResponse.getEntity(String.class);
+			if(responseMsg != null && responseMsg.equals("success")){
+				response.sendRedirect("PaymentStatus.jsp");
+			}
+			else{
+				System.out.println("POST request not worked");
+			}
 		} else {
-			
 			System.out.println("POST request not worked");
 		}
 	}

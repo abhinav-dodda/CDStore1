@@ -150,6 +150,7 @@ public class OrderCheckOut extends HttpServlet {
 			if (responseCode == HttpURLConnection.HTTP_OK) { // success
 				int purchaseOrderId = webServiceResponse.getEntity(Integer.class);
 				if (0 != purchaseOrderId) {
+					request.setAttribute("purchaseOrderId",purchaseOrderId);
 					response.sendRedirect("/MusicBonanza/Payment.jsp");
 				} else {
 					String message = "Something went wrong. Please try after sometime";

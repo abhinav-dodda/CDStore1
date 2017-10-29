@@ -15,7 +15,7 @@ public class PurchaseOrderDao {
 	
 	public int createOrder(PurchaseOrder purchaseorder){
 		int insertRowId = 0;
-		Result result = null;
+		int rowNum = 0;
 		try {
 		//insert into address 
 		/*Shipping shipping = purchaseorder.getShipping();
@@ -46,7 +46,7 @@ public class PurchaseOrderDao {
 			parameters.add(""+insertRowId);
 			parameters.add(""+item.getCdId());
 			parameters.add(""+item.getCdPrice());
-			result = DBManager.executeSQL("insertIntoPurchaseOrderItem", parameters);
+			rowNum = DBManager.executeSQL("insertIntoPurchaseOrderItem", parameters);
 			
 		}
 		} catch (SQLException e) {
@@ -54,7 +54,7 @@ public class PurchaseOrderDao {
 			e.printStackTrace();
 			System.out.println(Constants.dataNotSaved);
 		}
-		if(0 != insertRowId && result != null){//
+		if(0 != insertRowId && 0 != rowNum){//
 			System.out.println(Constants.dataSaved);
 		}
 		else{
@@ -64,20 +64,13 @@ public class PurchaseOrderDao {
 	}
 	
 	// Method to confirm the order and update the order status
-	
-			public Result confirmOrder(PurchaseOrder purchaseOrder) throws SQLException{
-				List<String> parameters = new ArrayList<String>();
-				parameters.add(" " +purchaseOrder.getPurchaseOrderId());
-				/*parameters.add(" "+purchaseOrder.getTotalQuantity());
-				parameters.add(" " +purchaseOrder.getPurchaseOrderItems());
-				parameters.add(" " + purchaseOrder.getTaxes());
-				parameters.add("" + purchaseOrder.getPurchaseOrderStatus());
-				parameters.add("" + purchaseOrder.getUser());
-				parameters.add("" + purchaseOrder.getShippingId());*/
-				
-				//executing SQL query to update the order status in the database
-				Result result;
-				result = DBManager.executeSQL("confirmOrder", parameters);
-				return result;
-			}
+				public int confirmOrder(int purchaseOrderId) throws SQLException{
+					List<String> parameters = new ArrayList<>();
+					parameters.add("ORDERED");
+					parameters.add(""+purchaseOrderId);
+					//executing SQL query to update the order status in the database
+					int rowNum = 0;
+					rowNum = DBManager.executeSQL("confirmOrder", parameters);
+					return rowNum;
+				}
 }

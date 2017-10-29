@@ -79,11 +79,11 @@ public class OrderProcessManager {
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		String response = null;
 		try {
-			Result result = orderProcessDao.createAccount(user);
+			int rowNum = orderProcessDao.createAccount(user);
 
 			// checking response from the database
 
-			if (result != null) {
+			if (rowNum != 0) {
 				response = "success";
 			} else {
 				response = "failure";
@@ -97,7 +97,7 @@ public class OrderProcessManager {
 		return response;
 	}
 
-	public Shipping getShippingById(int shippingId){
+	public Shipping getShippingById(int shippingId) {
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		Shipping shipping = null;
 		try {
@@ -109,19 +109,31 @@ public class OrderProcessManager {
 		}
 		return shipping;
 	}
-	
+
 	/*
-	 * Method for creating new shipping address 
+	 * Method for creating new shipping address
 	 * 
 	 * @param user
 	 * 
 	 * @return response
 	 */
 
-	public int createShipping(Shipping shipping,String username) {
+	public int createShipping(Shipping shipping) {
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
-		int shippingId = orderProcessDao.createShipping(shipping,username); 
+		int shippingId = orderProcessDao.createShipping(shipping);
 		return shippingId;
 	}
-	
+
+	public String updateUserShipping(User user) {
+		String response = null;
+		OrderProcessDao orderProcessDao = new OrderProcessDao();
+		int rowNum = orderProcessDao.updateUserShipping(user);
+		if (rowNum != 0) {
+			response = "success";
+		} else {
+			response = "failure";
+		}
+		return response;
+	}
+
 }

@@ -102,9 +102,9 @@ public  class DBManager extends HttpServlet {
 	 * @return resObj
 	 * @throws SQLException 
 	 */
-	public static Result executeSQL(String queryID, List<?> parameterList) throws SQLException {
+	public static int executeSQL(String queryID, List<?> parameterList) throws SQLException {
 		boolean expectionFlag=false;
-		Result resObj = null;
+		int rowNum = 0;
 		
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
 		stmt = connection.createStatement();
@@ -115,7 +115,7 @@ public  class DBManager extends HttpServlet {
 				//hQuery = hSession.createQuery(sqlQuery);
 				//log.info(Constants.executeSQLQueryExecuted);
 				startTransaction();
-				stmt.executeUpdate(sqlQuery);
+				rowNum = stmt.executeUpdate(sqlQuery);
 			
 			}
 
@@ -134,7 +134,7 @@ public  class DBManager extends HttpServlet {
 		finally {
 			endTransaction(expectionFlag);
 		}
-		return resObj;
+		return rowNum;
 	}
 	/* Executes query and returns the number of rows affected in the result
 	 * object.

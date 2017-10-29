@@ -103,9 +103,9 @@ public class Login extends HttpServlet {
 			User user = webServiceResponse.getEntity(User.class);
 			if (userName.equals(user.getUsername())) {
 				if (request.getAttribute("navigation") == "OrderCheckOut") {
-					response.sendRedirect("/OrderCheckOut.jsp");
+					response.sendRedirect("/MusicBonanza/OrderCheckOut.jsp");
 				} else {
-					response.sendRedirect("/Home.jsp");
+					response.sendRedirect("/MusicBonanza/Home.jsp");
 				}
 			} else {
 				String message = "Username or password is incorrect";

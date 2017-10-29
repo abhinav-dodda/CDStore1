@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.musicBonanza.entity.Shipping;
 import com.musicBonanza.entity.User;
 import com.musicBonanza.utils.Constants;
 import com.sun.jersey.api.client.Client;
@@ -71,29 +72,52 @@ public class ShippingAddress extends HttpServlet {
 		/*if (user == null) {
 			String message = "User not logged in";
 		} else {*/
+		user= new User();
 			String username = "raman";
 			String street = request.getParameter("streetAddress");
 			String province = request.getParameter("province");
 			String country = request.getParameter("country");
 			String zip = request.getParameter("zip");
 			String phone = request.getParameter("phone");
-
+			Shipping shipping = new Shipping();
+			shipping.setStreetAddress(street);
+			shipping.setProvince(province);
+			shipping.setCountry(country);
+			shipping.setZipCode(zip);
+			shipping.setPhone(phone);
 			Client client = Client.create();
 			WebResource webResource = client.resource(Constants.localhostUrl + "orderProcess/createShipping");
-			String input = "{\"username\":\"" + username + "\",\"street\":\"" + street + "\",\"province\":\"" + province + "\",\"country\":\"" + country
-					+ "\",\"zip\":\"" + zip + "\",\"phone\":\"" + phone + "\"}";
+			/*String input = "{\"username\":\"" + username + "\",\"street\":\"" + street + "\",\"province\":\"" + province + "\",\"country\":\"" + country
+					+ "\",\"zip\":\"" + zip + "\",\"phone\":\"" + phone + "\"}";*/
 			ClientResponse webServiceResponse = webResource.accept(MediaType.APPLICATION_JSON).
-					type("application/json").post(ClientResponse.class, input);
+					type("application/json").post(ClientResponse.class, shipping);
 
 			int responseCode = webServiceResponse.getStatus();
 			System.out.println("POST Response Code :: " + responseCode);
 			if (responseCode == HttpURLConnection.HTTP_OK) { // success
-				Integer output = webServiceResponse.getEntity(Integer.class);
-				if(output != null && output.intValue() != 0){
-					request.setAttribute("shippingid", output);
-					RequestDispatcher dispatcher = getServletContext()
-							.getRequestDispatcher("/OrderCheckOut.jsp");
-					dispatcher.forward(request, response);
+				String shippingId = webServiceResponse.getEntity(String.class);
+				if(shippingId != null && Integer.valueOf(shippingId) != 0){
+					user.setShippingId(Integer.valueOf(shippingId));
+					user.setUsername(username);
+					webResource = client.resource(Constants.localhostUrl + "orderProcess/updateUserShipping");
+					webServiceResponse = webResource.accept(MediaType.APPLICATION_JSON).
+							type("application/json").post(ClientResponse.class, user);
+					responseCode = webServiceResponse.getStatus();
+					System.out.println("POST Response Code :: " + responseCode);
+					if (responseCode == HttpURLConnection.HTTP_OK) { // success
+						String responseMsg = webServiceResponse.getEntity(String.class);
+						if(responseMsg =="success"){
+							request.setAttribute("shippingid", user);
+							RequestDispatcher dispatcher = getServletContext()
+									.getRequestDispatcher("/OrderCheckOut.jsp");
+							dispatcher.forward(request, response);
+						}
+						else{
+							System.out.println("User details not updated with shipping Id");
+						}
+					}else{
+						System.out.println("POST request not worked");
+					}
 				} else{
 					System.out.println("POST request not worked");
 				}

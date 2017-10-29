@@ -30,7 +30,7 @@
 <%@ include file="Header.jsp"%>
 <div class="container">
 	<div class="row-fluid">
-      <form class="form-horizontal" method="Post">
+      <form class="form-horizontal" action="Payment" method="Post">
         <fieldset>
               
           <!-- Name -->

@@ -140,9 +140,9 @@ public class OrderProcessService {
 	@Path("/createShipping")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Integer createShipping(String params) throws Exception {
+	public String createShipping(Shipping shipping) throws Exception {
 		int shippingId = 0;
-		JSONParser parser = new JSONParser();
+		/*JSONParser parser = new JSONParser();
 		try {
 			JSONObject json = (JSONObject) parser.parse(params);
 			String street = (String) json.get("street");
@@ -150,26 +150,27 @@ public class OrderProcessService {
 			String country = (String) json.get("country");
 			String zip = (String) json.get("zip");
 			String phone = (String) json.get("phone");
-			String username = (String) json.get("username");
-			if (!(street != null) && (province != null) && (country != null) && (zip != null) && (phone != null)) {
+			String username = (String) json.get("username");*/
+			if (!(shipping.getStreetAddress() != null) && (shipping.getProvince() != null) && (shipping.getProvince() != null) 
+					&& (shipping.getZipCode() != null) && (shipping.getPhone() != null)) {
 				throw new Exception("No shipping information available");
-			} else if (username == null) {
+			} /*else if (username == null) {
 				throw new Exception("User not logged in");
-			} else {
-				Shipping shipping = new Shipping();
+			}*/ else {
+				/*Shipping shipping = new Shipping();
 				shipping.setStreetAddress(street);
 				shipping.setProvince(province);
 				shipping.setCountry(country);
 				shipping.setZipCode(zip);
-				shipping.setPhone(phone);
+				shipping.setPhone(phone);*/
 				OrderProcessManager orderProcessManager = new OrderProcessManager();
-				shippingId = orderProcessManager.createShipping(shipping, username);
+				shippingId = orderProcessManager.createShipping(shipping);
 			}
-		} catch (ParseException e) {
+		/*} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		return shippingId;
+		}*/
+		return ""+shippingId;
 	}
 
 	@POST
@@ -186,43 +187,36 @@ public class OrderProcessService {
 		}
 		return shipping;
 	}
+	
+	@POST
+	@Path("/updateUserShipping")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public String updateUserShipping(User user) throws Exception {
+		String response = null;
+		if (user.getUsername() == null) {
+			throw new Exception("User not logged in");
+		}
+		else{
+			OrderProcessManager orderProcessManager = new OrderProcessManager();
+			response = orderProcessManager.updateUserShipping(user);
+		}		
+		return response;
+	}
 
-	@PUT
+	@POST
 	@Path("/confirmOrder")
 	@Consumes("application/json")
 	@Produces("application/json")
 
-	public String confirmOrder(String params) {
+	public String confirmOrder(String  params) throws ParseException {
 		String response = null;
 		JSONParser parser = new JSONParser();
-
+		JSONObject json = (JSONObject) parser.parse(params);
 		try {
-			JSONObject json = (JSONObject) parser.parse(params);
-			int purchaseOrderId = (int) json.get("purchaseOrderId");
-			User user = new User();
-			user = (User) json.get(user);
-			float totalAmount = (float) json.get("totalAmount");
-			int totalQuantity = (int) json.get("totalQuantity");
-			float taxes = (float) json.get("taxes");
-			String purchaseOrderStatus = json.get("purchaseOrderStatus").toString();
-			List<PurchaseOrderItem> purchaseOrderItems = (List<PurchaseOrderItem>) json.get("purchaseOrderItem");
-			Shipping shipping = new Shipping();
-			// shipping = (Shipping) json.get("shipping");
-
-			if (purchaseOrderStatus == Constants.orderConfirmed) {
-				PurchaseOrderManager purchaseOrderManager = new PurchaseOrderManager();
-				PurchaseOrder purchaseOrder = new PurchaseOrder();
-				purchaseOrder.setPurchaseOrderId(purchaseOrderId);
-				purchaseOrder.setUser(user);
-				purchaseOrder.setTotalAmount(totalAmount);
-				purchaseOrder.setTotalQuantity(totalQuantity);
-				purchaseOrder.setTaxes(taxes);
-				purchaseOrder.setPurchaseOrderStatus(purchaseOrderStatus);
-				purchaseOrder.setPurchaseOrderItems(purchaseOrderItems);
-				// purchaseOrder.setShippingId(shipping);
-				// response =purchaseOrderManager.confirmOrder(purchaseOrder);
-
-			}
+			String purchaseOrderId = (String)json.get("purchaseOrderId");
+			PurchaseOrderManager purchaseOrderManager = new PurchaseOrderManager();
+			response = purchaseOrderManager.confirmOrder(Integer.valueOf(purchaseOrderId));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
