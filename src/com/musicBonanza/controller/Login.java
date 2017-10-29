@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
 
 import com.musicBonanza.dao.*;
@@ -68,8 +69,12 @@ public class Login extends HttpServlet {
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-	   // Calling Web Service to get Account details
+	   
+		//Nandhini: session attribute set for login details
+		HttpSession session = request.getSession();
+		session.setAttribute("username",userName);
 		
+		// Calling Web Service to get Account details
 		Client client = Client.create();
 		WebResource webResource = client.resource(Constants.localhostUrl+"orderProcess/getAccount");
         String input = "{\"userName\":\""+userName+"\",\"password\":\""+password+"\"}";

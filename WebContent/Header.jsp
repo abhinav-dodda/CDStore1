@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="javax.servlet.http.HttpSession"%>
 <!DOCTYPE html>
 <script type="text/javascript" src="validations/validation.js"></script>
 <html>
@@ -28,17 +29,31 @@
         <a class="nav-link" href="#">AboutUs</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="ShoppingCartServlet">MyCart</a>
-      </li>
-      
-      <li class="nav-item"><a class="nav-link"
-							href="ProductCategoryServlet">Product Catalog</a></li>
-							<li class="nav-item">
+         <a class="nav-link" href="ProductCategories.jsp">Product Catalog</a>
+	  </li>
+	  <li class="nav-item">
         <a class="nav-link" href="Login.jsp">SignIn</a>
+      </li>
+	  
+	  <%
+	  HttpSession usersession = request.getSession();
+	  if(usersession.getAttribute("username") != null)
+	  {
+		  System.out.println("user logged in");
+	  %>
+      <li class="nav-item">
+        <a class="nav-link" href="Cart.jsp">MyCart</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="Logout.jsp?action=logout">SignOut</a>
       </li>
+      <%
+      }
+	  else
+	  {
+		  System.out.println("user not logged in");
+	  }
+      %>
     </ul>
   </div>
 </nav>
