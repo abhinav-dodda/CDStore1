@@ -3,10 +3,8 @@ package com.musicBonanza.entity;
 public class PurchaseOrderItem {
 
 	private int purchaseOrderId;
-	private int cdId;
-	private int cdPrice;
-	
-	
+	private String cdId;
+	private double cdPrice;
 	
 	public int getPurchaseOrderId() {
 		return purchaseOrderId;
@@ -14,17 +12,17 @@ public class PurchaseOrderItem {
 	public void setPurchaseOrderId(int purchaseOrderId) {
 		this.purchaseOrderId = purchaseOrderId;
 	}
-	public int getCdId() {
+	public String getCdId() {
 		return cdId;
 	}
-	public void setCdId(int cdId) {
+	public void setCdId(String cdId) {
 		this.cdId = cdId;
 	}
-	public int getCdPrice() {
+	public double getCdPrice() {
 		return cdPrice;
 	}
-	public void setCdPrice(int cdPrice) {
-		this.cdPrice = cdPrice;
+	public void setCdPrice(double d) {
+		this.cdPrice = d;
 	}
 	
 }

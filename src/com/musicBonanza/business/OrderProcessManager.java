@@ -4,57 +4,85 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.musicBonanza.dao.OrderProcessDao;
+import com.musicBonanza.dao.PurchaseOrderDao;
+import com.musicBonanza.entity.PurchaseOrder;
 import com.musicBonanza.entity.Result;
+import com.musicBonanza.entity.Shipping;
 import com.musicBonanza.entity.User;
 
 // Business layer logic for Order Process Service 
 
 public class OrderProcessManager {
 
-	/*Method to get user account information and checking if result
-    * is received from database then return success otherwise failure
-	@param user
-	@return response*/
-	
-	public String getAccount(User user){
-		OrderProcessDao orderProcessDao = new OrderProcessDao();
+	/*
+	 * Method to get user account information and checking if result is received
+	 * from database then return success otherwise failure
+	 * 
+	 * @param user
+	 * 
+	 * @return response
+	 */
+
+	public User getAccount(String username, String password) throws SQLException {
 		String response = null;
-		ResultSet resultSet;
+		OrderProcessDao orderProcessDao = new OrderProcessDao();
+		User user = orderProcessDao.getAccount(username, password);
+
+		// checking response from database
+		if (user != null) {
+			if (user.getUsername().equals(username)) {
+				response = "success";
+			} else {
+				response = "failure";
+			}
+		}
+		return user;
+	}
+
+	/*
+	 * Method to get user account information based on usrename and checking if
+	 * result is received from database then return success otherwise failure
+	 * 
+	 * @param user
+	 * 
+	 * @return response
+	 */
+
+	public User getAccountByUsername(String username) {
+		User user = null;
 		try {
-			resultSet = orderProcessDao.getAccount(user);
-			
-			//checking response from database
-			
-			if (resultSet != null) {
-				while (resultSet.next()) {
-					if (resultSet.getString("Username").equals(user.getUsername())) {
-						response = "success";
-					} else {
-						response = "failure";
-					}
-				}
+			OrderProcessDao orderProcessDao = new OrderProcessDao();
+			user = orderProcessDao.getAccountByUsername(username);
+
+			// checking response from database
+			if (user == null) {
+				System.out.println("No details found");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Exception from Database");
 			e.printStackTrace();
 		}
-		
-		return response;
+
+		return user;
 	}
 
-	/*Method for creating new account and checking response from the database 
-	@param user
-	@return response*/
-	
+	/*
+	 * Method for creating new account and checking response from the database
+	 * 
+	 * @param user
+	 * 
+	 * @return response
+	 */
+
 	public String createAccount(User user) {
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		String response = null;
 		try {
 			Result result = orderProcessDao.createAccount(user);
-		
-			//checking response from the database
-			
+
+			// checking response from the database
+
 			if (result != null) {
 				response = "success";
 			} else {
@@ -65,8 +93,35 @@ public class OrderProcessManager {
 			System.out.println("Exception from Database");
 			e.printStackTrace();
 		}
-		
+
 		return response;
 	}
 
+	public Shipping getShippingById(int shippingId){
+		OrderProcessDao orderProcessDao = new OrderProcessDao();
+		Shipping shipping = null;
+		try {
+			shipping = orderProcessDao.getShippingById(shippingId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Exception from Database");
+			e.printStackTrace();
+		}
+		return shipping;
+	}
+	
+	/*
+	 * Method for creating new shipping address 
+	 * 
+	 * @param user
+	 * 
+	 * @return response
+	 */
+
+	public int createShipping(Shipping shipping,String username) {
+		OrderProcessDao orderProcessDao = new OrderProcessDao();
+		int shippingId = orderProcessDao.createShipping(shipping,username); 
+		return shippingId;
+	}
+	
 }

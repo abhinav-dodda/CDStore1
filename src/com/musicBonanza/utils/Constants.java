@@ -32,6 +32,7 @@ public final class Constants {
 	public static final String accountCreatedMessage = "Account Created";
 	public static final String dataDeleted = "Data is Deleted";
 	public static final String userIsValidated = "User is Validated.";
+	public static final String orderConfirmed = "CONFIRMED";
 	// Success Codes
 	public static final int successCode = 1;
 

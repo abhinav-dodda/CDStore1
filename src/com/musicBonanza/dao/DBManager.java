@@ -5,6 +5,7 @@ import com.musicBonanza.entity.Result;
 import java.io.IOException;
 //import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -168,52 +169,49 @@ public  class DBManager extends HttpServlet {
 			endTransaction(expectionFlag);
 		}
 		return rs;
-
-		
-		/*try {
-			
-
-			// Setting the result object with no of rows affected & success
-			// code/message.
-			//resObj = setResultObject(null, null, hQuery.list().size(), Constants.successCode, Constants.successMessage);
-
-		} catch (Exception e) {
-			// Setting the result object with failure code/message.
-			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
-			log.error(e.getLocalizedMessage(), e);
-		}*/
 	}
-	 /* Executes query and returns result set.
+	/**
+	 * Executes query and returns the number of rows affected in the result
+	 * object.
 	 *
 	 * @param queryID
 	 * @param parameterList
 	 * @return resObj
-	 
-	public Result getQueryResult(String queryID, List<?> parameterList) {
-		Result resObj = null;
-		Query hQuery = null;
-
+	 * @throws SQLException 
+	 */
+	public static int executePreparedSQL(String queryID, List<?> parameterList) throws SQLException {
+		boolean expectionFlag=false;
+		int insertRowId = 0;
+		PreparedStatement preparedStatement = null;
+		
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
-		String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
+				String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
 
 		try {
 			if (!sqlQuery.isEmpty()) {
-				hQuery = hSession.createQuery(sqlQuery);
-				log.info(Constants.getQueryResultExecuted);
+				startTransaction();
+				preparedStatement = connection.prepareStatement(sqlQuery,
+		                PreparedStatement.RETURN_GENERATED_KEYS);
+		        preparedStatement.executeUpdate();
+		        ResultSet rs = preparedStatement.getGeneratedKeys();
+		        if(rs.next())
+                {
+		        	insertRowId = rs.getInt(1);
+                }
+			
 			}
 
-			// Setting the result object with result set, no of rows affected &
-			// success code/message.
-			resObj = setResultObject(hQuery.list(), null, hQuery.list().size(), Constants.successCode,
-					Constants.successMessage);
-		} catch (Exception e) {
-			// Setting the result object with failure code/message.
-			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
-			log.error(e.getLocalizedMessage(), e);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			expectionFlag=true;
+			
 		}
-		return resObj;
+		finally {
+			endTransaction(expectionFlag);
+		}
+		return insertRowId;
 	}
-	
+	/*
 	 * Saves new data.
 	 *
 	 * @param dataList
