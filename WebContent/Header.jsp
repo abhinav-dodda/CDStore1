@@ -29,12 +29,10 @@
         <a class="nav-link" href="#">AboutUs</a>
       </li>
       <li class="nav-item">
-<<<<<<< HEAD
          <a class="nav-link" href="ProductCategories.jsp">Product Catalog</a>
 	  </li>
 	  <li class="nav-item">
         <a class="nav-link" href="Login.jsp">SignIn</a>
-=======
         <a class="nav-link" href="ShoppingCartServlet">MyCart</a>
       </li>
       
@@ -42,7 +40,6 @@
 							href="ProductCategoryServlet">Product Catalog</a></li>
 							<li class="nav-item">
         <a class="nav-link" href="/MusicBonanza/Login">SignIn</a>
->>>>>>> branch 'phase1' of https://Nandyie@bitbucket.org/gsara017/musicbonanza.git
       </li>
 	  
 	  <%
