@@ -37,10 +37,34 @@
 
 </head>
 <body>
-
 <div class="container-fluid">
 <%@include file="Header.jsp" %>
-<br>
+<%
+ArrayList<CD> list = new ArrayList<CD>();
+list = (ArrayList<CD>)session.getAttribute("cart");
+if(list == null)
+{
+%>
+  <div class="container-fluid" style="margin-top:5%;">
+
+	<div class="row">
+        <div class="jumbotron" style="box-shadow: 2px 2px 4px #000000;">
+            <h2 class="text-center">Your Shopping Cart is empty!. Hope you have not added any products to the cart.<span style="color:#F89406;"> Use the below button to navigate to the </span><span style="color:#26A65B;">Product Catalog Page</span></h2>
+            <center>
+	            <div class="btn-group" style="margin-top:50px;">
+	               <a href = "ProductCategories.jsp" class="btn btn-lg btn-primary">Take Me There</a>
+	            </div>
+            </center>
+        </div>
+	</div>
+</div>	
+<%
+}
+else
+{
+	
+%>
+  <br>
 	<div class="row">
 		<div class="col-xs-8">
 			<div class="panel panel-info">
@@ -66,6 +90,7 @@
 		List<CD> cart = (List<CD>) session.getAttribute("cart");
 		for (CD c: cart)
 		{
+			
 			//usercart = cart.get(i);
 		%>
 				
@@ -73,14 +98,14 @@
 						<div class="col-xs-2"><img class="img-responsive" src="images/<%=c.getProductId()%>.jpg">
 						</div>
 						<div class="col-xs-4">
-							<h4 class="product-name"><strong><%=c.getProductName()  %></strong></h4><h4><small><%=c.getProdCat()  %></small></h4>
+							<h6 class="product-name"><strong><%=c.getProductName()  %></strong></h6><h3><small><%=c.getProdCat()  %></small></h3>
 						</div>
 						<div class="col-xs-6">
-							<div class="col-xs-6 text-right" id="price">
-								<h5><font size =3><strong><%=c.getProdPrice()  %><span class="text-muted"> X </span></strong></font></h5>
+							<div class="col-xs-6 text-right">
+								<h5><font size =3><strong><%=c.getProdPrice()  %><span class="text-muted"> x </span></strong></font></h5>
 							</div>
 							<div class="col-xs-4">
-								<input type="text" class="form-control input-sm" value="1">
+								<input type="text" class="form-control input-sm" value="1" id="quantity" onchange="updateCart(this)">
 							</div>
 							<div class="col-xs-2">
 								<button type="button" class="btn btn-link btn-xs" onclick="location.href='ShoppingCartServlet?action=delete&prodId=<%=c.getProductId()%>'">
@@ -93,25 +118,22 @@
 					<hr>
 			   <%
 			   totalPrice += c.getProdPrice();
-			   	}
-		     
+			  	}
+		
 		       %>
-
-				
-					<div class="row">
+              
+				  <div class="col-xs-10">
+					<h4 class="text-right">Total Amount: <strong>  <%= totalPrice %>$</strong></h4>
+				  </div>
+				</div>
+				<div class="panel-footer">
+					<div class="row text-center">
 						<div class="text-center">
 							<div class="col-xs-3">
 								<button type="button" class="btn btn-primary" onclick="ShoppingCartServlet?action=update">
 									Update cart
 								</button>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="panel-footer">
-					<div class="row text-center">
-						<div class="col-xs-9">
-							<h4 class="text-right">Total <strong><%= totalPrice %>$</strong></h4>
 						</div>
 						<div class="col-xs-3">
 							<button type="button" class="btn btn-success btn-block">
@@ -124,6 +146,10 @@
 		</div>
 	</div>
 </div>
+<%
+}
+%>
+
 <%@ include file="Footer.jsp"%>
 </body>
 </html>
