@@ -115,13 +115,14 @@ public class ProductCategory extends HttpServlet {
 		//store it in the Arraylist	
 		cart.add(usercart);
 		//cart.add(i, usercart);
-		//System.out.println(cart.get(i));
+		//System.out.println(cart.get(i));  
 		//cart.add(usercart);
 		}
 		session.setAttribute("cart",cart);
 		
+		
 	   //forward the request back to product page
-	   request.getRequestDispatcher("ProductCategories.jsp").forward(request, response);
+	   //request.getRequestDispatcher("ProductCategories.jsp").forward(request, response);
 		 
 	   //Nandhini :end of the code
 		 

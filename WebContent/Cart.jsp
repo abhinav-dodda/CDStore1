@@ -120,6 +120,7 @@ else
 										<option value="<%= quantity %>">10</option>
 								</select>
 								
+								
 							</div>
 							<div class="col-xs-2">
 								<button type="button" class="btn btn-link btn-xs" onclick="location.href='ShoppingCartServlet?action=delete&prodId=<%=c.getProductId()%>'">
