@@ -28,6 +28,13 @@ import com.musicBonanza.utils.Constants;
  * Servlet implementation class DBManager
  */
 @WebServlet("/DBManager")
+/**
+ * Database Agent to handle startTransaction, endTransaction, execureSQL,
+ * getQueryResult
+ * 
+ * @author ABHI
+ *
+ */
 public class DBManager extends HttpServlet {
 	static Connection connection;
 	static ResultSet rs;
@@ -54,10 +61,12 @@ public class DBManager extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-/*
- * This method is used to start a transaction in the database pool that is being created
- * @param noparams
- * */
+
+	/**
+	 * Method to initiate a database transaction
+	 * 
+	 * @throws SQLException
+	 */
 	public static void startTransaction() throws SQLException {
 		try {
 			connection.setAutoCommit(false);
@@ -66,10 +75,13 @@ public class DBManager extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	/*
-	 * This method is used to end a transaction in the database pool that is being created
+
+	/**
+	 * Method to end a database transaction
+	 * 
 	 * @param exceptionFlag
-	 * */
+	 * @throws SQLException
+	 */
 	public static void endTransaction(boolean exceptionFlag) throws SQLException {
 
 		try {
@@ -92,7 +104,7 @@ public class DBManager extends HttpServlet {
 	 * @param queryID
 	 * @param parameterList
 	 * @return resObj
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public static int executeSQL(String queryID, List<?> parameterList) throws Exception {
 		boolean expectionFlag = false;
@@ -160,7 +172,7 @@ public class DBManager extends HttpServlet {
 	 * @param queryID
 	 * @param parameterList
 	 * @return resObj
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public static int executePreparedSQL(String queryID, List<?> parameterList) throws Exception {
 		boolean expectionFlag = false;

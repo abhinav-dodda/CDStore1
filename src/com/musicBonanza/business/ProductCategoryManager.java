@@ -15,7 +15,7 @@ import com.musicBonanza.entity.Shipping;
 import com.musicBonanza.entity.User;
 import com.musicBonanza.*;
 /**
- * Product Manager Class
+ * Business Tier to handle the Product catalog
  * @author ABHI
  *
  */
