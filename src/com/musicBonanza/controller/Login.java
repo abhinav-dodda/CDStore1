@@ -89,10 +89,6 @@ public class Login extends HttpServlet {
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		// Nandhini: session attribute set for login details
-		HttpSession session = request.getSession();
-		session.setAttribute("username", userName);
-
 		// Calling Web Service to get Account details
 		Client client = Client.create();
 		WebResource webResource = client.resource(Constants.localhostUrl + "orderProcess/getAccount");
@@ -104,7 +100,10 @@ public class Login extends HttpServlet {
 		System.out.println("POST Response Code :: " + responseCode);
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
 			User user = webServiceResponse.getEntity(User.class);
-			if (userName.equals(user.getUsername())) {
+			if (user != null) {
+				// Nandhini: session attribute set for login details
+				HttpSession session = request.getSession();
+				session.setAttribute("username", userName);
 				if (request.getAttribute("navigation") == "OrderCheckOut") {
 					response.sendRedirect("/MusicBonanza/OrderCheckOut.jsp");
 				} else {
