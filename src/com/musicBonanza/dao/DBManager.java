@@ -1,4 +1,5 @@
 package com.musicBonanza.dao;
+
 import com.musicBonanza.Helper.*;
 import com.musicBonanza.entity.Result;
 
@@ -21,35 +22,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-/*import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.hibernate.FlushMode;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionException;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.TransactionException;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.context.internal.ManagedSessionContext;*/
-
 import com.musicBonanza.utils.Constants;
 
 /**
  * Servlet implementation class DBManager
  */
 @WebServlet("/DBManager")
-public  class DBManager extends HttpServlet {
+public class DBManager extends HttpServlet {
 	static Connection connection;
 	static ResultSet rs;
 	static Statement stmt;
 	static {
 		try {
 			Context context = new InitialContext();
-			DataSource ds = (DataSource) context.lookup("java:comp/env/myDataSource");
+			DataSource ds = (DataSource) context.lookup(Constants.envNameContext);
 			connection = ds.getConnection();
-			System.out.println(connection);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -60,332 +47,149 @@ public  class DBManager extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @throws SQLException 
+	 * @throws SQLException
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public DBManager() throws SQLException {
 		super();
-	//TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor stub
 	}
+/*
+ * This method is used to start a transaction in the database pool that is being created
+ * @param noparams
+ * */
 	public static void startTransaction() throws SQLException {
 		try {
 			connection.setAutoCommit(false);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			//connection.setAutoCommit(true);
 			e.printStackTrace();
 		}
 	}
+	/*
+	 * This method is used to end a transaction in the database pool that is being created
+	 * @param exceptionFlag
+	 * */
 	public static void endTransaction(boolean exceptionFlag) throws SQLException {
-		
+
 		try {
-			if(exceptionFlag) {
+			if (exceptionFlag) {
 				connection.rollback();
-			}else {
+			} else {
 				connection.commit();
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			
+
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	/**
-	 * Executes query and returns the number of rows affected in the result
-	 * object.
+	 * Executes query and returns the number of rows affected in the result object.
 	 *
 	 * @param queryID
 	 * @param parameterList
 	 * @return resObj
-	 * @throws SQLException 
+	 * @throws Exception 
 	 */
-	public static int executeSQL(String queryID, List<?> parameterList) throws SQLException {
-		boolean expectionFlag=false;
+	public static int executeSQL(String queryID, List<?> parameterList) throws Exception {
+		boolean expectionFlag = false;
 		int rowNum = 0;
-		
+
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
 		stmt = connection.createStatement();
 		String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
 
 		try {
 			if (!sqlQuery.isEmpty()) {
-				//hQuery = hSession.createQuery(sqlQuery);
-				//log.info(Constants.executeSQLQueryExecuted);
 				startTransaction();
 				rowNum = stmt.executeUpdate(sqlQuery);
-			
 			}
-
-			// Setting the result object with no of rows affected & success
-			// code/message.
-			//resObj = setResultObject(null, null, hQuery.list().size(), Constants.successCode, Constants.successMessage);
-
 		} catch (SQLException e) {
-			// Setting the result object with failure code/message.
-			//resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
-			//log.error(e.getLocalizedMessage(), e);
 			e.printStackTrace();
-			expectionFlag=true;
-			
-		}
-		finally {
+			expectionFlag = true;
+			throw new Exception(e.getMessage());
+		} finally {
 			endTransaction(expectionFlag);
 		}
 		return rowNum;
 	}
-	/* Executes query and returns the number of rows affected in the result
-	 * object.
+
+	/*
+	 * Executes query and returns the number of rows affected in the result object.
 	 *
 	 * @param queryID
+	 * 
 	 * @param parameterList
+	 * 
 	 * @return resObj
 	 */
-	public static ResultSet getQueryResult(String queryID, List<String> parameters) throws SQLException {
-		boolean expectionFlag=false;
+	public static ResultSet getQueryResult(String queryID, List<String> parameters) throws Exception {
+		boolean expectionFlag = false;
 		Statement stmt = null;
-		ResultSet rs=null;
-		try {		
+		ResultSet rs = null;
+		try {
 			Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
 			System.out.println(propertyObj);
-			
-			String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID,parameters);
+
+			String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameters);
 			System.out.println("Reached till here");
-			//Log log = null;
+			// Log log = null;
 			if (!sqlQuery.isEmpty()) {
 				startTransaction();
 				stmt = connection.createStatement();
-				 rs = stmt.executeQuery(sqlQuery);
-				//log.info(Constants.executeSQLQueryExecuted);
+				rs = stmt.executeQuery(sqlQuery);
 			}
 			System.out.println(queryID);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
-		}finally {
+			expectionFlag = true;
+			throw new Exception(e.getMessage());
+		} finally {
 			endTransaction(expectionFlag);
 		}
 		return rs;
 	}
+
 	/**
-	 * Executes query and returns the number of rows affected in the result
-	 * object.
+	 * Executes query and returns the number of rows affected in the result object.
 	 *
 	 * @param queryID
 	 * @param parameterList
 	 * @return resObj
-	 * @throws SQLException 
+	 * @throws Exception 
 	 */
-	public static int executePreparedSQL(String queryID, List<?> parameterList) throws SQLException {
-		boolean expectionFlag=false;
+	public static int executePreparedSQL(String queryID, List<?> parameterList) throws Exception {
+		boolean expectionFlag = false;
 		int insertRowId = 0;
 		PreparedStatement preparedStatement = null;
-		
+
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
-				String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
+		String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
 
 		try {
 			if (!sqlQuery.isEmpty()) {
 				startTransaction();
-				preparedStatement = connection.prepareStatement(sqlQuery,
-		                PreparedStatement.RETURN_GENERATED_KEYS);
-		        preparedStatement.executeUpdate();
-		        ResultSet rs = preparedStatement.getGeneratedKeys();
-		        if(rs.next())
-                {
-		        	insertRowId = rs.getInt(1);
-                }
-			
+				preparedStatement = connection.prepareStatement(sqlQuery, PreparedStatement.RETURN_GENERATED_KEYS);
+				preparedStatement.executeUpdate();
+				ResultSet rs = preparedStatement.getGeneratedKeys();
+				if (rs.next()) {
+					insertRowId = rs.getInt(1);
+				}
+
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			expectionFlag=true;
-			
-		}
-		finally {
+			expectionFlag = true;
+			throw new Exception(e.getMessage());
+		} finally {
 			endTransaction(expectionFlag);
 		}
 		return insertRowId;
-	}
-	/*
-	 * Saves new data.
-	 *
-	 * @param dataList
-	 * @return
-	 
-
-	public Result saveNewData(List<?> dataList) {
-		Result resObj = null;
-		int i = 0;
-		List<Integer> primaryIdList = new ArrayList<Integer>();
-		try {
-			if (!dataList.equals(null)) {
-				{
-					// Iterating the items in the list.
-					Iterator<?> item = dataList.iterator();
-					while (item.hasNext()) {
-						i = (int) hSession.save(item.next());
-						primaryIdList.add(i);
-						log.info(Constants.saveMethodExecuted);
-					}
-				}
-			}
-
-			// Setting the result object with success information.
-			resObj = setResultObject(null, primaryIdList, primaryIdList.size(), Constants.successCode,
-					Constants.dataSaved);
-		} catch (Exception e) {
-			// Setting the result object with failure information.
-			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.dataNotSaved);
-			log.error(e.getLocalizedMessage(), e);
-		}
-
-		return resObj;
-	}
-
-	public Result upDateEntity(List<?> dataList) {
-		Result resObj = null;
-		// List<Integer> primaryIdList = new ArrayList<Integer>();
-		try {
-			if (!dataList.equals(null)) {
-				{
-					// Iterating the items in the list.
-					Iterator<?> item = dataList.iterator();
-					while (item.hasNext()) {
-						hSession.saveOrUpdate(item.next());
-						log.info(Constants.saveMethodExecuted);
-					}
-				}
-			}
-
-			// Setting the result object with success information.
-			resObj = setResultObject(null, null, 0, Constants.successCode, Constants.dataSaved);
-		} catch (Exception e) {
-			// Setting the result object with failure information.
-			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.dataNotSaved);
-			log.error(e.getLocalizedMessage(), e);
-		}
-
-		return resObj;
-	}
-
-	 * Deletes data from DB Table.
-	 *
-	 * @param entityClass
-	 * @param primaryKeyList
-	 
-
-	public <T> Result DeleteData(Class<T> entityClass, List<Integer> primaryKeyList) {
-		// Reference :
-		// http://examples.javacodegeeks.com/enterprise-java/hibernate/delete-persistent-object-with-hibernate/
-		Result resObj = null;
-		if (!primaryKeyList.equals(null) && !primaryKeyList.isEmpty()) {
-			Iterator<Integer> item = primaryKeyList.iterator();
-
-			while (item.hasNext()) {
-				try {
-					hSession.delete(hSession.get(entityClass, item.next()));
-				} catch (HibernateException e) {
-					// Setting the result object with failure information.
-					resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.dataDeleteFailed);
-					log.error(e.getLocalizedMessage(), e);
-				}
-			}
-
-			// Setting the result object with success information.
-			resObj = setResultObject(null, null, 0, Constants.successCode, Constants.dataDeleted);
-		}
-
-		return resObj;
-	}
-
-	 * Updating the table based on the data passed.
-	 *
-	 * @param dataList
-	 * @return
-	 
-	// TODO This method is not functional. To be implemented.
-	public Result UpdateData(List<?> dataList) {
-		Result resObj = null;
-		try {
-			if (!dataList.equals(null)) {
-				{
-					for (Object item : dataList) {
-						hSession.update(item);
-					}
-				}
-			}
-
-			// Setting the result object with success information.
-			resObj = setResultObject(null, null, 0, Constants.successCode, Constants.dataSaved);
-		} catch (Exception e) {
-			// Setting the result object with failure information.
-			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.dataNotSaved);
-			log.error(e.getLocalizedMessage(), e);
-			System.out.println(e.getLocalizedMessage());
-		}
-
-		return resObj;
-	}
-	
-	 * Method used to set the Result Object.
-	 *
-	 * @param resultList
-	 * @param resultCount
-	 * @param statusCode
-	 * @param statusMessage
-	 * @return resultObj
-	 
-	public Result setResultObject(Object resultList, List<Integer> primaryIdList, int resultCount, int statusCode,
-			String statusMessage) {
-		Result resultObj = new Result();
-		try {
-			// Setting the result object based on the parameters passed.
-			resultObj.setResultList((List<?>) resultList);
-			resultObj.setPrimaryIdList(primaryIdList);
-			resultObj.setResultCount(resultCount);
-			resultObj.setStatusCode(statusCode);
-			resultObj.setStatusMessage(statusMessage);
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage(), e);
-		}
-		return resultObj;
-	}*/
-/*
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		/*
-		 * response.getWriter().append("Served at: ").append(request.getContextPath());
-		 */
-		/*try {
-			Context context = new InitialContext();
-			DataSource ds = (DataSource) context.lookup("java:comp/env/myDataSource");
-			Connection connection = ds.getConnection();
-			System.out.println(connection);
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

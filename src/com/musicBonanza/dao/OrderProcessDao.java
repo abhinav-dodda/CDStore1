@@ -18,7 +18,7 @@ public class OrderProcessDao {
 
 	// Method to Get Account information from the database
 
-	public User getAccount(String username, String password) throws SQLException {
+	public User getAccount(String username, String password) throws Exception {
 		// String response = orderProcessDao.getAccount(userName,password);
 		List<String> parameters = new ArrayList<String>();
 		parameters.add(username);
@@ -39,7 +39,7 @@ public class OrderProcessDao {
 		return user;
 	}
 
-	public User getAccountByUsername(String username) throws SQLException {
+	public User getAccountByUsername(String username) throws Exception {
 		// String response = orderProcessDao.getAccount(userName,password);
 		List<String> parameters = new ArrayList<String>();
 		parameters.add(username);
@@ -62,7 +62,7 @@ public class OrderProcessDao {
 
 	// Method to Create Account and storing information in the database
 
-	public int createAccount(User user) throws SQLException {
+	public int createAccount(User user) throws Exception {
 		int rowNum = 0;
 		List<String> parameters = new ArrayList<String>();
 		parameters.add(user.getUsername());
@@ -76,7 +76,7 @@ public class OrderProcessDao {
 		return rowNum;
 	}
 
-	public Shipping getShippingById(int shippingId) throws SQLException {
+	public Shipping getShippingById(int shippingId) throws Exception {
 		List<String> parameters = new ArrayList<String>();
 		parameters.add("" + shippingId);
 		Shipping shipping = null;
@@ -93,7 +93,7 @@ public class OrderProcessDao {
 		return shipping;
 	}
 
-	public int createShipping(Shipping shipping) {
+	public int createShipping(Shipping shipping) throws Exception {
 		int insertRowId = 0;
 		try {
 			// insert into address
@@ -117,7 +117,7 @@ public class OrderProcessDao {
 		return insertRowId;
 	}
 
-	public int updateUserShipping(User user) {
+	public int updateUserShipping(User user) throws Exception {
 		int rowNum = 0;
 		try {
 			List<String> parameters = new ArrayList<String>();

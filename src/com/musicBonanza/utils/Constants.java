@@ -2,7 +2,7 @@ package com.musicBonanza.utils;
 
 public final class Constants {
 	//Localhost access 
-	public static final String localhostUrl = "http://localhost:7002/MusicBonanza/rest/";
+	public static final String localhostUrl = "http://localhost:8080/MusicBonanza/rest/";
 	
 	// Database Configurations and sql pool names
 	public static final String sqlConfigName = "mySqlConfig.properties";
@@ -13,6 +13,7 @@ public final class Constants {
 	public static final String password = "password";
 	public static final String envNameContext = "java:comp/env/myDataSource";
 	public static final String mysqlPoolName = "jdbc/mysqlPool";
+	public static final String sqlQueryPropertiesFilePath ="com/musicBonanza/Util/sqlQuery.properties";
 
 	// Error Messages
 	public static final String connectionFailed = "Failed to Get/Make Connection";

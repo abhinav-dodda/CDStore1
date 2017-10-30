@@ -22,7 +22,7 @@ public class ProductCategoriesDao
 		
 	}
 	
-	public ResultSet getCategoryList() throws IOException, SQLException
+	public ResultSet getCategoryList() throws Exception
 	{
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
 /*		List<String> parameters = new ArrayList<String>();

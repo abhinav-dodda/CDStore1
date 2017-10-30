@@ -10,10 +10,20 @@ import com.musicBonanza.entity.PurchaseOrderItem;
 import com.musicBonanza.entity.Result;
 import com.musicBonanza.entity.Shipping;
 import com.musicBonanza.utils.Constants;
-
+/**
+ * 
+ * @author gurpreet
+ *	DAO class for handling purchase order functionality
+ */
 public class PurchaseOrderDao {
 	
-	public int createOrder(PurchaseOrder purchaseorder){
+
+	/*
+	 * Method to update details in DB for creation of order 
+	 * @params purchaseOrder
+	 * @return numberOfRowsAffected(rowNum)
+	 */
+	public int createOrder(PurchaseOrder purchaseorder) throws Exception{
 		int insertRowId = 0;
 		int rowNum = 0;
 		try {
@@ -63,14 +73,18 @@ public class PurchaseOrderDao {
 		return insertRowId;
 	}
 	
-	// Method to confirm the order and update the order status
-				public int confirmOrder(int purchaseOrderId) throws SQLException{
-					List<String> parameters = new ArrayList<>();
-					parameters.add("ORDERED");
-					parameters.add(""+purchaseOrderId);
-					//executing SQL query to update the order status in the database
-					int rowNum = 0;
-					rowNum = DBManager.executeSQL("confirmOrder", parameters);
-					return rowNum;
-				}
+	/*
+	 * Method to confirm the order and update the order status as 'ORDERED' 
+	 * @params purchaseOrder
+	 * @return numberOfRowsAffected(rowNum)
+	 */
+	public int confirmOrder(int purchaseOrderId) throws Exception{
+		List<String> parameters = new ArrayList<>();
+		parameters.add("ORDERED");
+		parameters.add(""+purchaseOrderId);
+		//executing SQL query to update the order status in the database
+		int rowNum = 0;
+		rowNum = DBManager.executeSQL("confirmOrder", parameters);
+		return rowNum;
+	}			
 }

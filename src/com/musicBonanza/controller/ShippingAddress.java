@@ -46,6 +46,16 @@ public class ShippingAddress extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if (username == null) {
+			request.setAttribute("navigation","Shipping");
+			RequestDispatcher dispatcher = getServletContext()
+					.getRequestDispatcher("/Login");
+			dispatcher.forward(request, response);
+		} else {
+			response.sendRedirect("/ShippingAddress.jsp");
+		}
 	}
 
 	/**
@@ -68,12 +78,13 @@ public class ShippingAddress extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		/*if (user == null) {
-			String message = "User not logged in";
-		} else {*/
-		user= new User();
-			String username = "raman";
+		String username = (String) session.getAttribute("username");
+		if (username == null) {
+			request.setAttribute("navigation","Shipping");
+			
+		} else {
+			User user= new User();
+			user.setUsername(username);
 			String street = request.getParameter("streetAddress");
 			String province = request.getParameter("province");
 			String country = request.getParameter("country");
@@ -98,7 +109,6 @@ public class ShippingAddress extends HttpServlet {
 				String shippingId = webServiceResponse.getEntity(String.class);
 				if(shippingId != null && Integer.valueOf(shippingId) != 0){
 					user.setShippingId(Integer.valueOf(shippingId));
-					user.setUsername(username);
 					webResource = client.resource(Constants.localhostUrl + "orderProcess/updateUserShipping");
 					webServiceResponse = webResource.accept(MediaType.APPLICATION_JSON).
 							type("application/json").post(ClientResponse.class, user);
@@ -125,7 +135,7 @@ public class ShippingAddress extends HttpServlet {
 			} else {
 				System.out.println("POST request not worked");
 			}
-		//}
+		}
 
 	}
 

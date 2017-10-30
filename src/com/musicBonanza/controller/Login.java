@@ -57,9 +57,12 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		if (request.getAttribute("navigation") == null) {
-			response.sendRedirect("Login.jsp");
+			response.sendRedirect("/Login.jsp");
 		} else if (request.getAttribute("navigation") == "OrderCheckOut") {
-			response.sendRedirect("OrderCheckOut.jsp");
+			response.sendRedirect("/OrderCheckOut.jsp");
+		}else if (request.getAttribute("navigation") == "Shipping") {
+			String message = "User not logged in";
+			response.sendRedirect("/Login.jsp");
 		}
 	}
 

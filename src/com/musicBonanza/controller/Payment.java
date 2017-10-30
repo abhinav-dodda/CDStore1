@@ -54,10 +54,16 @@ public class Payment extends HttpServlet {
 		
 		String cardHolderName = request.getParameter("holder_name");
 		String cardNumber = request.getParameter("card_number");
-		String expiryDate= request.getParameter("expiry_date");
 		String cardCVV = request.getParameter("card_cvv");
 		String expiryMonth = request.getParameter("expiry_month");
 		String expiryYear = request.getParameter("expiry_year");
+		
+		Object counter = request.getSession().getAttribute(Constants.paymentCounter);
+		if (counter == null) {
+			request.getSession().setAttribute(Constants.paymentCounter, 1);
+		}
+		/*Hard code of every fifth request is refused on the website*/
+		int requestCounter = (int) request.getSession().getAttribute(Constants.paymentCounter);
 		
 		// Calling Web Service to process payment
 		int purchaseOrderId = 1; // request.getParameter("purchaseOrderId");
@@ -73,14 +79,16 @@ public class Payment extends HttpServlet {
 		System.out.println("POST Response Code :: " + responseCode);
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
 			String responseMsg = webServiceResponse.getEntity(String.class);
-			if(responseMsg != null && responseMsg.equals("success")){
-				response.sendRedirect("PaymentStatus.jsp");
+			if(responseMsg != null && responseMsg.equals("success") && requestCounter % 5 != 0){
+					requestCounter++;
+					request.getSession().setAttribute("counter", requestCounter);
+				response.sendRedirect("PaymentSuccess.jsp");
 			}
 			else{
-				System.out.println("POST request not worked");
+				requestCounter++;
+				request.getSession().setAttribute(Constants.paymentCounter, requestCounter);
+				response.sendRedirect("PaymentFailure.jsp");
 			}
-		} else {
-			System.out.println("POST request not worked");
 		}
 	}
 

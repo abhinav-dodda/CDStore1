@@ -16,7 +16,7 @@ import com.musicBonanza.entity.User;
 import com.musicBonanza.*;
 public class ProductCategoryManager {
 
-	public ResultSet getCategoryList() throws IOException, SQLException {
+	public ResultSet getCategoryList() throws Exception {
 		ProductCategoriesDao productCategoriesDao = new ProductCategoriesDao();
 
 		String response = null;
