@@ -59,7 +59,7 @@ public class PurchaseOrderDao {
 			rowNum = DBAgent.executeSQL("insertIntoPurchaseOrderItem", parameters);
 			
 		}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println(Constants.dataNotSaved);

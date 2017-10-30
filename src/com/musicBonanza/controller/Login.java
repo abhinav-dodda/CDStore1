@@ -111,7 +111,7 @@ public class Login extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("username", userName);
 				if (request.getParameter("navigation").equals("OrderCheckOut")) {
-					response.sendRedirect("/MusicBonanza/OrderCheckOut.jsp");
+					response.sendRedirect("OrderCheckOut");
 				}
 				else if (request.getParameter("navigation").equals("Shipping")) {
 					response.sendRedirect("/MusicBonanza/ShippingAddress.jsp");

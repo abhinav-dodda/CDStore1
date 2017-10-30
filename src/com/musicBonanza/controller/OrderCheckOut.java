@@ -45,7 +45,9 @@ public class OrderCheckOut extends HttpServlet {
 		String username = (String) session.getAttribute("username");
 		if (username == null) {
 			request.setAttribute("navigation", "OrderCheckOut");
-			 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MusicBonanza/Login.jsp");
+			String message = "Please login to place order";
+			request.setAttribute("message",message);
+			 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login.jsp");
 			 dispatcher.forward(request, response);
 		} else {
 			User user = new User();
@@ -53,7 +55,9 @@ public class OrderCheckOut extends HttpServlet {
 			user.setUsername(username);
 			
 			//retrieving data from request
-			float totalAmount = (float)request.getAttribute("totalprice");
+			float totalAmount = Float.valueOf((String) request.getAttribute("totalprice"));
+			List<CD> cdList = (List<CD>) session.getAttribute("cart");
+			int totalQuantity = cdList.size();
 			
 			Client client = Client.create();
 			WebResource webResource = client.resource(Constants.localhostUrl + "orderProcess/getAccountByUsername");
@@ -92,9 +96,9 @@ public class OrderCheckOut extends HttpServlet {
 						request.setAttribute("username",username);
 						request.setAttribute("totalAmount",totalAmount);
 						request.setAttribute("deliveryCharges",10);
-						request.setAttribute("taxes",(0.5*totalAmount));
+						request.setAttribute("taxes",(0.05*totalAmount));
 						request.setAttribute("expectedDeliveryDate", expectedDeliveryDate);
-						
+						request.setAttribute("totalQuantity",totalQuantity);
 						RequestDispatcher dispatcher = getServletContext()
 								.getRequestDispatcher("/OrderCheckOut.jsp");
 						dispatcher.forward(request, response);

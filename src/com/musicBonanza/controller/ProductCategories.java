@@ -35,7 +35,7 @@ public class ProductCategories extends HttpServlet {
 	{
 		//System.out.println("servlet is called");
 		String[] productName = {"Naanum Rowdy Dhaan", "OK Kanmani", "AR Rahuman Mashups"};
-		String[] productId = {"product-1", "product-2", "product-3"};
+		String[] productId = {"cd001", "cd002", "cd003"};
 		String[] prodCat = {"Tamil", "Multilingual", "Regional"};
 		float[] prodPrice = {45, 55, 105};
 		int size = productId.length;

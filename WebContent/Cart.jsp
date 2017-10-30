@@ -151,7 +151,7 @@ else
 							</div>
 						</div>
 						<div class="col-xs-3">
-							<button type="button" class="btn btn-success btn-block" onclick="location.href='ShoppingCartServlet?action=checkout?totalPrice=<%= totalPrice %>'">
+							<button type="button" class="btn btn-success btn-block" onclick="location.href='ShoppingCartServlet?action=checkout&totalPrice=<%= totalPrice %>'">
 								Checkout
 							</button>
 						</div>
