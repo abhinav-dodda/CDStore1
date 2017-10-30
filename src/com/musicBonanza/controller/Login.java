@@ -57,12 +57,18 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		if (request.getAttribute("navigation") == null) {
-			response.sendRedirect("/Login.jsp");
-		} else if (request.getAttribute("navigation") == "OrderCheckOut") {
-			response.sendRedirect("/OrderCheckOut.jsp");
-		}else if (request.getAttribute("navigation") == "Shipping") {
-			String message = "User not logged in";
-			response.sendRedirect("/Login.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login.jsp");
+			dispatcher.forward(request, response);
+		} else if (request.getAttribute("navigation").equals("OrderCheckOut")) {
+			request.setAttribute("navigation","OrderCheckOut");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MusicBonanza/OrderCheckOut.jsp");
+			dispatcher.forward(request, response);
+		}else if (request.getAttribute("navigation").equals("Shipping")) {
+			String message = "Login to save Shipping details";
+			request.setAttribute("message", message);
+			request.setAttribute("navigation","Shipping");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
@@ -104,9 +110,13 @@ public class Login extends HttpServlet {
 				// Nandhini: session attribute set for login details
 				HttpSession session = request.getSession();
 				session.setAttribute("username", userName);
-				if (request.getAttribute("navigation") == "OrderCheckOut") {
+				if (request.getParameter("navigation").equals("OrderCheckOut")) {
 					response.sendRedirect("/MusicBonanza/OrderCheckOut.jsp");
-				} else {
+				}
+				else if (request.getParameter("navigation").equals("Shipping")) {
+					response.sendRedirect("/MusicBonanza/ShippingAddress.jsp");
+				}
+				else {
 					response.sendRedirect("/MusicBonanza/Home.jsp");
 				}
 			} else {

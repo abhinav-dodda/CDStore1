@@ -44,6 +44,7 @@
 					<div>${country}</div>
 					<div>${zip}</div>
 					<div>${phone}</div>
+					<input type="hidden" name="shippingid" value="${shippingid} }">
 				</address>
 				<!-- <div>
 					<button type="button" class="btn btn-primary"
@@ -64,26 +65,26 @@
 						<div>
 							<label>Items Ordered: 2HARDCODED</label>
 						</div>
-						<div>
+						<!-- <div>
 							<label>Order ID: 1342HARDCODED</label>
-						</div>
+						</div> -->
 					</div>
 					<div class="col-sm-6">
 						<section>
 							<div>
-								<label>Order Total: ${totalAmount }</label>
+								<label>Order Total:$ ${totalAmount }</label>
 							</div>
 							<div>
-								<label>Delivery Charges: ${deliveryCharges }</label>
+								<label>Delivery Charges:$ ${deliveryCharges }</label>
 							</div>
 							<div>
 								<label>Discount: $0</label>
 							</div>
 							<div>
-								<label>Tax: ${taxes }</label>
+								<label>Tax:$ ${taxes }</label>
 							</div>
 							<div>
-								<label>Total: ${totalAamount+taxes}</label>
+								<label>Total:$ ${totalAamount+deliveryCharges+taxes}</label>
 							</div>
 						</section>
 						<div>

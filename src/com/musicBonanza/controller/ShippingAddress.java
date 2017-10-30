@@ -54,7 +54,7 @@ public class ShippingAddress extends HttpServlet {
 					.getRequestDispatcher("/Login");
 			dispatcher.forward(request, response);
 		} else {
-			response.sendRedirect("/ShippingAddress.jsp");
+			response.sendRedirect("/MusicBonanza/ShippingAddress.jsp");
 		}
 	}
 
