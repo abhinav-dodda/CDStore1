@@ -188,7 +188,7 @@ public class OrderProcessService {
 			throw new Exception("No shipping information available");
 		}
 		OrderProcessManager orderProcessManager = new OrderProcessManager();
-		orderProcessManager.createShipping(shipping);
+		shippingId = orderProcessManager.createShipping(shipping);
 		return "" + shippingId;
 	}
 
