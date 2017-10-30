@@ -1,5 +1,11 @@
 package com.musicBonanza.entity;
 
+/**
+ * 
+ * @author 
+ * Entity class for CD
+ *
+ */
 public class CD {
 	
 	private String ProductId;

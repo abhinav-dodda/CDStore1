@@ -2,6 +2,12 @@ package com.musicBonanza.entity;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author 
+ * Entity class for purchased item
+ *
+ */
 public class PurchaseOrderItem implements Serializable{
 
 	/**

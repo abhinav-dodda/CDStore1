@@ -2,7 +2,12 @@ package com.musicBonanza.entity;
 
 import java.io.Serializable;
 
-// UserDetails generated
+/**
+ * 
+ * @author 
+ * Entity class for the user of CD Store
+ *
+ */
 
 public class User implements Serializable{
 	

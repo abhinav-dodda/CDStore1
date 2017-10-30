@@ -2,11 +2,14 @@ package com.musicBonanza.entity;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author 
+ * Entity class for the Shipping Address
+ *
+ */
 public class Shipping implements Serializable{
 	
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -4768310005313444080L;
 	private int shippingId;
 	private String streetAddress;
