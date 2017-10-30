@@ -13,7 +13,7 @@ import com.musicBonanza.utils.Constants;
 
 public class PurchaseOrderDao {
 	
-	public int createOrder(PurchaseOrder purchaseorder){
+	public int createOrder(PurchaseOrder purchaseorder) throws Exception{
 		int insertRowId = 0;
 		int rowNum = 0;
 		try {
@@ -64,7 +64,7 @@ public class PurchaseOrderDao {
 	}
 	
 	// Method to confirm the order and update the order status
-				public int confirmOrder(int purchaseOrderId) throws SQLException{
+				public int confirmOrder(int purchaseOrderId) throws Exception{
 					List<String> parameters = new ArrayList<>();
 					parameters.add("ORDERED");
 					parameters.add(""+purchaseOrderId);

@@ -46,6 +46,16 @@ public class ShippingAddress extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if (username == null) {
+			request.setAttribute("navigation","Shipping");
+			RequestDispatcher dispatcher = getServletContext()
+					.getRequestDispatcher("/Login");
+			dispatcher.forward(request, response);
+		} else {
+			response.sendRedirect("/ShippingAddress.jsp");
+		}
 	}
 
 	/**
@@ -70,7 +80,8 @@ public class ShippingAddress extends HttpServlet {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if (username == null) {
-			String message = "User not logged in";
+			request.setAttribute("navigation","Shipping");
+			
 		} else {
 			User user= new User();
 			user.setUsername(username);

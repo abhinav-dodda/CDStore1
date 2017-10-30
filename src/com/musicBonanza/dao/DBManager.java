@@ -92,9 +92,9 @@ public class DBManager extends HttpServlet {
 	 * @param queryID
 	 * @param parameterList
 	 * @return resObj
-	 * @throws SQLException
+	 * @throws Exception 
 	 */
-	public static int executeSQL(String queryID, List<?> parameterList) throws SQLException {
+	public static int executeSQL(String queryID, List<?> parameterList) throws Exception {
 		boolean expectionFlag = false;
 		int rowNum = 0;
 
@@ -110,7 +110,7 @@ public class DBManager extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			expectionFlag = true;
-
+			throw new Exception(e.getMessage());
 		} finally {
 			endTransaction(expectionFlag);
 		}
@@ -126,7 +126,7 @@ public class DBManager extends HttpServlet {
 	 * 
 	 * @return resObj
 	 */
-	public static ResultSet getQueryResult(String queryID, List<String> parameters) throws SQLException {
+	public static ResultSet getQueryResult(String queryID, List<String> parameters) throws Exception {
 		boolean expectionFlag = false;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -146,7 +146,8 @@ public class DBManager extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-
+			expectionFlag = true;
+			throw new Exception(e.getMessage());
 		} finally {
 			endTransaction(expectionFlag);
 		}
@@ -159,9 +160,9 @@ public class DBManager extends HttpServlet {
 	 * @param queryID
 	 * @param parameterList
 	 * @return resObj
-	 * @throws SQLException
+	 * @throws Exception 
 	 */
-	public static int executePreparedSQL(String queryID, List<?> parameterList) throws SQLException {
+	public static int executePreparedSQL(String queryID, List<?> parameterList) throws Exception {
 		boolean expectionFlag = false;
 		int insertRowId = 0;
 		PreparedStatement preparedStatement = null;
@@ -184,7 +185,7 @@ public class DBManager extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			expectionFlag = true;
-
+			throw new Exception(e.getMessage());
 		} finally {
 			endTransaction(expectionFlag);
 		}

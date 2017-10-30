@@ -34,7 +34,7 @@ public class OrderProcessService {
 	@Path("/getAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public User getAccount(String params) throws IOException, SQLException {
+	public User getAccount(String params) throws Exception {
 		// JSONObject responseObj = new JSONObject();
 		User user = null;
 		JSONParser parser = new JSONParser();
@@ -62,7 +62,7 @@ public class OrderProcessService {
 	@Path("/getAccountByUsername")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public User getAccountByUsername(String userName) throws IOException, SQLException {
+	public User getAccountByUsername(String userName) throws Exception {
 		User user = null;
 		if (userName != null) {
 			OrderProcessManager orderProcessManager = new OrderProcessManager();

@@ -23,7 +23,7 @@ public class OrderProcessManager {
 	 * @return response
 	 */
 
-	public User getAccount(String username, String password) throws SQLException {
+	public User getAccount(String username, String password) throws Exception {
 		String response = null;
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		User user = orderProcessDao.getAccount(username, password);
@@ -48,7 +48,7 @@ public class OrderProcessManager {
 	 * @return response
 	 */
 
-	public User getAccountByUsername(String username) {
+	public User getAccountByUsername(String username) throws Exception {
 		User user = null;
 		try {
 			OrderProcessDao orderProcessDao = new OrderProcessDao();
@@ -100,7 +100,7 @@ public class OrderProcessManager {
 		return response;
 	}
 
-	public Shipping getShippingById(int shippingId) {
+	public Shipping getShippingById(int shippingId) throws Exception {
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		Shipping shipping = null;
 		try {
@@ -121,13 +121,13 @@ public class OrderProcessManager {
 	 * @return response
 	 */
 
-	public int createShipping(Shipping shipping) {
+	public int createShipping(Shipping shipping) throws Exception {
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		int shippingId = orderProcessDao.createShipping(shipping);
 		return shippingId;
 	}
 
-	public String updateUserShipping(User user) {
+	public String updateUserShipping(User user) throws Exception {
 		String response = null;
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		int rowNum = orderProcessDao.updateUserShipping(user);

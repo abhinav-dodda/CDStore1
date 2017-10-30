@@ -11,7 +11,7 @@ import com.musicBonanza.entity.Result;
 
 public class PurchaseOrderManager {
 
-	public int createOrder(PurchaseOrder purchaseOrder){
+	public int createOrder(PurchaseOrder purchaseOrder) throws Exception{
 		PurchaseOrderDao purchaseOrderDao = new PurchaseOrderDao();
 		int purchaseOrderId = purchaseOrderDao.createOrder(purchaseOrder);
 		return purchaseOrderId;
@@ -19,7 +19,7 @@ public class PurchaseOrderManager {
 	
 	// Method to confirm the order and update the order status
 	
-			public String confirmOrder(int purchaseOrderId) throws SQLException{
+			public String confirmOrder(int purchaseOrderId) throws Exception{
 				String response = null;
 				PurchaseOrderDao purchaseOrderDao = new PurchaseOrderDao();
 				int rowNum = purchaseOrderDao.confirmOrder(purchaseOrderId);
