@@ -14,7 +14,7 @@
 			<p class="hyper">
 				<a href="Home.jsp" class="form-title">Music Bonanza</a>
 				@2017
-				AllRights Reserved Design by ***
+				AllRights Reserved Design by TeamMB
 			</p>
   </footer>
 </div>
