@@ -33,7 +33,7 @@
         <a class="nav-link" href="Home.jsp"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">AboutUs</a>
+        <a class="nav-link" href="AboutUs.jsp">AboutUs</a>
       </li>
       <li class="nav-item">
          <a class="nav-link" href="ProductCategories.jsp">Product Catalog</a>
@@ -50,7 +50,7 @@
         <a class="nav-link" href="Home.jsp"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">AboutUs</a>
+        <a class="nav-link" href="AboutUs.jsp">AboutUs</a>
       </li>
 	  <li class="nav-item">
          <a class="nav-link" href="ProductCategories.jsp">Product Catalog</a>
