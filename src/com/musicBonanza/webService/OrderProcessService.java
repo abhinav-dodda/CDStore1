@@ -93,7 +93,7 @@ public class OrderProcessService {
 			if (!(firstName != null) && (lastName != null) && (userName != null) && (email != null)
 					&& (password != null) && (confirmPassword != null)) {
 				return "Please fill all the required fields";
-			} else if (password.equals(confirmPassword)) {
+			} else if (!password.equals(confirmPassword)) {
 				return "Password Mismatch";
 			} else {
 				User user = new User();
@@ -108,8 +108,14 @@ public class OrderProcessService {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			if(e.getMessage().contains("Username already exists")){
+				response = "Username already exists";
+			}
+			e.printStackTrace();
+			return response;
 		}
-
 		return response;
 	}
 

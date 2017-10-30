@@ -129,7 +129,7 @@ public  class DBManager extends HttpServlet {
 			//log.error(e.getLocalizedMessage(), e);
 			e.printStackTrace();
 			expectionFlag=true;
-			
+			throw new SQLException(e.getMessage());
 		}
 		finally {
 			endTransaction(expectionFlag);

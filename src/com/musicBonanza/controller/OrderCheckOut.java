@@ -49,7 +49,7 @@ public class OrderCheckOut extends HttpServlet {
 			 dispatcher.forward(request, response);
 		} else {
 			User user = new User();
-			user.setUsername("raman");//username
+			user.setUsername(username);//username from session
 			Client client = Client.create();
 			WebResource webResource = client.resource(Constants.localhostUrl + "orderProcess/getAccountByUsername");
 			ClientResponse webServiceResponse = webResource.type("application/json").post(ClientResponse.class,
@@ -125,7 +125,7 @@ public class OrderCheckOut extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else {
 			User user = new User();
-			user.setUsername("raman");//username
+			user.setUsername(username);//username from session
 			PurchaseOrder purchaseOrder = new PurchaseOrder();
 			purchaseOrder.setShippingId(1);// request.getParameter("shippingid");
 			purchaseOrder.setUser(user);

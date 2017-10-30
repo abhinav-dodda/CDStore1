@@ -75,7 +75,7 @@ public class OrderProcessManager {
 	 * @return response
 	 */
 
-	public String createAccount(User user) {
+	public String createAccount(User user) throws Exception {
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		String response = null;
 		try {
@@ -90,6 +90,9 @@ public class OrderProcessManager {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			if(e.getMessage().contains("Duplicate")){
+				throw new Exception("Username already exists");
+			}
 			System.out.println("Exception from Database");
 			e.printStackTrace();
 		}
