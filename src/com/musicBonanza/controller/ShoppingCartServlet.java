@@ -2,8 +2,6 @@ package com.musicBonanza.controller;
 
 import java.io.IOException;
 
-
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.musicBonanza.entity.CD;
+import com.sun.jersey.spi.dispatch.RequestDispatcher;
 
 
 /**
@@ -39,7 +38,7 @@ public class ShoppingCartServlet extends HttpServlet {
   //GET method for shopping cart  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
     	String action = request.getParameter("action");
 		if(action.equalsIgnoreCase("delete"))
 		{
@@ -47,10 +46,11 @@ public class ShoppingCartServlet extends HttpServlet {
 		}
 		else if(action.equalsIgnoreCase("update")) 
 		{
-			doGet_update(request, response);
+			doGet_updateQuantity(request, response);
 		}
 		else if(action.equalsIgnoreCase("checkout")) 
 		{
+			System.out.println("heyllooooo check out");
 			doGet_checkout(request, response);
 		}
 	}
@@ -74,22 +74,34 @@ public class ShoppingCartServlet extends HttpServlet {
 	 }
 	
 	//update quantity in the cart and price
-	protected void doGet_update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet_updateQuantity(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-    	String prodId = request.getParameter("prodId");
-    	String prodPrice = request.getParameter("price");
-    	String totalprice = request.getParameter("totalPrice");
+		//HttpSession session = request.getSession();
+		String prodId = request.getParameter("prodId");
+		String price = request.getParameter("price");
+		String quantity = request.getParameter("selectQuantity");
+		System.out.println("ProductId:"+prodId);
+		System.out.println("prodPrice:"+price);
+		System.out.println("quantity:"+quantity);
+		
+    	//String prodId = request.getParameter("prodId");
+    	//String prodPrice = request.getParameter("price");
+    	//String totalprice = request.getParameter("totalPrice");
     	//int quantity = quantity.getText();
-    	System.out.println("ProductId:"+prodId);
-    	System.out.println("totalprice:"+totalprice);
-    	System.out.println("prodPrice:"+prodPrice);
+    	//System.out.println("ProductId:"+prodId);
+    	//System.out.println("totalprice:"+totalprice);
+    	//System.out.println("prodPrice:"+prodPrice);
  
 	 }
 	
 	//check out order action
 	protected void doGet_checkout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-
+		String totalprice = request.getParameter("totalPrice");
+		request.setAttribute("totalprice", totalprice);
+		System.out.println("check:"+request.getAttribute("totalprice"));
+		System.out.println("check:"+totalprice);
+		request.getRequestDispatcher("OrderCheckOut").forward(request,response);
         
 	}
  	
@@ -99,13 +111,7 @@ public class ShoppingCartServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String quantity = request.getParameter("quantity");
-		String totalprice = request.getParameter("totalPrice");
-		String price = request.getParameter("Price");
-    	//int quantity = quantity.getText();
-    	System.out.println("quantity retrieved:"+quantity);
-    	System.out.println("totalPrice retrieved:"+totalprice);
-    	System.out.println("totalPrice retrieved:"+price);
+
 	}
 
 }

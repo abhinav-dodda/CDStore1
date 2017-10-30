@@ -86,6 +86,7 @@ else
 		<% 
 		//get the response attribute from servlet
 		float totalPrice = 0;
+		int quantity = 1;
 		CD usercart = new CD();
 		List<CD> cart = (List<CD>) session.getAttribute("cart");
 		for (CD c: cart)
@@ -102,10 +103,23 @@ else
 						</div>
 						<div class="col-xs-6">
 							<div class="col-xs-6 text-right">
-								<h5><font size =3><strong><%=c.getProdPrice()  %><span class="text-muted"> x </span></strong></font></h5>
+								<h5><font size =3><strong><%=c.getProdPrice()  %><span class="text-muted">  x </span></strong></font></h5>
 							</div>
 							<div class="col-xs-4">
-								<input type="text" class="form-control input-sm" value="1" id="quantity" onchange="updateCart(this)">
+								<select id="selectQuantity" name="selectQuantity" class="field"
+									                                      style="height: 80%;width: 40%;">
+							            <option value="<%= quantity %>">1</option>
+										<option value="<%= quantity %>">2</option>
+										<option value="<%= quantity %>">3</option>
+										<option value="<%= quantity %>">4</option>
+										<option value="<%= quantity %>">5</option>
+										<option value="<%= quantity %>">6</option>
+										<option value="<%= quantity %>">7</option>
+										<option value="<%= quantity %>">8</option>
+										<option value="<%= quantity %>">9</option>
+										<option value="<%= quantity %>">10</option>
+								</select>
+								
 							</div>
 							<div class="col-xs-2">
 								<button type="button" class="btn btn-link btn-xs" onclick="location.href='ShoppingCartServlet?action=delete&prodId=<%=c.getProductId()%>'">
@@ -118,8 +132,8 @@ else
 					<hr>
 			   <%
 			   totalPrice += c.getProdPrice();
-			  	}
-		
+			   	}
+		     
 		       %>
               
 				  <div class="col-xs-10">
@@ -136,7 +150,7 @@ else
 							</div>
 						</div>
 						<div class="col-xs-3">
-							<button type="button" class="btn btn-success btn-block">
+							<button type="button" class="btn btn-success btn-block" onclick="location.href='ShoppingCartServlet?action=checkout?totalPrice=<%= totalPrice %>'">
 								Checkout
 							</button>
 						</div>
