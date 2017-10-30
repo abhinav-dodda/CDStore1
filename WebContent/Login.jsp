@@ -57,7 +57,7 @@
 					</div>
 					
 			<div class= login-button>
-				<input type="submit" class="login-button" id="loginButton" value="Login"><i class="fa fa-chevron-right"	></i>
+				<input type="submit" class="login-button" id="loginButton" value="Login"><!-- <i class="fa fa-chevron-right"	></i> -->
 				</div>
 				<br>
 			<div class="etc-login-form">
