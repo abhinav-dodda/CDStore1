@@ -2,7 +2,8 @@ package com.musicBonanza.entity;
 
 public class ProductCategories {
 	public String CategoryName;
-	public int CategoryID;
+	public String CategoryID;
+	public String Cdid;
 	
 	public String getCategoryName() {
 		return CategoryName;
@@ -10,11 +11,18 @@ public class ProductCategories {
 	public void setCategoryName(String categoryName) {
 		CategoryName = categoryName;
 	}
-	public int getCategoryID() {
+	public String getCategoryID() {
 		return CategoryID;
 	}
-	public void setCategoryID(int categoryID) {
+	public void setCategoryID(String categoryID) {
 		CategoryID = categoryID;
 	}
 
+	public String getCdid() {
+		return Cdid;
+	}
+	
+	public void setCdid(String cdid) {
+		Cdid = cdid;
+	}
 }

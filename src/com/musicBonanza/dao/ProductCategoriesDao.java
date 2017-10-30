@@ -1,8 +1,6 @@
 package com.musicBonanza.dao;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,52 +8,72 @@ import java.util.List;
 import java.util.Properties;
 
 import com.musicBonanza.Helper.Helper;
+import com.musicBonanza.entity.ProductCategories;
 import com.musicBonanza.utils.Constants;
 
-/**
- * Product Categories DAO
- * @author ABHI
- *
- */
-public class ProductCategoriesDao 
-{
-/*	ProductCategoryDBManager productCategoryDBManager = new ProductCategoryDBManager();;*/
+public class ProductCategoriesDao {
 	Properties prop = new Properties();
-	
-	public ProductCategoriesDao()
-	{
-		
+
+	public ProductCategoriesDao() {
+
+	}
+
+	public ResultSet getCategoryList() throws IOException, SQLException {
+		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
+
+		List<String> parameters = new ArrayList<String>();
+		ResultSet resultSet=null;
+		try {
+			resultSet = DBAgent.getQueryResult("selectCategoryFromProductCategories", parameters);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//.getQueryResult("selectCategoryFromProductCategories", parameters);
+		return resultSet;
 	}
 	
-	public ResultSet getCategoryList() throws Exception
+	public ResultSet getProductList(ProductCategories productCategory) throws IOException, SQLException
 	{
+		ResultSet resultSet=null;
 		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
-/*		List<String> parameters = new ArrayList<String>();
-		parameters.add(category);*/
 		List<String> parameters = new ArrayList<String>();
-		ResultSet resultSet = DBAgent.getQueryResult("selectCategoryFromProductCategories", parameters);
-		return resultSet;
+		
+		if(productCategory.getCategoryName() == "All") {
+			try {
+				resultSet = DBAgent.getQueryResult("selectAllProducts", parameters);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		/*String query = propertyObj.getProperty("selectCategoryFromProductCategories");
-		ResultSet resultSet = productCategoryDBManager.productCategories(query, category);
+		else
+		{
+			parameters.add(productCategory.getCategoryName());
+			try {
+				resultSet = DBAgent.getQueryResult("selectProductsWhereCategory", parameters);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		
-		//ResultSet resultSet = DBManager.runSQLQueries("selectFromProductCategories", parameters);
-		return resultSet;*/
-		// get the property value and print it out
-		/*String query = propertyObj.getProperty("selectFromProductCategories");
-		ResultSet resultSet = productCategoryDBManager.productCategories(query, category);
+		return resultSet;
+	}
+	
+	public ResultSet getProductInfo(String parms) throws IOException, SQLException
+	{
+		ResultSet resultSet=null;
+		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
+		List<String> parameters = new ArrayList<String>();
 		
+		parameters.add(parms);
 		try {
-			if(resultSet.next()){
-				return resultSet.getString("title");
-			}
-			else{
-				return "failure";
-			}
-		} catch (SQLException e) {
+			resultSet = DBAgent.getQueryResult("selectProductDetailsWhereCdid", parameters);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "failure";*/
+		return resultSet;
 	}
-
+}
