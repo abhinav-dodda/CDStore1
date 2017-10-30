@@ -11,7 +11,7 @@ import com.musicBonanza.entity.Result;
 import com.musicBonanza.entity.Shipping;
 import com.musicBonanza.utils.Constants;
 /**
- * 
+ * Purchase Order DAO
  * @author gurpreet
  *	DAO class for handling purchase order functionality
  */
@@ -48,7 +48,7 @@ public class PurchaseOrderDao {
 		parameters.add(""+purchaseorder.getTotalQuantity());
 		parameters.add(""+purchaseorder.getTaxes());
 		insertRowId = 0;
-		insertRowId = DBManager.executePreparedSQL("insertIntoPurchaseOrder", parameters);
+		insertRowId = DBAgent.executePreparedSQL("insertIntoPurchaseOrder", parameters);
 		//insert into POItem
 		parameters.clear();
 		List <PurchaseOrderItem> itemsList = purchaseorder.getPurchaseOrderItems();
@@ -56,7 +56,7 @@ public class PurchaseOrderDao {
 			parameters.add(""+insertRowId);
 			parameters.add(""+item.getCdId());
 			parameters.add(""+item.getCdPrice());
-			rowNum = DBManager.executeSQL("insertIntoPurchaseOrderItem", parameters);
+			rowNum = DBAgent.executeSQL("insertIntoPurchaseOrderItem", parameters);
 			
 		}
 		} catch (SQLException e) {
@@ -84,7 +84,7 @@ public class PurchaseOrderDao {
 		parameters.add(""+purchaseOrderId);
 		//executing SQL query to update the order status in the database
 		int rowNum = 0;
-		rowNum = DBManager.executeSQL("confirmOrder", parameters);
+		rowNum = DBAgent.executeSQL("confirmOrder", parameters);
 		return rowNum;
 	}			
 }

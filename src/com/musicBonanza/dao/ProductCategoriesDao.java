@@ -12,6 +12,11 @@ import java.util.Properties;
 import com.musicBonanza.Helper.Helper;
 import com.musicBonanza.utils.Constants;
 
+/**
+ * Product Categories DAO
+ * @author ABHI
+ *
+ */
 public class ProductCategoriesDao 
 {
 /*	ProductCategoryDBManager productCategoryDBManager = new ProductCategoryDBManager();;*/
@@ -28,7 +33,7 @@ public class ProductCategoriesDao
 /*		List<String> parameters = new ArrayList<String>();
 		parameters.add(category);*/
 		List<String> parameters = new ArrayList<String>();
-		ResultSet resultSet = DBManager.getQueryResult("selectCategoryFromProductCategories", parameters);
+		ResultSet resultSet = DBAgent.getQueryResult("selectCategoryFromProductCategories", parameters);
 		return resultSet;
 		}
 		/*String query = propertyObj.getProperty("selectCategoryFromProductCategories");

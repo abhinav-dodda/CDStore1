@@ -20,7 +20,7 @@ import com.musicBonanza.utils.Constants;
  */
 public class OrderProcessDao {
 
-	/*
+	/*Order Processing DAO
 	 * Method to get user account from DB
 	 * @param username
 	 * @param password
@@ -35,7 +35,7 @@ public class OrderProcessDao {
 		// executing SQL Query to get results
 		ResultSet resultSet;
 		User user = null;
-		resultSet = DBManager.getQueryResult("selectFromUserDetails", parameters);
+		resultSet = DBAgent.getQueryResult("selectFromUserDetails", parameters);
 		if (resultSet.next()) {
 			user = new User();
 			user.setEmail(resultSet.getString("email"));
@@ -60,7 +60,7 @@ public class OrderProcessDao {
 
 		ResultSet resultSet;
 		User user = null;
-		resultSet = DBManager.getQueryResult("selectUserByUsername", parameters);
+		resultSet = DBAgent.getQueryResult("selectUserByUsername", parameters);
 		if (resultSet.next()) {
 			user = new User();
 			user.setEmail(resultSet.getString("email"));
@@ -87,7 +87,7 @@ public class OrderProcessDao {
 		parameters.add(user.getEmail());
 
 		// executing SQL query to insert user information in the database
-		rowNum = DBManager.executeSQL("insertIntoUser", parameters);
+		rowNum = DBAgent.executeSQL("insertIntoUser", parameters);
 		return rowNum;
 	}
 
@@ -100,7 +100,7 @@ public class OrderProcessDao {
 		List<String> parameters = new ArrayList<String>();
 		parameters.add("" + shippingId);
 		Shipping shipping = null;
-		ResultSet resultSet = DBManager.getQueryResult("seletAddressById", parameters);
+		ResultSet resultSet = DBAgent.getQueryResult("seletAddressById", parameters);
 		if (resultSet.next()) {
 			shipping = new Shipping();
 			shipping.setCountry(resultSet.getString("country"));
@@ -128,7 +128,7 @@ public class OrderProcessDao {
 			parameters.add(shipping.getCountry());
 			parameters.add(shipping.getZipCode());
 			parameters.add(shipping.getPhone());
-			insertRowId = DBManager.executePreparedSQL("insertIntoAddress", parameters);
+			insertRowId = DBAgent.executePreparedSQL("insertIntoAddress", parameters);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -155,7 +155,7 @@ public class OrderProcessDao {
 			parameters.add(user.getUsername());
 
 			// executing SQL query to insert user information in the database
-			rowNum = DBManager.executeSQL("updateUserDetailsWithAddressId", parameters);
+			rowNum = DBAgent.executeSQL("updateUserDetailsWithAddressId", parameters);
 			if(rowNum == 0){
 				System.out.println(Constants.dataNotSaved);
 			}
