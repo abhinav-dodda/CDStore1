@@ -10,44 +10,34 @@ import com.musicBonanza.entity.Result;
 import com.musicBonanza.entity.Shipping;
 import com.musicBonanza.entity.User;
 
-// Business layer logic for Order Process Service 
+/**
+ * 
+ * @author 
+ * Business layer logic for Order Process Service 
+ *
+ */
 
 public class OrderProcessManager {
 
 	/*
 	 * Method to get user account information and checking if result is received
 	 * from database then return success otherwise failure
-	 * 
-	 * @param user
-	 * 
-	 * @return response
+	 * @param username
+	 * @param password
+	 * @return user
 	 */
-
 	public User getAccount(String username, String password) throws Exception {
-		String response = null;
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		User user = orderProcessDao.getAccount(username, password);
-
-		// checking response from database
-		if (user != null) {
-			if (user.getUsername().equals(username)) {
-				response = "success";
-			} else {
-				response = "failure";
-			}
-		}
 		return user;
 	}
 
 	/*
-	 * Method to get user account information based on usrename and checking if
+	 * Method to get user account information based on username and checking if
 	 * result is received from database then return success otherwise failure
-	 * 
-	 * @param user
-	 * 
-	 * @return response
+	 * @param username
+	 * @return user
 	 */
-
 	public User getAccountByUsername(String username) throws Exception {
 		User user = null;
 		try {
@@ -68,13 +58,10 @@ public class OrderProcessManager {
 	}
 
 	/*
-	 * Method for creating new account and checking response from the database
-	 * 
+	 * Method for creating new user account and checking response from the database
 	 * @param user
-	 * 
 	 * @return response
 	 */
-
 	public String createAccount(User user) throws Exception {
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		String response = null;
@@ -100,6 +87,11 @@ public class OrderProcessManager {
 		return response;
 	}
 
+	/*
+	 * Method for getting shipping details based on shipping id
+	 * @param user
+	 * @return shipping
+	 */
 	public Shipping getShippingById(int shippingId) throws Exception {
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		Shipping shipping = null;
@@ -115,18 +107,20 @@ public class OrderProcessManager {
 
 	/*
 	 * Method for creating new shipping address
-	 * 
-	 * @param user
-	 * 
-	 * @return response
+	 * @param shipping
+	 * @return shippingId
 	 */
-
 	public int createShipping(Shipping shipping) throws Exception {
 		OrderProcessDao orderProcessDao = new OrderProcessDao();
 		int shippingId = orderProcessDao.createShipping(shipping);
 		return shippingId;
 	}
 
+	/*
+	 * Method for updating shipping Id for user
+	 * @param user
+	 * @return response
+	 */
 	public String updateUserShipping(User user) throws Exception {
 		String response = null;
 		OrderProcessDao orderProcessDao = new OrderProcessDao();

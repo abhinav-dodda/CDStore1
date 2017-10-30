@@ -12,12 +12,20 @@ import com.musicBonanza.entity.Shipping;
 import com.musicBonanza.entity.User;
 import com.musicBonanza.utils.Constants;
 
-// Data Access Object for Order Processing
-
+/**
+ * 
+ * @author 
+ * Data Access Object for Order Processing Service 
+ *
+ */
 public class OrderProcessDao {
 
-	// Method to Get Account information from the database
-
+	/*
+	 * Method to get user account from DB
+	 * @param username
+	 * @param password
+	 * @return user
+	 */	
 	public User getAccount(String username, String password) throws Exception {
 		// String response = orderProcessDao.getAccount(userName,password);
 		List<String> parameters = new ArrayList<String>();
@@ -25,7 +33,6 @@ public class OrderProcessDao {
 		parameters.add(password);
 
 		// executing SQL Query to get results
-
 		ResultSet resultSet;
 		User user = null;
 		resultSet = DBManager.getQueryResult("selectFromUserDetails", parameters);
@@ -39,6 +46,11 @@ public class OrderProcessDao {
 		return user;
 	}
 
+	/*
+	 * Method to get user account information based on username from database
+	 * @param username
+	 * @return user
+	 */
 	public User getAccountByUsername(String username) throws Exception {
 		// String response = orderProcessDao.getAccount(userName,password);
 		List<String> parameters = new ArrayList<String>();
@@ -60,8 +72,11 @@ public class OrderProcessDao {
 		return user;
 	}
 
-	// Method to Create Account and storing information in the database
-
+	/*
+	 * Method for creating new user account 
+	 * @param user
+	 * @return response
+	 */
 	public int createAccount(User user) throws Exception {
 		int rowNum = 0;
 		List<String> parameters = new ArrayList<String>();
@@ -76,6 +91,11 @@ public class OrderProcessDao {
 		return rowNum;
 	}
 
+	/*
+	 * Method for getting shipping details based on shipping id
+	 * @param user
+	 * @return shipping
+	 */
 	public Shipping getShippingById(int shippingId) throws Exception {
 		List<String> parameters = new ArrayList<String>();
 		parameters.add("" + shippingId);
@@ -93,6 +113,11 @@ public class OrderProcessDao {
 		return shipping;
 	}
 
+	/*
+	 * Method for creating new shipping address
+	 * @param shipping
+	 * @return insertRowId
+	 */
 	public int createShipping(Shipping shipping) throws Exception {
 		int insertRowId = 0;
 		try {
@@ -117,6 +142,11 @@ public class OrderProcessDao {
 		return insertRowId;
 	}
 
+	/*
+	 * Method for updating shipping Id for user
+	 * @param user
+	 * @return numberOfRowsAffected(rowNum)
+	 */
 	public int updateUserShipping(User user) throws Exception {
 		int rowNum = 0;
 		try {
