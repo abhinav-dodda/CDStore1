@@ -99,7 +99,7 @@ public class OrderProcessService {
 	 * @throws IOException
 	 */
 
-	public String createAccount(String params) throws IOException {
+	public String createAccount(String params){
 
 		String response = null;
 		JSONParser parser = new JSONParser();
@@ -132,7 +132,7 @@ public class OrderProcessService {
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			if (e.getMessage().contains("Username already exists")) {
+			if (e.getMessage().contains("Duplicate") || e.getMessage().contains("Username already exists")) {
 				response = "Username already exists";
 			}
 			e.printStackTrace();

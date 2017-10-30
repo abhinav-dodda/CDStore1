@@ -92,7 +92,7 @@ public class UserRegistration extends HttpServlet {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserRegistration.jsp");
 				dispatcher.forward(request, response);
 			}
-            else if(responseMsg.contains("Username already exists")){
+			else if(responseMsg.contains("Username already exists")){
                 String message = "Username already exists";
                 request.setAttribute("message", message);
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserRegistration.jsp");
@@ -102,6 +102,13 @@ public class UserRegistration extends HttpServlet {
 				response.sendRedirect("Home.jsp");
 			}
 		} else {
+			String responseMsg = webServiceResponse.getEntity(String.class);
+			if(responseMsg.contains("Username already exists")){
+                String message = "Username already exists";
+                request.setAttribute("message", message);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserRegistration.jsp");
+                dispatcher.forward(request, response);
+            }
 			System.out.println("POST request not worked");
 		}
 	}
