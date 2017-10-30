@@ -29,7 +29,7 @@
 <body>
 <div class="container-fluid">
 <%@ include file="Header.jsp"%>
-<h1> Order Confirmed</h1>
+<h1> Order Successfully Completed</h1>
 </div>
 <div class="col-sm-5"></div>
 <%@ include file="Footer.jsp"%>
