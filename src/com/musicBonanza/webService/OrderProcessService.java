@@ -187,6 +187,8 @@ public class OrderProcessService {
 				&& (shipping.getPhone() != null)) {
 			throw new Exception("No shipping information available");
 		}
+		OrderProcessManager orderProcessManager = new OrderProcessManager();
+		orderProcessManager.createShipping(shipping);
 		return "" + shippingId;
 	}
 
