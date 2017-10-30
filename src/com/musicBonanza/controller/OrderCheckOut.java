@@ -172,7 +172,7 @@ public class OrderCheckOut extends HttpServlet {
 			int responseCode = webServiceResponse.getStatus();
 			System.out.println("POST Response Code :: " + responseCode);
 			if (responseCode == HttpURLConnection.HTTP_OK) { // success
-				int purchaseOrderId = webServiceResponse.getEntity(Integer.class);
+				int purchaseOrderId = Integer.valueOf(webServiceResponse.getEntity(String.class));
 				if (0 != purchaseOrderId) {
 					request.setAttribute("purchaseOrderId",purchaseOrderId);
 					response.sendRedirect("/MusicBonanza/Payment.jsp");
@@ -180,7 +180,7 @@ public class OrderCheckOut extends HttpServlet {
 					String message = "Something went wrong. Please try after sometime";
 					request.setAttribute("message", message);
 					request.setAttribute("purchaseOrder",purchaseOrder);
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/OrderCheckOut.jsp");
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Cart.jsp");
 					dispatcher.forward(request, response);
 				}
 			} else {

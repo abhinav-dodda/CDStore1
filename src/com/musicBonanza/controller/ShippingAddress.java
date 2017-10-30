@@ -116,7 +116,7 @@ public class ShippingAddress extends HttpServlet {
 					System.out.println("POST Response Code :: " + responseCode);
 					if (responseCode == HttpURLConnection.HTTP_OK) { // success
 						String responseMsg = webServiceResponse.getEntity(String.class);
-						if(responseMsg =="success"){
+						if("success".equals(responseMsg)){
 							request.setAttribute("shippingid", user);
 							RequestDispatcher dispatcher = getServletContext()
 									.getRequestDispatcher("/OrderCheckOut.jsp");

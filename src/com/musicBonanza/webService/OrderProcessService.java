@@ -151,7 +151,7 @@ public class OrderProcessService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Integer createOrder(PurchaseOrder purchaseOrder) throws Exception {
+	public String createOrder(PurchaseOrder purchaseOrder) throws Exception {
 		int purchaseOrderId = 0;
 		if (purchaseOrder.getUser() == null) {
 			throw new Exception("User not logged in");
@@ -167,7 +167,7 @@ public class OrderProcessService {
 			PurchaseOrderManager purchaseOrderManager = new PurchaseOrderManager();
 			purchaseOrderId = purchaseOrderManager.createOrder(purchaseOrder);
 		}
-		return purchaseOrderId;
+		return ""+purchaseOrderId;
 	}
 
 	@POST
