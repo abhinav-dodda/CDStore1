@@ -4,7 +4,8 @@ public final class Constants {
 	//Localhost access 
 	public static final String localhostUrl = "http://localhost:8080/MusicBonanza/rest/";
 	
-	// Database Configurations and sql pool names
+	// Database Configurations and sql pool names	// FileNames
+	public static final String sqlQueryProperty = "com/musicBonanza/utils/sqlQuery.properties";
 	public static final String sqlConfigName = "mySqlConfig.properties";
 	public static final String dbName = "dbName";
 	public static final String dbURL = "dbURL";
@@ -37,24 +38,8 @@ public final class Constants {
 	// Success Codes
 	public static final int successCode = 1;
 
-	// FileNames
-	public static final String sqlQueryProperty = "com/musicBonanza/utils/sqlQuery.properties";
-	public static final String hibernatePropertyFile = "hibernate.cfg.xml";
 
-	// Property Keys
-	public static final String getCategoryList = "getCategoryList";
-	public static final String checkIfUserExists = "checkIfUserExists";
-	public static final String getAccountInfo = "getAccountInfo";
-	public static final String getCustomerDetails = "getCustomerDetails";
-	public static final String getProductList = "getProductList";
-	public static final String getProductListWithCategory = "getProductListWithCategory";
-	public static final String getProductInfo = "getProductInfo";
-	public static final String getCartItems = "getCartItems";
-	public static final String getCustomerIdbyUsername = "getCustomerIdbyUsername";
-	public static final String getLastId = "getLastId";
-
-	// Shipping Address 
-
+	
 	// Servlet variables
 	public static final String shoppingCart = "ShoppingCart";
 	public static final String userOrVisitorFlag = "flag";
@@ -85,5 +70,4 @@ public final class Constants {
 	public static final String zipcode = "zip";
 	public static final String email = "email";
 	public static final String phone = "phone";
-
 }
