@@ -14,8 +14,19 @@ import com.musicBonanza.entity.PurchaseOrder;
 import com.musicBonanza.entity.Shipping;
 import com.musicBonanza.entity.User;
 import com.musicBonanza.*;
+/**
+ * Product Manager Class
+ * @author ABHI
+ *
+ */
+
 public class ProductCategoryManager {
 
+	/**
+	 * This is method fetches the categories list present in the database and binds them to a combobox in jsp page
+	 * @return
+	 * @throws Exception
+	 */
 	public ResultSet getCategoryList() throws Exception {
 		ProductCategoriesDao productCategoriesDao = new ProductCategoriesDao();
 
@@ -23,19 +34,11 @@ public class ProductCategoryManager {
 		ResultSet resultSet = productCategoriesDao.getCategoryList();
 		try {
 			if (resultSet != null) {
-				
-				  while(resultSet.next()) {
-				  
-				  String resultCategory = resultSet.getString("category");
-				  System.out.println(resultCategory);
-				  //ProductCategories productCategories = new ProductCategories();
-				  //productCategories.setCategoryName(resultSet.getString("category")); 
-				//response = productCategories.CategoryName;
-				  }
+				while (resultSet.next()) {
+					String resultCategory = resultSet.getString("category");
+				}
 
-			}
-			else
-			{
+			} else {
 				response = "Failure";
 			}
 		} catch (Exception e) {
