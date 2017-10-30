@@ -26,7 +26,11 @@ import com.musicBonanza.entity.PurchaseOrderItem;
 import com.musicBonanza.entity.Shipping;
 import com.musicBonanza.entity.User;
 import com.musicBonanza.utils.Constants;
-
+/**
+ * 
+ * @author ABHI
+ *
+ */
 @Path("/orderProcess")
 public class OrderProcessService {
 
@@ -34,8 +38,13 @@ public class OrderProcessService {
 	@Path("/getAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	/**
+	 * This method is used to Login if user enters his username and password
+	 * @param params
+	 * @return
+	 * @throws Exception
+	 */
 	public User getAccount(String params) throws Exception {
-		// JSONObject responseObj = new JSONObject();
 		User user = null;
 		JSONParser parser = new JSONParser();
 		try {
@@ -45,10 +54,6 @@ public class OrderProcessService {
 			if (userName != null && password != null) {
 				OrderProcessManager orderProcessManager = new OrderProcessManager();
 				user = orderProcessManager.getAccount(userName, password);
-				/*
-				 * if(user!=null){
-				 * responseObj.put("username",user.getUsername()); }
-				 */
 			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -62,14 +67,24 @@ public class OrderProcessService {
 	@Path("/getAccountByUsername")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public User getAccountByUsername(String userName) throws Exception {
+	/**
+	 * This account retrieves the user details by username
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
+	public User getAccountByUsername(String userName) {
 		User user = null;
-		if (userName != null) {
-			OrderProcessManager orderProcessManager = new OrderProcessManager();
-			user = orderProcessManager.getAccountByUsername(userName);
-		} else {
-			System.out.println("No user available");
+		try {
+			if (userName != null) {
+				OrderProcessManager orderProcessManager = new OrderProcessManager();
+				user = orderProcessManager.getAccountByUsername(userName);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 		return user;
 	}
 
@@ -77,6 +92,13 @@ public class OrderProcessService {
 	@Path("/createAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	/**
+	 * This method is used for user registration
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 */
+
 	public String createAccount(String params) throws IOException {
 
 		String response = null;
@@ -110,7 +132,7 @@ public class OrderProcessService {
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			if(e.getMessage().contains("Username already exists")){
+			if (e.getMessage().contains("Username already exists")) {
 				response = "Username already exists";
 			}
 			e.printStackTrace();
@@ -123,6 +145,12 @@ public class OrderProcessService {
 	@Path("/createOrder")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	/**
+	 * This method is used to create an order for the user
+	 * @param purchaseOrder
+	 * @return
+	 * @throws Exception
+	 */
 	public Integer createOrder(PurchaseOrder purchaseOrder) throws Exception {
 		int purchaseOrderId = 0;
 		if (purchaseOrder.getUser() == null) {
@@ -146,43 +174,32 @@ public class OrderProcessService {
 	@Path("/createShipping")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	/**
+	 * This method is used to create the shipping details for the customer
+	 * @param shipping
+	 * @return
+	 * @throws Exception
+	 */
 	public String createShipping(Shipping shipping) throws Exception {
 		int shippingId = 0;
-		/*JSONParser parser = new JSONParser();
-		try {
-			JSONObject json = (JSONObject) parser.parse(params);
-			String street = (String) json.get("street");
-			String province = (String) json.get("province");
-			String country = (String) json.get("country");
-			String zip = (String) json.get("zip");
-			String phone = (String) json.get("phone");
-			String username = (String) json.get("username");*/
-			if (!(shipping.getStreetAddress() != null) && (shipping.getProvince() != null) && (shipping.getProvince() != null) 
-					&& (shipping.getZipCode() != null) && (shipping.getPhone() != null)) {
-				throw new Exception("No shipping information available");
-			} /*else if (username == null) {
-				throw new Exception("User not logged in");
-			}*/ else {
-				/*Shipping shipping = new Shipping();
-				shipping.setStreetAddress(street);
-				shipping.setProvince(province);
-				shipping.setCountry(country);
-				shipping.setZipCode(zip);
-				shipping.setPhone(phone);*/
-				OrderProcessManager orderProcessManager = new OrderProcessManager();
-				shippingId = orderProcessManager.createShipping(shipping);
-			}
-		/*} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		return ""+shippingId;
+		if (!(shipping.getStreetAddress() != null) && (shipping.getProvince() != null)
+				&& (shipping.getProvince() != null) && (shipping.getZipCode() != null)
+				&& (shipping.getPhone() != null)) {
+			throw new Exception("No shipping information available");
+		}
+		return "" + shippingId;
 	}
 
 	@POST
 	@Path("/getShippingById")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+/**
+ * This method is used to get the shipping ID of a particular user
+ * @param shippingId
+ * @return
+ * @throws Exception
+ */
 	public Shipping getShippingById(int shippingId) throws Exception {
 		Shipping shipping = null;
 		if (shippingId == 0) {
@@ -193,20 +210,25 @@ public class OrderProcessService {
 		}
 		return shipping;
 	}
-	
+
 	@POST
 	@Path("/updateUserShipping")
-	@Consumes("application/json")
-	@Produces("application/json")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+/**
+ * This method updates the user shipping address
+ * @param user
+ * @return
+ * @throws Exception
+ */
 	public String updateUserShipping(User user) throws Exception {
 		String response = null;
 		if (user.getUsername() == null) {
 			throw new Exception("User not logged in");
-		}
-		else{
+		} else {
 			OrderProcessManager orderProcessManager = new OrderProcessManager();
 			response = orderProcessManager.updateUserShipping(user);
-		}		
+		}
 		return response;
 	}
 
@@ -214,13 +236,18 @@ public class OrderProcessService {
 	@Path("/confirmOrder")
 	@Consumes("application/json")
 	@Produces("application/json")
-
-	public String confirmOrder(String  params) throws ParseException {
+/**
+ * This method is used to authorize the user order based on payment info and stores shipping info with order
+ * @param params
+ * @return
+ * @throws ParseException
+ */
+	public String confirmOrder(String params) throws ParseException {
 		String response = null;
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(params);
 		try {
-			String purchaseOrderId = (String)json.get("purchaseOrderId");
+			String purchaseOrderId = (String) json.get("purchaseOrderId");
 			PurchaseOrderManager purchaseOrderManager = new PurchaseOrderManager();
 			response = purchaseOrderManager.confirmOrder(Integer.valueOf(purchaseOrderId));
 		} catch (Exception e) {

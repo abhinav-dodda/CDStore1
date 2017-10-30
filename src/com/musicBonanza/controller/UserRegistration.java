@@ -92,12 +92,6 @@ public class UserRegistration extends HttpServlet {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserRegistration.jsp");
 				dispatcher.forward(request, response);
 			}
-			else if(responseMsg.contains("Username already exists")){
-				String message = "Username already exists";
-				request.setAttribute("message", message);
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserRegistration.jsp");
-				dispatcher.forward(request, response);
-			}
 			else{
 				response.sendRedirect("Home.jsp");
 			}

@@ -53,15 +53,7 @@ public final class Constants {
 	public static final String getCustomerIdbyUsername = "getCustomerIdbyUsername";
 	public static final String getLastId = "getLastId";
 
-	// Log Messages
-
-	public static final String executeSQLQueryExecuted = "ExcuteSQL method Executed.";
-	public static final String getQueryResultExecuted = "Get Query method Executed.";
-	public static final String saveMethodExecuted = "Save Method Executed.";
-	public static final String hibernateConfigLoaded = "Hibernate Configured and Loaded.";
-	public static final String hibernateSessionCreated = "Hibenate Session Created.";
-	public static final String hibernateTransactionStarted = "Hibenate Transaction Started.";
-	public static final String hibernateSessionCleanedUp = "Hibenate Session flushed, Transaction Committed, Session closed.";
+	// Shipping Address 
 
 	// Servlet variables
 	public static final String shoppingCart = "ShoppingCart";
