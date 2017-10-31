@@ -150,7 +150,11 @@ else
 							</div>
 						</div>
 						<div class="col-xs-3">
+<<<<<<< HEAD
 							<button type="button" class="btn btn-success btn-block" onclick="location.href='ShoppingCartServlet?action=checkout'">
+=======
+							<button type="button" class="btn btn-success btn-block" onclick="location.href='ShoppingCartServlet?action=checkout&totalPrice=<%= totalPrice %>'">
+>>>>>>> branch 'phase1' of https://Nandyie@bitbucket.org/gsara017/musicbonanza.git
 								Checkout
 							</button>
 						</div>

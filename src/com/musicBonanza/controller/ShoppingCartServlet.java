@@ -104,10 +104,7 @@ public class ShoppingCartServlet extends HttpServlet {
 	//Nandhini: directing the further task to check out order action
 	protected void doGet_checkout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String totalprice = request.getParameter("totalPrice");
-		request.setAttribute("totalprice", totalprice);
-		System.out.println("check:"+request.getAttribute("totalprice"));
-		System.out.println("check:"+totalprice);
+
 		request.getRequestDispatcher("OrderCheckOut").forward(request,response);
         
 	}
