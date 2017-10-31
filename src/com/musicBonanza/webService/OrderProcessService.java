@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -112,12 +113,19 @@ public class OrderProcessService {
 			String password = (String) json.get("password");
 			String confirmPassword = (String) json.get("confirmPassword");
 
-			if (!(firstName != null) && (lastName != null) && (userName != null) && (email != null)
+			//code to check email
+			String patternStr = "^[-!#$%&'*+/0-9=?A-Z^_a-z{|}~](\\.?[-!#$%&'*+/0-9=?A-Z^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\\.[a-zA-Z](-?[a-zA-Z0-9])*)+$";
+		    Pattern emailPattern = Pattern.compile(patternStr);
+
+            if (!(firstName != null) && (lastName != null) && (userName != null) && (email != null)
 					&& (password != null) && (confirmPassword != null)) {
 				return "Please fill all the required fields";
 			} else if (!password.equals(confirmPassword)) {
 				return "Password Mismatch";
-			} else {
+			} else if(!emailPattern.matcher(email).matches()) {
+				return "Invalid Email";
+			}
+		    else {
 				User user = new User();
 				user.setFirstName(firstName);
 				user.setLastName(lastName);

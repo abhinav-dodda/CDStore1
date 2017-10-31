@@ -98,6 +98,12 @@ public class UserRegistration extends HttpServlet {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserRegistration.jsp");
                 dispatcher.forward(request, response);
             }
+			else if (responseMsg.contains("Invalid")){
+                String message = "Please enter valid email";
+                request.setAttribute("message", message);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserRegistration.jsp");
+                dispatcher.forward(request, response);
+            }
 			else{
 				response.sendRedirect("Home.jsp");
 			}
