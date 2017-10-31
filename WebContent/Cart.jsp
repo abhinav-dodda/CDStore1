@@ -31,10 +31,8 @@
 <script type="text/javascript" src="validations/bootstrap.js"></script>
 <script type="text/javascript" src="validations/bootstrap.min.js"></script>
 <script type="text/javascript" src="validations/validation.js"></script>
-<script type="text/javascript" src="validations/PriceCalculations.js"></script>
 
 <title>Shopping Cart</title>
-
 </head>
 <body>
 <div class="container-fluid">
@@ -75,7 +73,7 @@ else
 								<h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
 							</div>
 							<div class="col-xs-6">
-								<button type="button" class="btn btn-primary btn-sm btn-block" onclick="window.location='ProductCategories.jsp'">
+								<button type="button" class="btn btn-primary btn-sm btn-block" onclick="window.location='ProductCategories'">
 									<span class="glyphicon glyphicon-share-alt"></span>Continue shopping
 								</button>
 							</div>
@@ -91,54 +89,55 @@ else
 		List<CD> cart = (List<CD>) session.getAttribute("cart");
 		for (CD c: cart)
 		{
-			
-			//usercart = cart.get(i);
+
 		%>
 				
 					<div class="row">
 						<div class="col-xs-2"><img class="img-responsive" src="images/<%=c.getProductId()%>.jpg">
 						</div>
-						<div class="col-xs-4">
+						<div class="col-xs-3">
 							<h6 class="product-name"><strong><%=c.getProductName()  %></strong></h6><h3><small><%=c.getProdCat()  %></small></h3>
 						</div>
-						<div class="col-xs-6">
-							<div class="col-xs-6 text-right">
-								<h5><font size =3><strong><%=c.getProdPrice()  %><span class="text-muted">  x </span></strong></font></h5>
+					<form id="quantity" action="ShoppingCartServlet?action=update" method="GET">
+						<div class="col-xs-10 text-right">
+								<h5><font size =3><strong><input type="text" style="border:none" size="1" name="price" value="<%=c.getProdPrice()  %>" readonly="readonly"/>X</strong></font></h5>
 							</div>
-							<div class="col-xs-4">
-								<select id="selectQuantity" name="selectQuantity" class="field"
-									                                      style="height: 80%;width: 40%;">
-							            <option value="<%= quantity %>">1</option>
-										<option value="<%= quantity %>">2</option>
-										<option value="<%= quantity %>">3</option>
-										<option value="<%= quantity %>">4</option>
-										<option value="<%= quantity %>">5</option>
-										<option value="<%= quantity %>">6</option>
-										<option value="<%= quantity %>">7</option>
-										<option value="<%= quantity %>">8</option>
-										<option value="<%= quantity %>">9</option>
-										<option value="<%= quantity %>">10</option>
-								</select>
-								
-								
-							</div>
-							<div class="col-xs-2">
-								<button type="button" class="btn btn-link btn-xs" onclick="location.href='ShoppingCartServlet?action=delete&prodId=<%=c.getProductId()%>'">
+					  <div class="col-xs-8 text-right">
+						<div class="col-xs-14">
+							<select id="selectQuantity" name="selectQuantity" class="field"
+									                                      style="height: 80%;width: 40%;" onchange="this.form.submit()">
+							            <option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+	   						 </select>								
+						    </div>
+						  </div>	
+					</form>
+					 <div class="col-xs-2">
+						<div class="col-xs-3">
+								<button type="button" class="btn btn-link btn-lg" onclick="location.href='ShoppingCartServlet?action=delete&prodId=<%=c.getProductId()%>'">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
-							</div>
+						</div>
 						</div>
 					</div>
 					
 					<hr>
 			   <%
-			   totalPrice += c.getProdPrice();
+			   
 			   	}
 		     
 		       %>
               
-				  <div class="col-xs-10">
-					<h4 class="text-right">Total Amount: <strong>  <%= totalPrice %>$</strong></h4>
+				  <div class="col-xs-7">
+					<h4 class="text-right">Total Amount: <strong>  <%= session.getAttribute("totalPrice")%>$</strong></h4>
 				  </div>
 				</div>
 				<div class="panel-footer">
@@ -151,7 +150,7 @@ else
 							</div>
 						</div>
 						<div class="col-xs-3">
-							<button type="button" class="btn btn-success btn-block" onclick="location.href='ShoppingCartServlet?action=checkout?totalPrice=<%= totalPrice %>'">
+							<button type="button" class="btn btn-success btn-block" onclick="location.href='ShoppingCartServlet?action=checkout'">
 								Checkout
 							</button>
 						</div>
