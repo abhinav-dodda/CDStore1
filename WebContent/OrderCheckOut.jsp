@@ -29,7 +29,7 @@
 	<div class="container-fluid">
 		<%@ include file="Header.jsp"%>
 		<div class="row order-checkout-div">
-		<!-- <form id="order-checkout-form" action="OrderCheckOut" class="text-left" method="post"> -->
+	 <form id="order-checkout-form" action="OrderCheckOut" class="text-left" method="post"> 
 			<div class="col-sm-4">
 				<div class="section-title-ordercheckout">
 					<strong>Delivery Address</strong>
@@ -98,7 +98,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- </form> -->
+			</form> 
 		</div>
 		<%@ include file="Footer.jsp"%>
 	</div>
