@@ -54,9 +54,9 @@ public class OrderCheckOut extends HttpServlet {
 			//retrieving data from session
 			user.setUsername(username);
 			String totalAmountStr = (String) session.getAttribute("totalPrice");
-			float totalAmount = 0;
+			double totalAmount = 0;
 			if(totalAmountStr != null){
-				totalAmount = Float.valueOf(totalAmountStr);
+				totalAmount = Double.valueOf(totalAmountStr);
 			}
 			List<CD> cdList = (List<CD>) session.getAttribute("cart");
 			int totalQuantity = cdList.size();
@@ -143,7 +143,7 @@ public class OrderCheckOut extends HttpServlet {
 			String message = "Please login to place order";
 			// redirect to Login jsp
 			request.setAttribute("message", message);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MusicBonanza/Login.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login.jsp");
 			dispatcher.forward(request, response);
 		} else {
 			User user = new User();
@@ -151,8 +151,9 @@ public class OrderCheckOut extends HttpServlet {
 			PurchaseOrder purchaseOrder = new PurchaseOrder();
 			purchaseOrder.setShippingId(Integer.valueOf(request.getParameter("shippingid")));
 			purchaseOrder.setUser(user);
-			purchaseOrder.setTotalAmount(Float.valueOf(request.getParameter("totalAmount")));
-			purchaseOrder.setTaxes(Float.valueOf(request.getParameter("taxes")));
+			purchaseOrder.setTotalAmount(Double.valueOf(request.getParameter("totalAmount")));
+			purchaseOrder.setTaxes(Double.valueOf(request.getParameter("taxes")));
+			
 			
 			//picking cart details from session
 			List<CD> cdList = (List<CD>) session.getAttribute("cart");

@@ -2,7 +2,7 @@ package com.musicBonanza.utils;
 
 public final class Constants {
 	//Localhost access 
-	public static final String localhostUrl = "http://localhost:8080/MusicBonanza/rest/";
+	public static final String localhostUrl = "http://localhost:7002/MusicBonanza/rest/";
 	
 	// Database Configurations and sql pool names	// FileNames
 	public static final String sqlQueryProperty = "com/musicBonanza/utils/sqlQuery.properties";

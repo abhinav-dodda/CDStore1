@@ -13,9 +13,12 @@ import java.util.Set;
  *
  */
 public class PurchaseOrder implements Serializable{
-	
 
-	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6259991776685940127L;
 
 	public int getPurchaseOrderId() {
 		return purchaseOrderId;
@@ -41,11 +44,11 @@ public class PurchaseOrder implements Serializable{
 		this.totalQuantity = totalQuantity;
 	}
 
-	public float getTaxes() {
+	public double getTaxes() {
 		return taxes;
 	}
 
-	public void setTaxes(float taxes) {
+	public void setTaxes(double taxes) {
 		this.taxes = taxes;
 	}
 
@@ -65,11 +68,11 @@ public class PurchaseOrder implements Serializable{
 		this.purchaseOrderItems = purchaseOrderItems;
 	}
 
-	public float getTotalAmount() {
+	public double getTotalAmount() {
 		return totalAmount;
 	}
 
-	public void setTotalAmount(float totalAmount) {
+	public void setTotalAmount(double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 
@@ -85,9 +88,9 @@ public class PurchaseOrder implements Serializable{
 
 	private int purchaseOrderId;
 	private User user; 
-	private float totalAmount;
+	private double totalAmount;
 	private int totalQuantity;
-	private float taxes; 
+	private double taxes; 
 	private String purchaseOrderStatus;
 	private List<PurchaseOrderItem> purchaseOrderItems = new ArrayList<PurchaseOrderItem>(0);
 	private int shippingId;
@@ -101,7 +104,7 @@ public class PurchaseOrder implements Serializable{
 	/*
 	 * Parameterized constructor 
 	 */
-	public PurchaseOrder(User user, int totalQuantity, float totalAmount,float taxes,List<PurchaseOrderItem> purchaseOrderItems,
+	public PurchaseOrder(User user, int totalQuantity, double totalAmount,double taxes,List<PurchaseOrderItem> purchaseOrderItems,
 			 int shippingId)
 	   {
 		this.user = user;
