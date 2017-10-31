@@ -53,9 +53,11 @@ public class OrderCheckOut extends HttpServlet {
 			User user = new User();
 			//retrieving data from session
 			user.setUsername(username);
-			
-			//retrieving data from request
-			float totalAmount = Float.valueOf((String) request.getAttribute("totalprice"));
+			String totalAmountStr = (String) session.getAttribute("totalPrice");
+			float totalAmount = 0;
+			if(totalAmountStr != null){
+				totalAmount = Float.valueOf(totalAmountStr);
+			}
 			List<CD> cdList = (List<CD>) session.getAttribute("cart");
 			int totalQuantity = cdList.size();
 			
