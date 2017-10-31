@@ -69,8 +69,10 @@ public class OrderCheckOut extends HttpServlet {
 				User responseUser = webServiceResponse.getEntity(User.class);
 				if (responseUser != null) {
 					webResource = client.resource(Constants.localhostUrl + "orderProcess/getShippingById");
+					String shippingid = ""+responseUser.getShippingId();
+					String input = "{\"shippingid\":\"" + shippingid + "\"}";
 					webServiceResponse = webResource.type("application/json").post(ClientResponse.class,
-							responseUser.getShippingId());
+							input);
 					responseCode = webServiceResponse.getStatus();
 					if (responseCode == HttpURLConnection.HTTP_OK) { // success
 						Shipping shipping = webServiceResponse.getEntity(Shipping.class);

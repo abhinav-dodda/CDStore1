@@ -202,9 +202,12 @@ public class OrderProcessService {
  * @return
  * @throws Exception
  */
-	public Shipping getShippingById(int shippingId) throws Exception {
+	public Shipping getShippingById(String params) throws Exception {
 		Shipping shipping = null;
-		if (shippingId == 0) {
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject) parser.parse(params);
+		String shippingId = (String)json.get("shippingid");
+		if (shippingId == null) {
 			throw new Exception("No shipping Id available");
 		} else {
 			OrderProcessManager orderProcessManager = new OrderProcessManager();
