@@ -10,13 +10,12 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.*;
 
 public class Helper {
-	/*
-	 * This method is used to configure a JDBC Connection Pooling and read all the
-	 * SQL Files from a properties file
+	/**
+	 * This method is used to load the SQL Properties file n
 	 * 
-	 * @param path of the sqlQuery.Properties file
+	 * @param propertyFileName
+	 * @return
 	 */
-
 	public static Properties LoadProperty(String propertyFileName) {
 
 		Properties property = new Properties();
@@ -24,10 +23,8 @@ public class Helper {
 		InputStream inputStream;
 		try {
 			inputStream = loader.getResourceAsStream(propertyFileName);
-
 			property.load(inputStream);
 			System.out.println("Prop File loaded");
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -54,6 +51,7 @@ public class Helper {
 		if (parameterList != null) {
 			processedQuery = ProcessQuery(parameterList, rawQuery);
 			System.out.println("Reached FetchAndProcessQuery");
+			System.out.println(processedQuery);
 		} else {
 			processedQuery = rawQuery;
 		}
@@ -83,18 +81,10 @@ public class Helper {
 
 		return processedString;
 	}
-
-	/*
-	 * Loads the property file using the below parameters.
-	 *
-	 * @param propertyKey
-	 * 
-	 * @param className
-	 * 
-	 * @return
-	 * 
-	 * @return
-	 */
+/**
+ * Main Method that loads the sql properties file
+ * @param args
+ */
 	public static void main(String[] args) {
 
 		Helper.LoadProperty(Constants.sqlQueryPropertiesFilePath);

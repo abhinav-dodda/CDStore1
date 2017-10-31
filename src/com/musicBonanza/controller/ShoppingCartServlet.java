@@ -2,7 +2,6 @@ package com.musicBonanza.controller;
 
 import java.io.IOException;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -36,10 +35,11 @@ public class ShoppingCartServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-  //Nandhini: created to update/delete the cart details  
+  //GET method for shopping cart  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String action = request.getParameter("action");
+		//HttpSession session = request.getSession();
+    	String action = request.getParameter("action");
 		if(action.equalsIgnoreCase("delete"))
 		{
 			doGet_delete(request, response);
@@ -50,17 +50,15 @@ public class ShoppingCartServlet extends HttpServlet {
 		}
 		else if(action.equalsIgnoreCase("checkout")) 
 		{
-			
+			System.out.println("heyllooooo check out");
 			doGet_checkout(request, response);
 		}
 	}
 
-	//Nandhini: Handles the delete part of shopping cart
+	//delete action for shopping cart
 	protected void doGet_delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		HttpSession session = request.getSession();
-		if(request.getParameter("prodId") != null || session.getAttribute("cart") != null)
-		{
     	String prodId = request.getParameter("prodId");
     	List<CD> cart = (List<CD>) session.getAttribute("cart");
     	Iterator<CD> iter = cart.iterator();
@@ -72,39 +70,37 @@ public class ShoppingCartServlet extends HttpServlet {
     			iter.remove();
     		}
     	}
-	   }
     	response.sendRedirect("Cart.jsp");
 	 }
 	
-	//Nandhini: update quantity in the cart and price
+	//update quantity in the cart and price
 	protected void doGet_updateQuantity(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		float priceupdate = 0;
-		float reducedprice = 0;
-		float actualprice = 0;
-		float price;
-		float quantity;
-		float totalprice = 0; 
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
+		String prodId = request.getParameter("prodId");
+		String price = request.getParameter("price");
+		String quantity = request.getParameter("selectQuantity");
+		System.out.println("ProductId:"+prodId);
+		System.out.println("prodPrice:"+price);
+		System.out.println("quantity:"+quantity);
 		
-		if(request.getParameter("price") != null || request.getParameter("selectQuantity") != null || session.getAttribute("totalPrice") != null)
-		{
-	        price  = Float.parseFloat(request.getParameter("price"));
-		    quantity = Float.parseFloat(request.getParameter("selectQuantity"));
-		    totalprice = (float) session.getAttribute("totalPrice");
-			priceupdate = price*quantity;
-			reducedprice = totalprice - price;
-			actualprice = reducedprice + priceupdate;
-			session.setAttribute("totalPrice",actualprice);
-			response.sendRedirect("Cart.jsp");
-		}
+    	//String prodId = request.getParameter("prodId");
+    	//String prodPrice = request.getParameter("price");
+    	//String totalprice = request.getParameter("totalPrice");
+    	//int quantity = quantity.getText();
+    	//System.out.println("ProductId:"+prodId);
+    	//System.out.println("totalprice:"+totalprice);
+    	//System.out.println("prodPrice:"+prodPrice);
  
 	 }
 	
-	//Nandhini: directing the further task to check out order action
+	//check out order action
 	protected void doGet_checkout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-
+		String totalprice = request.getParameter("totalPrice");
+		request.setAttribute("totalprice", totalprice);
+		System.out.println("check:"+request.getAttribute("totalprice"));
+		System.out.println("check:"+totalprice);
 		request.getRequestDispatcher("OrderCheckOut").forward(request,response);
         
 	}
@@ -116,8 +112,6 @@ public class ShoppingCartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 
-		
-		
 	}
 
 }

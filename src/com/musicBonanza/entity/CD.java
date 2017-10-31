@@ -1,13 +1,19 @@
 package com.musicBonanza.entity;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author 
  * Entity class for CD
  *
  */
-public class CD {
+public class CD implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1859512008030281813L;
 	private String ProductId;
 	private String ProductName;
 	private float ProdPrice;

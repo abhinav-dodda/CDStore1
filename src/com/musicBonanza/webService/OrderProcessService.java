@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -112,12 +113,19 @@ public class OrderProcessService {
 			String password = (String) json.get("password");
 			String confirmPassword = (String) json.get("confirmPassword");
 
-			if (!(firstName != null) && (lastName != null) && (userName != null) && (email != null)
+			//code to check email
+			String patternStr = "^[-!#$%&'*+/0-9=?A-Z^_a-z{|}~](\\.?[-!#$%&'*+/0-9=?A-Z^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\\.[a-zA-Z](-?[a-zA-Z0-9])*)+$";
+		    Pattern emailPattern = Pattern.compile(patternStr);
+
+            if (!(firstName != null) && (lastName != null) && (userName != null) && (email != null)
 					&& (password != null) && (confirmPassword != null)) {
 				return "Please fill all the required fields";
 			} else if (!password.equals(confirmPassword)) {
 				return "Password Mismatch";
-			} else {
+			} else if(!emailPattern.matcher(email).matches()) {
+				return "Invalid Email";
+			}
+		    else {
 				User user = new User();
 				user.setFirstName(firstName);
 				user.setLastName(lastName);
@@ -151,7 +159,7 @@ public class OrderProcessService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Integer createOrder(PurchaseOrder purchaseOrder) throws Exception {
+	public String createOrder(PurchaseOrder purchaseOrder) throws Exception {
 		int purchaseOrderId = 0;
 		if (purchaseOrder.getUser() == null) {
 			throw new Exception("User not logged in");
@@ -167,7 +175,7 @@ public class OrderProcessService {
 			PurchaseOrderManager purchaseOrderManager = new PurchaseOrderManager();
 			purchaseOrderId = purchaseOrderManager.createOrder(purchaseOrder);
 		}
-		return purchaseOrderId;
+		return ""+purchaseOrderId;
 	}
 
 	@POST
@@ -202,9 +210,12 @@ public class OrderProcessService {
  * @return
  * @throws Exception
  */
-	public Shipping getShippingById(int shippingId) throws Exception {
+	public Shipping getShippingById(String params) throws Exception {
 		Shipping shipping = null;
-		if (shippingId == 0) {
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject) parser.parse(params);
+		String shippingId = (String)json.get("shippingid");
+		if (shippingId == null) {
 			throw new Exception("No shipping Id available");
 		} else {
 			OrderProcessManager orderProcessManager = new OrderProcessManager();

@@ -22,6 +22,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.musicBonanza.entity.Shipping;
+import com.musicBonanza.entity.CD;
 import com.musicBonanza.entity.User;
 import com.musicBonanza.entity.PurchaseOrderItem;
 import com.musicBonanza.entity.PurchaseOrder;
@@ -44,25 +45,36 @@ public class OrderCheckOut extends HttpServlet {
 		String username = (String) session.getAttribute("username");
 		if (username == null) {
 			request.setAttribute("navigation", "OrderCheckOut");
-			 RequestDispatcher dispatcher =
-			 getServletContext().getRequestDispatcher("Login.jsp");
+			String message = "Please login to place order";
+			request.setAttribute("message",message);
+			 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login.jsp");
 			 dispatcher.forward(request, response);
 		} else {
 			User user = new User();
-			user.setUsername(username);//username from session
+			//retrieving data from session
+			user.setUsername(username);
+			String totalAmountStr = (String) session.getAttribute("totalPrice");
+			float totalAmount = 0;
+			if(totalAmountStr != null){
+				totalAmount = Float.valueOf(totalAmountStr);
+			}
+			List<CD> cdList = (List<CD>) session.getAttribute("cart");
+			int totalQuantity = cdList.size();
+			
 			Client client = Client.create();
 			WebResource webResource = client.resource(Constants.localhostUrl + "orderProcess/getAccountByUsername");
 			ClientResponse webServiceResponse = webResource.type("application/json").post(ClientResponse.class,
 					user.getUsername());
-
 			int responseCode = webServiceResponse.getStatus();
 			System.out.println("POST Response Code :: " + responseCode);
 			if (responseCode == HttpURLConnection.HTTP_OK) { // success
 				User responseUser = webServiceResponse.getEntity(User.class);
 				if (responseUser != null) {
 					webResource = client.resource(Constants.localhostUrl + "orderProcess/getShippingById");
+					String shippingid = ""+responseUser.getShippingId();
+					String input = "{\"shippingid\":\"" + shippingid + "\"}";
 					webServiceResponse = webResource.type("application/json").post(ClientResponse.class,
-							responseUser.getShippingId());
+							input);
 					responseCode = webServiceResponse.getStatus();
 					if (responseCode == HttpURLConnection.HTTP_OK) { // success
 						Shipping shipping = webServiceResponse.getEntity(Shipping.class);
@@ -83,8 +95,14 @@ public class OrderCheckOut extends HttpServlet {
 
 						String expectedDeliveryDate = "Expected Delivery Date : " + (now.get(Calendar.MONTH) + 1) + "-"
 								+ now.get(Calendar.DATE) + "-" + now.get(Calendar.YEAR);// expectedDeliveryDate.a
+						
+						// setting variables for display on jsp
+						request.setAttribute("username",username);
+						request.setAttribute("totalAmount",totalAmount);
+						request.setAttribute("deliveryCharges",10);
+						request.setAttribute("taxes",(0.05*totalAmount));
 						request.setAttribute("expectedDeliveryDate", expectedDeliveryDate);
-						// session.getAttribute("user");
+						request.setAttribute("totalQuantity",totalQuantity);
 						RequestDispatcher dispatcher = getServletContext()
 								.getRequestDispatcher("/OrderCheckOut.jsp");
 						dispatcher.forward(request, response);
@@ -92,12 +110,16 @@ public class OrderCheckOut extends HttpServlet {
 						else{
 							request.setAttribute("user",responseUser);
 							RequestDispatcher dispatcher = getServletContext()
-									.getRequestDispatcher("/Shipping.jsp");
+									.getRequestDispatcher("/ShippingAddress.jsp");
 							dispatcher.forward(request, response);
 						}
 					} else {
 						String message = "Something went wrong. Please try again after sometime.";
-						response.sendRedirect("/MusicBonanza/ShippingAddress.jsp");
+						request.setAttribute("message",message);
+						RequestDispatcher dispatcher = getServletContext()
+								.getRequestDispatcher("/ShippingAddress.jsp");
+						dispatcher.forward(request, response);
+						//response.sendRedirect("/MusicBonanza/ShippingAddress.jsp");
 					}
 				} else {
 					String message = "Username or password is incorrect";
@@ -127,18 +149,24 @@ public class OrderCheckOut extends HttpServlet {
 			User user = new User();
 			user.setUsername(username);//username from session
 			PurchaseOrder purchaseOrder = new PurchaseOrder();
-			purchaseOrder.setShippingId(1);// request.getParameter("shippingid");
+			purchaseOrder.setShippingId(Integer.valueOf(request.getParameter("shippingid")));
 			purchaseOrder.setUser(user);
-			purchaseOrder.setTotalAmount(10);// request.getParameter("totalAmount");
-			purchaseOrder.setTotalQuantity(3);// request.getParameter("totalQuantity");
-			purchaseOrder.setTaxes(5);// request.getParameter("taxes");
+			purchaseOrder.setTotalAmount(Float.valueOf(request.getParameter("totalAmount")));
+			purchaseOrder.setTaxes(Float.valueOf(request.getParameter("taxes")));
+			
+			//picking cart details from session
+			List<CD> cdList = (List<CD>) session.getAttribute("cart");
+			int totalQuantity =0; // counter for number of items purchased
 			List<PurchaseOrderItem> products = new ArrayList<PurchaseOrderItem>();
-			for (int i = 1; i < 3; i++) {
+			//creating list of purchased items
+			for (CD cd : cdList) {
 				PurchaseOrderItem purchaseOrderItem = new PurchaseOrderItem();
-				purchaseOrderItem.setCdPrice(10.5);
-				purchaseOrderItem.setCdId("cd00" + i);
+				purchaseOrderItem.setCdPrice(cd.getProdPrice());
+				purchaseOrderItem.setCdId(cd.getProductId());
 				products.add(purchaseOrderItem);
+				totalQuantity++;
 			}
+			purchaseOrder.setTotalQuantity(totalQuantity);
 			purchaseOrder.setPurchaseOrderItems(products);
 			Client client = Client.create();
 			WebResource webResource = client.resource(Constants.localhostUrl + "orderProcess/createOrder");
@@ -148,7 +176,7 @@ public class OrderCheckOut extends HttpServlet {
 			int responseCode = webServiceResponse.getStatus();
 			System.out.println("POST Response Code :: " + responseCode);
 			if (responseCode == HttpURLConnection.HTTP_OK) { // success
-				int purchaseOrderId = webServiceResponse.getEntity(Integer.class);
+				int purchaseOrderId = Integer.valueOf(webServiceResponse.getEntity(String.class));
 				if (0 != purchaseOrderId) {
 					request.setAttribute("purchaseOrderId",purchaseOrderId);
 					response.sendRedirect("/MusicBonanza/Payment.jsp");
@@ -156,7 +184,7 @@ public class OrderCheckOut extends HttpServlet {
 					String message = "Something went wrong. Please try after sometime";
 					request.setAttribute("message", message);
 					request.setAttribute("purchaseOrder",purchaseOrder);
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/OrderCheckOut.jsp");
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Cart.jsp");
 					dispatcher.forward(request, response);
 				}
 			} else {

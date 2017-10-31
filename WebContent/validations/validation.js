@@ -11,9 +11,16 @@ function validateLogin(){
 
 function Validate() {
    
-        var password = $('#signupPassword').val();
+		var email = document.getElementById('email');
+		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	    var password = $('#signupPassword').val();
         var confirmPassword = $('#ConfirmsignupPassword').val();
-        if (password != confirmPassword) {
+        if (!filter.test(email.value)) {
+            alert('Please provide a valid email address');
+            email.focus;
+            }
+        
+        else if (password != confirmPassword) {
             alert("Passwords do not match.");
          }
 }
